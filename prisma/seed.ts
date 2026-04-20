@@ -22,8 +22,8 @@ async function main() {
     // ── Unicorns (100 companies - Alludo merged into Corel) ──────────────
     const unicorns = [
       // Name, HQ/CMA, Industry, Founders, Decade, Peak Val ($B), Status, Revenue Multiplier, Acquirer Region
-      ["Nortel / BNR", "Ottawa-Gatineau", "Telecom", null, "1990s", 768.6, "Defunct", false, null],
-      ["JDS Uniphase (JDSU)", "Ottawa-Gatineau", "Telecom", "Jozef Straus; Kevin Kalkhoven", "1990s", 314.5, "Acquired", false, "US"],
+      ["Nortel / BNR", "Ottawa-Gatineau", "Telecom", "N/A", "1990s", 768.6, "Defunct", false, null],
+      ["JDS Uniphase (JDSU)", "Ottawa-Gatineau", "Telecom", "Jozef Straus; Kevin Kalkhoven", "1990s", 295.0, "Acquired", false, "US"],
       ["Shopify", "Ottawa-Gatineau", "E-commerce", "Tobias Lütke, Daniel Weinand, Scott Lake", "2010s", 300.0, "Public", false, null],
       ["BlackBerry (RIM)", "Kitchener-C-W", "Mobile", "Mike Lazaridis, Douglas Fregin", "1990s", 130.0, "Public", false, null],
       ["Constellation Software", "Toronto", "Software", "Mark Leonard", "2010s", 112.0, "Public", false, null],

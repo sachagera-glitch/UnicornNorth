@@ -25,13 +25,7 @@ export default function HeroSection({ totalUnicorns, aggregatePeak, hubCount }: 
         borderBottom: "1px solid var(--border)",
       }}
     >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "2.5rem 2rem 2rem",
-        }}
-      >
+      <div className="hero-container">
         {/* Headline */}
         <h1
           style={{
@@ -60,22 +54,13 @@ export default function HeroSection({ totalUnicorns, aggregatePeak, hubCount }: 
         </p>
 
         {/* Stats bar */}
-        <div
-          style={{
-            display: "flex",
-            gap: "2.5rem",
-            flexWrap: "wrap",
-          }}
-        >
+        <div className="hero-stats-bar">
           {stats.map((s, i) => (
-            <div key={i}>
-              <div
-                className="data-value"
-                style={{ fontSize: "1.5rem", lineHeight: 1.2 }}
-              >
+            <div key={i} className="hero-stat-item">
+              <div className="data-value hero-stat-value">
                 {s.value}
               </div>
-              <div className="data-label" style={{ fontSize: "0.65rem" }}>
+              <div className="data-label hero-stat-label">
                 {s.label}
               </div>
             </div>

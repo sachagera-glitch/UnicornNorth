@@ -108,8 +108,8 @@ const FOUNDERS: Founder[] = [
     name: "Jozef Straus",
     company: "JDS Fitel / JDS Uniphase",
     location: "Ottawa, ON",
-    peak: "$314.5B adjusted peak",
-    description: "Jozef Straus co-founded JDS Fitel, a fiber optics company that merged with Uniphase in 1999 to form JDS Uniphase (JDSU). At the height of the dot-com boom, JDSU briefly became one of the most valuable companies in the world, with a market capitalization exceeding $300 billion (adjusted to 2025 CAD), making it by far the largest Canadian tech company by market cap at the time. The company was the dominant supplier of fiber-optic components that powered the global telecommunications buildout of the late 1990s. Though the stock crashed with the telecom bubble in 2001, Straus’s work helped establish Canada as a global leader in photonics and fiber-optic technology, creating an entire industry cluster in Ottawa.",
+    peak: "$295.0B adjusted peak",
+    description: "Jozef Straus co-founded JDS Fitel, a fiber optics company that merged with Uniphase in 1999 to form JDS Uniphase (JDSU). At the height of the dot-com boom, JDSU briefly became one of the most valuable companies in the world, with a market capitalization reaching $295.0 billion (adjusted to 2025 CAD), making it by far the largest Canadian tech company by market cap at the time. The company was the dominant supplier of fiber-optic components that powered the global telecommunications buildout of the late 1990s. Though the stock crashed with the telecom bubble in 2001, Straus’s work helped establish Canada as a global leader in photonics and fiber-optic technology, creating an entire industry cluster in Ottawa.",
     wikipediaUrl: "https://en.wikipedia.org/wiki/JDSU"
   },
   {

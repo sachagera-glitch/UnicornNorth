@@ -126,7 +126,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
             cursor: "pointer",
           }}
         >
-          <option value="all">All Peak Decades</option>
+          <option value="all">All Peak Decades**</option>
           <option value="1990s">1990s Peak</option>
           <option value="2000s">2000s Peak</option>
           <option value="2010s">2010s Peak</option>
@@ -149,7 +149,9 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
         letterSpacing: "0.02em",
         textAlign: "left"
       }}>
-        * Inflation adjusted to 2025 CAD based on peak market cap. Decades indicate when this peak was achieved. For private companies, valuations are estimated based on ecosystem research.
+        * Inflation adjusted to 2025 CAD based on peak market cap.<br/>
+        ** Decades indicate when this peak was achieved.<br/>
+        *** For private companies, valuations are estimated based on ecosystem research.
       </div>
 
       {/* Table */}
@@ -171,7 +173,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
                 Adj. Peak ($B)*{sortIndicator("peakValuationCad2025")}
               </th>
               <th onClick={() => handleSort("companyStatus")}>
-                Status{sortIndicator("companyStatus")}
+                Status***{sortIndicator("companyStatus")}
               </th>
             </tr>
           </thead>
