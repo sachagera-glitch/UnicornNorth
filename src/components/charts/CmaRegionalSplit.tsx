@@ -103,33 +103,33 @@ export default function CmaRegionalSplit({ data }: CmaRegionalSplitProps) {
             return (
               <div 
                 key={item.name} 
+                className="cma-item-grid"
                 style={{ 
-                  display: "grid", 
-                  gridTemplateColumns: "30px 180px 1fr 100px 60px", 
-                  alignItems: "center", 
-                  gap: "1.5rem",
-                  padding: "0.5rem 0",
+                  padding: "0.75rem 0",
                   borderBottom: i < sortedData.length - 1 ? "1px solid var(--border-light)" : "none"
                 }}
               >
                 {/* Rank */}
-                <div style={{ 
-                  fontSize: "1.25rem", 
-                  fontWeight: 700, 
-                  color: i < 3 ? "var(--gold)" : "var(--slate-light)",
-                  fontFamily: "'Playfair Display', serif",
-                  opacity: 0.8
-                }}>
+                <div 
+                  className="cma-rank"
+                  style={{ 
+                    fontSize: "1.25rem", 
+                    fontWeight: 700, 
+                    color: i < 3 ? "var(--gold)" : "var(--slate-light)",
+                    fontFamily: "'Playfair Display', serif",
+                    opacity: 0.8
+                  }}
+                >
                   {i + 1}
                 </div>
 
                 {/* Name */}
-                <div style={{ fontSize: "1rem", fontWeight: 600, color: "var(--navy)" }}>
+                <div className="cma-name" style={{ fontSize: "1rem", fontWeight: 600, color: "var(--navy)" }}>
                   {item.name}
                 </div>
 
                 {/* Stacked Bar */}
-                <div style={{ display: "flex", height: 24, gap: "4px" }}>
+                <div className="cma-bar" style={{ display: "flex", height: 20, gap: "4px" }}>
                   {item.historical > 0 && (
                     <div 
                       style={{ 
@@ -153,23 +153,29 @@ export default function CmaRegionalSplit({ data }: CmaRegionalSplitProps) {
                 </div>
 
                 {/* Total Value */}
-                <div style={{ 
-                  fontSize: "0.9rem", 
-                  fontWeight: 700, 
-                  color: "var(--navy)",
-                  textAlign: "right",
-                  fontFamily: "'Roboto Mono'"
-                }}>
+                <div 
+                  className="cma-value"
+                  style={{ 
+                    fontSize: "0.9rem", 
+                    fontWeight: 700, 
+                    color: "var(--navy)",
+                    textAlign: "right",
+                    fontFamily: "'Roboto Mono'"
+                  }}
+                >
                   {formatValueShort(item.total)}
                 </div>
 
                 {/* Count */}
-                <div style={{ 
-                  fontSize: "0.85rem", 
-                  color: "var(--text-secondary)", 
-                  textAlign: "right",
-                  fontFamily: "'Inter'"
-                }}>
+                <div 
+                  className="cma-count"
+                  style={{ 
+                    fontSize: "0.85rem", 
+                    color: "var(--text-secondary)", 
+                    textAlign: "right",
+                    fontFamily: "'Inter'"
+                  }}
+                >
                   {item.count} co.
                 </div>
               </div>

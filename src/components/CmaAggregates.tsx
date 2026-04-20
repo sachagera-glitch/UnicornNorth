@@ -24,7 +24,7 @@ export default function CmaAggregates() {
       <div className="section-header">
         <h2>Regional Prominence</h2>
         <div className="divider" />
-        <p>Aggregate lifetime peak valuation by CMA, adjusted to 2025 constant CAD.</p>
+        <p>Aggregate lifetime peak valuation by City, adjusted to 2025 constant CAD.</p>
       </div>
 
       <div style={{ display: "grid", gap: "0.75rem" }}>
@@ -34,7 +34,7 @@ export default function CmaAggregates() {
             padding: "1.25rem 1.75rem",
           }}>
             <div>
-              <div className="data-label" style={{ marginBottom: 2, fontSize: "0.6rem" }}>CMA</div>
+              <div className="data-label" style={{ marginBottom: 2, fontSize: "0.6rem" }}>CITY</div>
               <div style={{ fontWeight: 700, fontSize: "1rem", color: "var(--navy)" }}>{c.cma}</div>
             </div>
             <div>

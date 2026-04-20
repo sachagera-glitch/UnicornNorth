@@ -114,6 +114,7 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
       <div className="card" style={{ padding: "1.5rem", background: "var(--paper-warm)" }}>
         {/* Treemap-like Layout using CSS Grid */}
         <div 
+          className="grid-stack-mobile"
           style={{ 
             display: "grid", 
             gridTemplateColumns: "repeat(12, 1fr)",
@@ -179,7 +180,7 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
           )}
 
           {/* Smaller ones */}
-          <div style={{ gridArea: "6 / 7 / 7 / 13", display: "flex", gap: "8px" }}>
+          <div className="stack-mobile" style={{ gridArea: "6 / 7 / 7 / 13", display: "flex", gap: "8px", flexWrap: "wrap" }}>
             {sectors.filter(s => ["Web3", "Health", "Clean", "Other"].includes(s.label)).map(s => (
                <div key={s.label} style={{ flex: 1, background: s.color, borderRadius: "6px", padding: "0.75rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                   <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--navy)" }}>{s.label}</div>

@@ -67,16 +67,16 @@ export default function ValueConcentration({ data }: ValueConcentrationProps) {
         <p>How much of Canada's unicorn value lives in the top few companies</p>
       </div>
 
-      <div className="card" style={{ padding: "3rem" }}>
-        <div style={{ display: "grid", gap: "1.5rem" }}>
+      <div className="card" style={{ padding: "1.5rem" }}>
+        <div style={{ display: "grid", gap: "1rem" }}>
           {rows.map((row, i) => (
             <div 
               key={i} 
               style={{ 
                 display: "grid", 
-                gridTemplateColumns: "120px 1fr 60px", 
+                gridTemplateColumns: "clamp(60px, 15vw, 120px) 1fr 60px", 
                 alignItems: "center", 
-                gap: "2rem" 
+                gap: "1rem" 
               }}
             >
               <div style={{ 
@@ -115,11 +115,11 @@ export default function ValueConcentration({ data }: ValueConcentrationProps) {
         </div>
 
         <div style={{ 
-          marginTop: "3rem", 
-          paddingTop: "2rem", 
+          marginTop: "2rem", 
+          paddingTop: "1.5rem", 
           borderTop: "1px solid var(--border-light)",
-          fontSize: "0.95rem",
-          lineHeight: 1.6,
+          fontSize: "0.9rem",
+          lineHeight: 1.5,
           color: "var(--text-secondary)",
           fontFamily: "'Inter'",
           maxWidth: "800px"

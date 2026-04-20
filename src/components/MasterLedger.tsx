@@ -78,12 +78,12 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
     sortField === field ? (sortDir === "asc" ? " ↑" : " ↓") : "";
 
   return (
-    <section id="ledger" className="section">
+    <section className="section" style={{ paddingTop: 0 }}>
       <div className="section-header">
-        <h2>The Leadership Board</h2>
+        <h2>Leadership Board</h2>
         <div className="divider" />
         <p>
-          All-time ranking of Canadian unicorns by peak valuation (≥ $1B {currency}).
+          The definitive ranking of Canadian companies by inflation-adjusted peak valuation.
         </p>
       </div>
 
@@ -161,7 +161,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
       </div>
 
       {/* Table */}
-      <div style={{ overflowX: "auto" }}>
+      <div className="scroll-x" style={{ background: "var(--white)", borderRadius: 8, boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
         <table className="data-table">
           <thead>
             <tr>

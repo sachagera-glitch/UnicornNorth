@@ -44,6 +44,7 @@ export default function Header() {
         {/* Right side */}
         <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
           <span
+            className="hidden-mobile"
             style={{
               fontFamily: "'Roboto Mono'",
               fontSize: "0.6rem",
