@@ -8,13 +8,14 @@ interface UnicornRow {
   companyName: string;
   hqCma: string | null;
   industry: string | null;
+  founders: string | null;
   firstUnicornDecade: string | null;
   peakValuationCad2025: string | null;
   companyStatus: string | null;
   isRevenueMultiplier: boolean;
 }
 
-type SortField = "companyName" | "hqCma" | "peakValuationCad2025" | "companyStatus";
+type SortField = "companyName" | "hqCma" | "peakValuationCad2025" | "companyStatus" | "founders";
 
 function statusBadge(status: string | null) {
   const s = (status || "").toLowerCase();
@@ -169,6 +170,9 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
               <th onClick={() => handleSort("companyName")}>
                 Company{sortIndicator("companyName")}
               </th>
+              <th onClick={() => handleSort("founders")}>
+                Founders{sortIndicator("founders")}
+              </th>
               <th onClick={() => handleSort("hqCma")}>
                 HQ or Founded City (CMA){sortIndicator("hqCma")}
               </th>
@@ -198,6 +202,13 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
                       ★
                     </span>
                   )}
+                </td>
+                <td style={{ 
+                  color: "var(--slate)", 
+                  fontSize: "0.75rem",
+                  fontFamily: "'Inter', sans-serif"
+                }}>
+                  {u.founders}
                 </td>
                 <td style={{ color: "var(--slate)" }}>{u.hqCma}</td>
                 <td

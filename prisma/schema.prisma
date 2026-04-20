@@ -14,9 +14,11 @@ model Unicorn {
   companyName           String   @map("company_name") @db.VarChar(255)
   hqCma                 String?  @map("hq_cma") @db.VarChar(100)
   industry              String?  @db.VarChar(100)
+  founders              String?  @db.Text
   firstUnicornDecade    String?  @map("first_unicorn_decade") @db.VarChar(20)
   peakValuationCad2025  Decimal? @map("peak_valuation_cad_2025") @db.Decimal(20, 2)
   companyStatus         String?  @map("company_status") @db.VarChar(50)
+  acquirerRegion        String?  @map("acquirer_region") @db.VarChar(50)
   isRevenueMultiplier   Boolean  @default(false) @map("is_revenue_multiplier")
   lastUpdated           DateTime @default(now()) @map("last_updated")
 
@@ -41,4 +43,12 @@ model CompanyOnCusp {
   identifiedDate DateTime @default(now()) @map("identified_date") @db.Date
 
   @@map("companies_on_cusp")
+}
+
+model CmaMetadata {
+  cma         String @id @db.VarChar(100)
+  lens        String @db.VarChar(100)
+  description String @db.Text
+
+  @@map("cma_metadata")
 }

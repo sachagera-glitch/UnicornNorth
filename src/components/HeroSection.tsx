@@ -2,13 +2,19 @@
 
 import { useCurrency } from "./CurrencyContext";
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  totalUnicorns: number;
+  aggregatePeak: number;
+  hubCount: number;
+}
+
+export default function HeroSection({ totalUnicorns, aggregatePeak, hubCount }: HeroSectionProps) {
   const { formatValue, currency } = useCurrency();
 
   const stats = [
-    { value: "101", label: "Companies" },
-    { value: formatValue(2_150_700_000_000).split(" ")[0], label: `Aggregate (${currency})` },
-    { value: "11", label: "CMAs" },
+    { value: totalUnicorns.toString(), label: "Companies" },
+    { value: formatValue(aggregatePeak).split(" ")[0], label: `Aggregate (${currency})` },
+    { value: hubCount.toString(), label: "CMAs" },
     { value: "36", label: "Years" },
   ];
 

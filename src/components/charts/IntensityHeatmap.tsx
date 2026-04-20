@@ -47,7 +47,7 @@ export default function IntensityHeatmap() {
         <h2>The Intensity Heatmap</h2>
         <div className="divider" />
         <p>
-          CMAs glow based on unicorns per 1 million residents (2020s decade). Smaller
+          Tech hubs glow based on unicorns per 1 million residents (2020s decade). Smaller
           hubs like Kitchener and Moncton burn hotter than major metros.
         </p>
       </div>

@@ -2,8 +2,126 @@
 
 import { useCurrency } from "./CurrencyContext";
 
-export default function VitalityTab() {
+interface UnicornRow {
+  id: number;
+  companyName: string;
+  hqCma: string | null;
+  industry: string | null;
+  firstUnicornDecade: string | null;
+  peakValuationCad2025: string | null;
+  companyStatus: string | null;
+  acquirerRegion: string | null;
+  isRevenueMultiplier: boolean;
+  lastUpdated: Date;
+}
+
+interface CmaStatRow {
+  cma: string;
+  decade: string;
+  unicornCount: number;
+  unicornsPerMillionRes: string | null;
+}
+
+interface Props {
+  unicorns: UnicornRow[];
+  cmaStats: CmaStatRow[];
+}
+
+export default function VitalityTab({ unicorns, cmaStats }: Props) {
   const { formatValue } = useCurrency();
+
+  // ── Data Processing ──────────────────────────────────────────────────
+  
+  // 1. Grouping for "Where are they now?"
+  const statusGroups = unicorns.reduce((acc, u) => {
+    const s = (u.companyStatus || "").toLowerCase();
+    let category = "Other (HoldCo, active)";
+    
+    if (s.includes("pe-owned") || s.includes("advent")) {
+      category = "PE-owned";
+    } else if (s.includes("self-funded")) {
+      category = "Self-funded";
+    } else if (s.includes("public")) {
+      category = "Public (listed)";
+    } else if (s.includes("acquired") && !s.includes("defunct")) {
+      category = "Acquired";
+    } else if (s.includes("defunct")) {
+      category = "Defunct / wound down";
+    } else if (s.includes("protection") || s.includes("restructured") || s.includes("post-ch")) {
+      category = "Distressed / restructured";
+    } else if (s.includes("private")) {
+      category = "Private";
+    } else if (s.includes("holdco") || s.includes("delisted")) {
+      category = "Other (HoldCo, active)";
+    }
+    
+    acc[category] = (acc[category] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const total = unicorns.length;
+  const statusData = [
+    { label: "Private", color: "var(--navy)", count: statusGroups["Private"] || 0 },
+    { label: "Public (listed)", color: "var(--red)", count: statusGroups["Public (listed)"] || 0 },
+    { label: "Acquired", color: "var(--gold)", count: statusGroups["Acquired"] || 0 },
+    { label: "PE-owned", color: "var(--slate)", count: statusGroups["PE-owned"] || 0 },
+    { label: "Self-funded", color: "var(--burgundy)", count: statusGroups["Self-funded"] || 0 },
+    { label: "Defunct / wound down", color: "var(--slate-light)", count: statusGroups["Defunct / wound down"] || 0 },
+    { label: "Distressed / restructured", color: "var(--red-dark)", count: statusGroups["Distressed / restructured"] || 0 },
+    { label: "Other (HoldCo, active)", color: "var(--border)", count: statusGroups["Other (HoldCo, active)"] || 0 },
+  ].map(d => ({ ...d, pct: `${Math.round((d.count / total) * 100)}%` }));
+
+  // 2. Survival Spectrum
+  const aliveCount = (statusGroups["Private"] || 0) + (statusGroups["Public (listed)"] || 0) + (statusGroups["Self-funded"] || 0) + (statusGroups["Distressed / restructured"] || 0);
+  const absorbedCount = statusGroups["Acquired"] || 0;
+  const deadCount = statusGroups["Defunct / wound down"] || 0;
+  const peCount = statusGroups["PE-owned"] || 0;
+  const otherCount = statusGroups["Other (HoldCo, active)"] || 0;
+
+  // 3. Interesting Patterns
+  // Value Destroyed: Sum of defunct companies' peak valuation
+  const valueDestroyed = unicorns.reduce((acc, u) => {
+    if ((u.companyStatus || "").toLowerCase().includes("defunct")) {
+      return acc + (parseFloat(u.peakValuationCad2025 || "0") * 1_000_000_000);
+    }
+    return acc;
+  }, 0);
+
+  // Self-funded survival
+  const selfFunded = unicorns.filter(u => (u.companyStatus || "").toLowerCase().includes("self-funded"));
+  const selfFundedIndependent = selfFunded.filter(u => {
+    const s = (u.companyStatus || "").toLowerCase();
+    return s.includes("private") || s.includes("public") || s.includes("self-funded");
+  }).length;
+  const selfFundedSurvivalPct = selfFunded.length > 0 ? Math.round((selfFundedIndependent / selfFunded.length) * 100) : 100;
+
+  // Ottawa casualities
+  const ottawaUnicorns = unicorns.filter(u => (u.hqCma || "").includes("Ottawa"));
+  const ottawaGone = ottawaUnicorns.filter(u => {
+    const s = (u.companyStatus || "").toLowerCase();
+    return s.includes("acquired") || s.includes("defunct") || s.includes("pe-owned");
+  }).length;
+  const ottawaGonePct = ottawaUnicorns.length > 0 ? Math.round((ottawaGone / ottawaUnicorns.length) * 100) : 0;
+
+  // Constellation Software
+  const constellation = unicorns.find(u => u.companyName.includes("Constellation Software"));
+  const constellationPeak = constellation ? parseFloat(constellation.peakValuationCad2025 || "0") : 112;
+
+  // 4. Acquisitions
+  const acqRegions = unicorns.reduce((acc, u) => {
+    if (u.acquirerRegion) {
+      acc[u.acquirerRegion] = (acc[u.acquirerRegion] || 0) + 1;
+    }
+    return acc;
+  }, {} as Record<string, number>);
+
+  const acqData = [
+    { label: "US acquirers", count: acqRegions["US"] || 0, color: "var(--red)" },
+    { label: "European", count: acqRegions["European"] || 0, color: "var(--navy)" },
+    { label: "Canadian", count: acqRegions["Canadian"] || 0, color: "var(--gold)" },
+  ].sort((a, b) => b.count - a.count);
+  const totalAcquired = acqData.reduce((acc, d) => acc + d.count, 0);
+  const usAcqPct = totalAcquired > 0 ? Math.round(((acqRegions["US"] || 0) / totalAcquired) * 100) : 0;
 
   return (
     <div className="animate-in">
@@ -12,40 +130,39 @@ export default function VitalityTab() {
         <div className="section-header">
           <h2>Where are they now?</h2>
           <div className="divider" />
-          <p>Current status of 101 Canadian tech unicorns</p>
+          <p>Current status of {total} Canadian tech unicorns</p>
         </div>
         
         <div className="card" style={{ padding: "3rem", display: "flex", gap: "4rem", alignItems: "center", flexWrap: "wrap" }}>
-          {/* Simple SVG Donut */}
+          {/* SVG Donut */}
           <div style={{ position: "relative", width: 240, height: 240 }}>
             <svg viewBox="0 0 42 42" style={{ transform: "rotate(-90deg)", width: "100%", height: "100%" }}>
-              {/* Using stroke-dasharray for segments */}
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--navy)" strokeWidth="6" strokeDasharray="42 58" strokeDashoffset="0" />
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--red)" strokeWidth="6" strokeDasharray="18 82" strokeDashoffset="-42" />
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--gold)" strokeWidth="6" strokeDasharray="16 84" strokeDashoffset="-60" />
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--slate)" strokeWidth="6" strokeDasharray="8 92" strokeDashoffset="-76" />
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--burgundy)" strokeWidth="6" strokeDasharray="5 95" strokeDashoffset="-84" />
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--slate-light)" strokeWidth="6" strokeDasharray="6 94" strokeDashoffset="-89" />
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--red-dark)" strokeWidth="6" strokeDasharray="3 97" strokeDashoffset="-95" />
-              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--border)" strokeWidth="6" strokeDasharray="2 98" strokeDashoffset="-98" />
+              {statusData.reduce((acc, d, i) => {
+                const offset = acc.totalOffset;
+                const dash = (d.count / total) * 100;
+                acc.totalOffset -= dash;
+                acc.elements.push(
+                  <circle 
+                    key={i} 
+                    cx="21" cy="21" r="15.915" 
+                    fill="transparent" 
+                    stroke={d.color} 
+                    strokeWidth="6" 
+                    strokeDasharray={`${dash} ${100 - dash}`} 
+                    strokeDashoffset={offset} 
+                  />
+                );
+                return acc;
+              }, { elements: [] as any[], totalOffset: 0 }).elements}
             </svg>
             <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ fontSize: "2.5rem", fontWeight: 800, color: "var(--navy)", lineHeight: 1 }}>101</div>
+              <div style={{ fontSize: "2.5rem", fontWeight: 800, color: "var(--navy)", lineHeight: 1 }}>{total}</div>
               <div style={{ fontSize: "0.7rem", fontWeight: 600, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.1em" }}>unicorns</div>
             </div>
           </div>
 
           <div style={{ flex: 1, display: "grid", gap: "0.6rem" }}>
-            {[
-              { color: "var(--navy)", count: 46, pct: "46%", label: "Private" },
-              { color: "var(--red)", count: 21, pct: "21%", label: "Public (listed)" },
-              { color: "var(--gold)", count: 13, pct: "13%", label: "Acquired" },
-              { color: "var(--slate)", count: 6, pct: "6%", label: "PE-owned" },
-              { color: "var(--burgundy)", count: 3, pct: "3%", label: "Self-funded" },
-              { color: "var(--slate-light)", count: 7, pct: "7%", label: "Defunct / wound down" },
-              { color: "var(--red-dark)", count: 3, pct: "3%", label: "Distressed / restructured" },
-              { color: "var(--border)", count: 2, pct: "2%", label: "Other (HoldCo, active)" },
-            ].map((st, i) => (
+            {statusData.map((st, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: "1rem", fontSize: "0.9rem" }}>
                 <div style={{ width: 12, height: 12, background: st.color, borderRadius: 2 }} />
                 <div style={{ fontWeight: 700, width: 25, color: "var(--navy)" }}>{st.count}</div>
@@ -67,11 +184,11 @@ export default function VitalityTab() {
         
         <div className="card" style={{ padding: "2rem" }}>
           <div style={{ display: "flex", height: 40, borderRadius: 4, overflow: "hidden", marginBottom: "1rem" }}>
-            <div style={{ flex: 73, background: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>Alive (73)</div>
-            <div style={{ flex: 13, background: "var(--gold)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>Absorbed (13)</div>
-            <div style={{ flex: 7, background: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>Dead (7)</div>
-            <div style={{ flex: 6, background: "var(--slate)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>PE (6)</div>
-            <div style={{ flex: 2, background: "var(--slate-light)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>?</div>
+            <div style={{ flex: aliveCount, background: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>Alive ({aliveCount})</div>
+            <div style={{ flex: absorbedCount, background: "var(--gold)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>Absorbed ({absorbedCount})</div>
+            <div style={{ flex: deadCount, background: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>Dead ({deadCount})</div>
+            <div style={{ flex: peCount, background: "var(--slate)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>PE ({peCount})</div>
+            <div style={{ flex: otherCount, background: "var(--slate-light)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>?</div>
           </div>
           <p style={{ fontSize: "0.7rem", color: "var(--text-secondary)", fontStyle: "italic" }}>
             Alive = private + public + self-funded. Absorbed = acquired by larger entity. Dead = defunct, CCAA, or wound down. PE = private equity ownership.
@@ -97,28 +214,28 @@ export default function VitalityTab() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "1rem" }}>
           {[
             {
-              val: "$1.18T",
+              val: formatValue(valueDestroyed),
               valColor: "var(--red)",
               title: "Value destroyed",
-              desc: "Nortel alone accounts for ~$700B. The dot-com trio (Nortel + JDS + 360networks) represents $1.05T in lost peak value — nearly half the ecosystem's all-time total."
+              desc: "Nortel alone accounts for ~$700B. The dot-com trio (Nortel + JDS + 360networks) represents over $1T in lost peak value — nearly half the ecosystem's all-time total."
             },
             {
-              val: "100%",
+              val: `${selfFundedSurvivalPct}%`,
               valColor: "var(--gold)",
               title: "Self-funded unicorns still independent",
-              desc: "Geotab, Ross Video, and Global Relay — every bootstrapped unicorn has survived. 100% survival vs. ~65% for VC-backed."
+              desc: `Of the ${selfFunded.length} bootstrapped unicorns, ${selfFundedIndependent} have survived as independent entities. ${selfFundedSurvivalPct}% survival vs. ~65% for VC-backed.`
             },
             {
-              val: "52%",
+              val: `${ottawaGonePct}%`,
               valColor: "var(--navy)",
               title: "Ottawa's historical companies are gone",
-              desc: "Of Ottawa's 23 unicorns, 13 are now acquired, defunct, or PE-owned. Only 10 remain independent — a stark contrast to Toronto (27 of 34 still independent)."
+              desc: `Of Ottawa's ${ottawaUnicorns.length} unicorns, ${ottawaGone} are now acquired, defunct, or PE-owned. Only ${ottawaUnicorns.length - ottawaGone} remain independent — a stark contrast to Toronto.`
             },
             {
-              val: "$112B",
+              val: formatValue(constellationPeak * 1_000_000_000),
               valColor: "var(--burgundy)",
               title: "Constellation Software: the quiet giant",
-              desc: "The stock hit CAD 5,300 in May 2025 giving an actual peak of ~$112B. Canada's most successful serial acquirer is now larger than BlackBerry ever was."
+              desc: `Canada's most successful serial acquirer is now valued at over ${formatValue(constellationPeak * 1_000_000_000)}, larger than BlackBerry ever was at its peak.`
             }
           ].map((p, i) => (
             <div key={i} className="card" style={{ padding: "2rem" }}>
@@ -135,27 +252,23 @@ export default function VitalityTab() {
         <div className="section-header">
           <h2>Acquisitions: where they went</h2>
           <div className="divider" />
-          <p>Destination of the 13 acquired unicorns</p>
+          <p>Destination of the {totalAcquired} acquired unicorns</p>
         </div>
 
         <div className="card" style={{ padding: "2.5rem" }}>
           <div style={{ display: "grid", gap: "1rem", maxWidth: 600 }}>
-            {[
-              { label: "US acquirers", count: 11, flex: 11, color: "var(--red)" },
-              { label: "European", count: 3, flex: 3, color: "var(--navy)" },
-              { label: "Canadian", count: 2, flex: 2, color: "var(--gold)" },
-            ].map((a, i) => (
+            {acqData.map((a, i) => (
               <div key={i} style={{ display: "grid", gridTemplateColumns: "100px 1fr", alignItems: "center", gap: "1rem" }}>
                 <div style={{ fontSize: "0.85rem", fontWeight: 500, color: "var(--text-secondary)" }}>{a.label}</div>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <div style={{ height: 16, background: a.color, width: `${(a.count / 11) * 100}%`, minWidth: "10%", borderRadius: 2 }} />
+                  <div style={{ height: 16, background: a.color, width: `${(a.count / Math.max(...acqData.map(d => d.count))) * 100}%`, minWidth: "10%", borderRadius: 2 }} />
                   <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--navy)" }}>{a.count}</div>
                 </div>
               </div>
             ))}
           </div>
           <p style={{ marginTop: "1.5rem", fontSize: "0.85rem", color: "var(--text-secondary)", fontStyle: "italic" }}>
-            69% of acquired Canadian unicorns were bought by US companies — a persistent brain-drain pattern.
+            {usAcqPct}% of acquired Canadian unicorns were bought by US companies — a persistent brain-drain pattern.
           </p>
         </div>
       </section>

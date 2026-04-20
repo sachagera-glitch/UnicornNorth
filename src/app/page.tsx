@@ -7,8 +7,8 @@ export default async function Home() {
   });
 
   const cmaStats = await prisma.cmaDecadeStat.findMany();
-
   const onCusp = await prisma.companyOnCusp.findMany();
+  const cmaMetadata = await prisma.cmaMetadata.findMany();
 
   // Serialize Decimal to string for client components
   const serializedUnicorns = unicorns.map((u) => ({
@@ -26,6 +26,7 @@ export default async function Home() {
       unicorns={serializedUnicorns}
       cmaStats={serializedCmaStats}
       onCusp={onCusp}
+      cmaMetadata={cmaMetadata}
     />
   );
 }

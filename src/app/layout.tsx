@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "UnicornNorth — The Definitive Canadian Tech Ecosystem Ledger",
   description:
-    "Explore the 101 companies that define the Canadian tech ecosystem. From Toronto's AI surge to Ottawa's telecom legacy and Vancouver's biotech hubs, track $2.15 Trillion in aggregate peak value creation.",
+    "Explore the 99 companies that define the Canadian tech ecosystem. From Toronto's AI surge to Ottawa's telecom legacy and Vancouver's biotech hubs, track $2.14 Trillion in aggregate peak value creation.",
   keywords: [
     "Canadian unicorns",
     "Toronto tech ecosystem",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "UnicornNorth — The Canadian Tech Ecosystem Ledger",
     description:
-      "101 companies. $2.15T CAD. The definitive chronicle of Canadian value creation across Toronto, Ottawa, Vancouver, and Montreal.",
+      "99 companies. $2.14T CAD. The definitive chronicle of Canadian value creation across Toronto, Ottawa, Vancouver, and Montreal.",
     url: "https://unicornnorth.ca",
     siteName: "UnicornNorth",
     locale: "en_CA",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "UnicornNorth — Canadian Tech Ledger",
-    description: "Tracking the $2.15T evolution of the Canadian tech ecosystem.",
+    description: "Tracking the $2.14T evolution of the Canadian tech ecosystem.",
   },
 };
 
@@ -62,7 +62,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Dataset",
               "name": "UnicornNorth Canadian Tech Ecosystem Ledger",
-              "description": "A comprehensive dataset of 101 Canadian unicorn companies representing $2.15T in aggregate peak valuation.",
+              "description": "A comprehensive dataset of 99 Canadian unicorn companies representing $2.14T in aggregate peak valuation.",
               "url": "https://unicornnorth.ca",
               "keywords": "Canadian tech, Unicorns, Venture Capital, Toronto, Ottawa, Vancouver, Montreal",
               "creator": {

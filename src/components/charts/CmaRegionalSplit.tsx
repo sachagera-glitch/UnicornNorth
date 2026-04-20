@@ -73,7 +73,7 @@ export default function CmaRegionalSplit({ data }: CmaRegionalSplitProps) {
   return (
     <section className="section" style={{ paddingBottom: "4rem" }}>
       <div className="section-header">
-        <h2>Regional Value Split</h2>
+        <h2>Tech Hub Value Split</h2>
         <div className="divider" />
         <p>
           Visualizing where Canada's tech wealth was created. This chart compares the total 

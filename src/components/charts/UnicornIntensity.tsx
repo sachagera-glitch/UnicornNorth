@@ -149,13 +149,16 @@ export default function UnicornIntensity({ unicorns }: UnicornIntensityProps) {
                   <div 
                     style={{ 
                       position: "absolute",
-                      left: `${Math.max((item.rate / maxRate) * 100, 2)}%`,
+                      left: 0,
+                      width: (item.rate / maxRate) > 0.8 ? `${(item.rate / maxRate) * 100}%` : "100%",
                       top: 0,
                       bottom: 0,
                       display: "flex",
                       alignItems: "center",
-                      paddingLeft: (item.rate / maxRate) < 0.2 ? "0.75rem" : "1rem",
-                      color: (item.rate / maxRate) < 0.2 ? "var(--navy)" : "white",
+                      justifyContent: (item.rate / maxRate) > 0.8 ? "flex-end" : "flex-start",
+                      paddingLeft: (item.rate / maxRate) > 0.8 ? "0" : `${(item.rate / maxRate) * 100}%`,
+                      paddingRight: (item.rate / maxRate) > 0.8 ? "1rem" : "0",
+                      color: (item.rate / maxRate) > 0.8 ? "white" : "var(--navy)",
                       fontSize: "0.85rem",
                       fontWeight: 700,
                       fontFamily: "'Roboto Mono', monospace",
@@ -164,7 +167,9 @@ export default function UnicornIntensity({ unicorns }: UnicornIntensityProps) {
                       transition: "all 0.4s ease-out"
                     }}
                   >
-                    {item.rate.toFixed(1)} per M
+                    <span style={{ paddingLeft: (item.rate / maxRate) > 0.8 ? "0" : "0.75rem" }}>
+                      {item.rate.toFixed(1)} per M
+                    </span>
                   </div>
                 </div>
                 <div style={{ fontSize: "0.85rem", color: "var(--slate-light)", textAlign: "right" }}>

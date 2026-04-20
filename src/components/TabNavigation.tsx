@@ -1,6 +1,6 @@
 "use client";
 
-export type TabKey = "overview" | "ledger" | "regions" | "radar" | "vitality" | "founders";
+export type TabKey = "overview" | "ledger" | "regions" | "radar" | "vitality" | "founders" | "about";
 
 interface TabNavigationProps {
   activeTab: TabKey;
@@ -10,10 +10,11 @@ interface TabNavigationProps {
 const TABS: { key: TabKey; label: string }[] = [
   { key: "overview", label: "Overview" },
   { key: "ledger", label: "Leadership Board" },
-  { key: "regions", label: "Regions" },
+  { key: "regions", label: "Tech Hubs" },
   { key: "radar", label: "Radar" },
   { key: "vitality", label: "Vitality" },
   { key: "founders", label: "GOAT Founders" },
+  { key: "about", label: "About" },
 ];
 
 export default function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
