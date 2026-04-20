@@ -1,19 +1,10 @@
 import { useCurrency } from "./CurrencyContext";
 
-interface CmaMetadata {
-  cma: string;
-  lens: string;
-  description: string;
-}
-
-interface Unicorn {
-  hqCma: string | null;
-  peakValuationCad2025: string | null;
-}
+import { type UnicornRow, type CmaMetadataRow } from "@/types";
 
 interface Props {
-  unicorns: Unicorn[];
-  cmaMetadata: CmaMetadata[];
+  unicorns: UnicornRow[];
+  cmaMetadata: CmaMetadataRow[];
 }
 
 export default function CmaAggregates({ unicorns, cmaMetadata }: Props) {

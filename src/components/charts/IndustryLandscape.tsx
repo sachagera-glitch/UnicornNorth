@@ -3,16 +3,7 @@
 import React, { useMemo } from "react";
 import { useCurrency } from "../CurrencyContext";
 
-interface UnicornRow {
-  id: number;
-  companyName: string;
-  hqCma: string | null;
-  industry: string | null;
-  firstUnicornDecade: string | null;
-  peakValuationCad2025: string | null;
-  companyStatus: string | null;
-  isRevenueMultiplier: boolean;
-}
+import { type UnicornRow } from "@/types";
 
 interface IndustryLandscapeProps {
   data: UnicornRow[];

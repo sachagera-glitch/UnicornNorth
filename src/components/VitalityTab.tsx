@@ -2,25 +2,7 @@
 
 import { useCurrency } from "./CurrencyContext";
 
-interface UnicornRow {
-  id: number;
-  companyName: string;
-  hqCma: string | null;
-  industry: string | null;
-  firstUnicornDecade: string | null;
-  peakValuationCad2025: string | null;
-  companyStatus: string | null;
-  acquirerRegion: string | null;
-  isRevenueMultiplier: boolean;
-  lastUpdated: Date;
-}
-
-interface CmaStatRow {
-  cma: string;
-  decade: string;
-  unicornCount: number;
-  unicornsPerMillionRes: string | null;
-}
+import { type UnicornRow, type CmaStatRow } from "@/types";
 
 interface Props {
   unicorns: UnicornRow[];

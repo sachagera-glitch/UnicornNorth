@@ -22,39 +22,12 @@ import GoatFounders from "@/components/GoatFounders";
 import ValueConcentration from "@/components/charts/ValueConcentration";
 import AboutUs from "@/components/AboutUs";
 
-interface UnicornRow {
-  id: number;
-  companyName: string;
-  hqCma: string | null;
-  industry: string | null;
-  firstUnicornDecade: string | null;
-  peakValuationCad2025: string | null;
-  companyStatus: string | null;
-  acquirerRegion: string | null;
-  isRevenueMultiplier: boolean;
-  lastUpdated: Date;
-}
-
-interface CmaStatRow {
-  cma: string;
-  decade: string;
-  unicornCount: number;
-  unicornsPerMillionRes: string | null;
-}
-
-interface CuspRow {
-  id: number;
-  companyName: string;
-  hqCma: string | null;
-  sectorFocus: string | null;
-  identifiedDate: Date;
-}
-
-interface CmaMetadataRow {
-  cma: string;
-  lens: string;
-  description: string;
-}
+import { 
+  type UnicornRow, 
+  type CmaStatRow, 
+  type CuspRow, 
+  type CmaMetadataRow 
+} from "@/types";
 
 interface Props {
   unicorns: UnicornRow[];

@@ -2,16 +2,7 @@
 
 import { useState, useMemo } from "react";
 
-interface UnicornRow {
-  id: number;
-  companyName: string;
-  hqCma: string | null;
-  industry: string | null;
-  firstUnicornDecade: string | null;
-  peakValuationCad2025: string | null;
-  companyStatus: string | null;
-  isRevenueMultiplier: boolean;
-}
+import { type UnicornRow } from "@/types";
 
 interface UnicornIntensityProps {
   unicorns: UnicornRow[];

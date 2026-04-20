@@ -106,7 +106,7 @@ export default function ValueEpochs() {
                 border: "1px solid var(--border)",
                 borderRadius: 2,
               }}
-              formatter={(value: number) => [`$${value}B`, undefined]}
+              formatter={(value: any) => [`$${value}B`]}
             />
             <Legend
               wrapperStyle={{

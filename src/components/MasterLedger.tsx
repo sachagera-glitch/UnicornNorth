@@ -3,17 +3,7 @@
 import { useState, useMemo } from "react";
 import { useCurrency } from "./CurrencyContext";
 
-interface UnicornRow {
-  id: number;
-  companyName: string;
-  hqCma: string | null;
-  industry: string | null;
-  founders: string | null;
-  firstUnicornDecade: string | null;
-  peakValuationCad2025: string | null;
-  companyStatus: string | null;
-  isRevenueMultiplier: boolean;
-}
+import { type UnicornRow } from "@/types";
 
 type SortField = "companyName" | "hqCma" | "peakValuationCad2025" | "companyStatus" | "founders";
 

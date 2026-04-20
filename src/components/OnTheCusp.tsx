@@ -1,6 +1,6 @@
 "use client";
 
-interface CuspCompany { companyName: string; hqCma: string | null; sectorFocus: string | null; }
+import { type CuspRow } from "@/types";
 
 const CUSP_LENSES: Record<string, { title: string; lens: string }> = {
   "Ottawa-Gatineau": { title: "Ottawa-Gatineau", lens: "Deep-Tech Reload" },
@@ -12,13 +12,13 @@ const CUSP_LENSES: Record<string, { title: string; lens: string }> = {
   "Kitchener-C-W": { title: "Kitchener-C-W", lens: "Engagement Tech" },
 };
 
-export default function OnTheCusp({ data }: { data: CuspCompany[] }) {
+export default function OnTheCusp({ data }: { data: CuspRow[] }) {
   const grouped = data.reduce((acc, c) => {
     const cma = c.hqCma || "Other";
     if (!acc[cma]) acc[cma] = [];
     acc[cma].push(c);
     return acc;
-  }, {} as Record<string, CuspCompany[]>);
+  }, {} as Record<string, CuspRow[]>);
 
   return (
     <section className="section">
