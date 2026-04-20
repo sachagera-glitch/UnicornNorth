@@ -19,6 +19,10 @@ export const metadata: Metadata = {
     "tech economic data Canada",
   ],
   authors: [{ name: "UnicornNorth Research" }],
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "UnicornNorth — The Canadian Tech Ecosystem Ledger",
     description:
@@ -27,11 +31,20 @@ export const metadata: Metadata = {
     siteName: "UnicornNorth",
     locale: "en_CA",
     type: "website",
+    images: [
+      {
+        url: "/favicon.svg",
+        width: 1200,
+        height: 630,
+        alt: "UnicornNorth Canadian Tech Ledger",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "UnicornNorth — Canadian Tech Ledger",
     description: "Tracking the $2.14T evolution of the Canadian tech ecosystem.",
+    images: ["/favicon.svg"],
   },
 };
 
