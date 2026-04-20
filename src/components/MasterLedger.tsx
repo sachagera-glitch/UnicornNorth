@@ -1,0 +1,224 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import { useCurrency } from "./CurrencyContext";
+
+interface UnicornRow {
+  id: number;
+  companyName: string;
+  hqCma: string | null;
+  industry: string | null;
+  firstUnicornDecade: string | null;
+  peakValuationCad2025: string | null;
+  companyStatus: string | null;
+  isRevenueMultiplier: boolean;
+}
+
+type SortField = "companyName" | "hqCma" | "peakValuationCad2025" | "companyStatus";
+
+function statusBadge(status: string | null) {
+  const s = (status || "").toLowerCase();
+  const cls =
+    s === "public"
+      ? "badge badge-public"
+      : s === "private"
+        ? "badge badge-private"
+        : s === "acquired"
+          ? "badge badge-acquired"
+          : "badge badge-defunct";
+  return <span className={cls}>{status}</span>;
+}
+
+export default function MasterLedger({ data }: { data: UnicornRow[] }) {
+  const { formatValueShort, currency } = useCurrency();
+  const [sortField, setSortField] = useState<SortField>("peakValuationCad2025");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+  const [filterStatus, setFilterStatus] = useState<string>("all");
+  const [filterDecade, setFilterDecade] = useState<string>("all");
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortField(field);
+      setSortDir(field === "peakValuationCad2025" ? "desc" : "asc");
+    }
+  };
+
+  const sorted = useMemo(() => {
+    let filtered = [...data];
+    if (filterStatus !== "all") {
+      filtered = filtered.filter(
+        (u) => (u.companyStatus || "").toLowerCase() === filterStatus
+      );
+    }
+    if (filterDecade !== "all") {
+      filtered = filtered.filter((u) => u.firstUnicornDecade === filterDecade);
+    }
+
+    filtered.sort((a, b) => {
+      let av: string | number = "";
+      let bv: string | number = "";
+      if (sortField === "peakValuationCad2025") {
+        av = parseFloat(a.peakValuationCad2025 || "0");
+        bv = parseFloat(b.peakValuationCad2025 || "0");
+      } else {
+        av = (a[sortField] || "").toLowerCase();
+        bv = (b[sortField] || "").toLowerCase();
+      }
+      if (av < bv) return sortDir === "asc" ? -1 : 1;
+      if (av > bv) return sortDir === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    return filtered;
+  }, [data, sortField, sortDir, filterStatus, filterDecade]);
+
+  const sortIndicator = (field: SortField) =>
+    sortField === field ? (sortDir === "asc" ? " ↑" : " ↓") : "";
+
+  return (
+    <section id="ledger" className="section">
+      <div className="section-header">
+        <h2>The Leadership Board</h2>
+        <div className="divider" />
+        <p>
+          All-time ranking of Canadian unicorns by peak valuation (≥ $1B {currency}).
+        </p>
+      </div>
+
+      {/* Filters */}
+      <div
+        style={{
+          display: "flex",
+          gap: "1rem",
+          marginBottom: "1.5rem",
+          flexWrap: "wrap",
+          alignItems: "center",
+        }}
+      >
+        <div className="data-label" style={{ marginRight: "0.5rem" }}>
+          Filter:
+        </div>
+        <select
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value)}
+          style={{
+            fontFamily: "'Roboto Mono', monospace",
+            fontSize: "0.7rem",
+            padding: "0.4rem 0.75rem",
+            border: "1px solid var(--border)",
+            borderRadius: 2,
+            background: "var(--paper)",
+            color: "var(--navy)",
+            cursor: "pointer",
+          }}
+        >
+          <option value="all">All Status</option>
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+          <option value="acquired">Acquired</option>
+          <option value="defunct">Defunct</option>
+        </select>
+        <select
+          value={filterDecade}
+          onChange={(e) => setFilterDecade(e.target.value)}
+          style={{
+            fontFamily: "'Roboto Mono', monospace",
+            fontSize: "0.7rem",
+            padding: "0.4rem 0.75rem",
+            border: "1px solid var(--border)",
+            borderRadius: 2,
+            background: "var(--paper)",
+            color: "var(--navy)",
+            cursor: "pointer",
+          }}
+        >
+          <option value="all">All Decades</option>
+          <option value="1990s">1990s</option>
+          <option value="2000s">2000s</option>
+          <option value="2010s">2010s</option>
+          <option value="2020s">2020s</option>
+        </select>
+        <div
+          className="data-label"
+          style={{ marginLeft: "auto" }}
+        >
+          {sorted.length} of {data.length} companies
+        </div>
+      </div>
+
+      <div style={{
+        marginBottom: "1rem",
+        fontSize: "0.65rem",
+        fontFamily: "'Roboto Mono'",
+        color: "var(--text-secondary)",
+        opacity: 0.8,
+        letterSpacing: "0.02em",
+        textAlign: "left"
+      }}>
+        * Inflation adjusted to 2025 CAD based on peak market cap. For private companies, valuations are estimated based on ecosystem research.
+      </div>
+
+      {/* Table */}
+      <div style={{ overflowX: "auto" }}>
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th style={{ width: "40px" }}>#</th>
+              <th onClick={() => handleSort("companyName")}>
+                Company{sortIndicator("companyName")}
+              </th>
+              <th onClick={() => handleSort("hqCma")}>
+                HQ or Founded City (CMA){sortIndicator("hqCma")}
+              </th>
+              <th onClick={() => handleSort("peakValuationCad2025")} style={{ textAlign: "right" }}>
+                Adj. Peak ($B)*{sortIndicator("peakValuationCad2025")}
+              </th>
+              <th onClick={() => handleSort("companyStatus")}>
+                Status{sortIndicator("companyStatus")}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((u, i) => (
+              <tr key={u.id}>
+                <td style={{ 
+                  fontFamily: "'Roboto Mono'", 
+                  fontSize: "0.75rem", 
+                  color: "var(--slate-light)",
+                  fontWeight: 600 
+                }}>
+                  {i + 1}
+                </td>
+                <td>
+                  <span className="company-name">{u.companyName}</span>
+                  {u.isRevenueMultiplier && (
+                    <span className="revenue-flag" title="5x revenue multiplier">
+                      ★
+                    </span>
+                  )}
+                </td>
+                <td style={{ color: "var(--slate)" }}>{u.hqCma}</td>
+                <td
+                  className="data-value"
+                  style={{ textAlign: "right", fontSize: "0.85rem" }}
+                >
+                  ${parseFloat(u.peakValuationCad2025 || "0").toFixed(1)}
+                </td>
+                <td>{statusBadge(u.companyStatus)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        className="data-label"
+        style={{ marginTop: "1rem", textAlign: "right" }}
+      >
+        ★ = 5x revenue multiplier estimate
+      </div>
+    </section>
+  );
+}

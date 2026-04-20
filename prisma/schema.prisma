@@ -1,0 +1,44 @@
+// UnicornNorth - Canadian Tech Ecosystem Ledger
+// Prisma Schema for Neon PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Unicorn {
+  id                    Int      @id @default(autoincrement())
+  companyName           String   @map("company_name") @db.VarChar(255)
+  hqCma                 String?  @map("hq_cma") @db.VarChar(100)
+  industry              String?  @db.VarChar(100)
+  firstUnicornDecade    String?  @map("first_unicorn_decade") @db.VarChar(20)
+  peakValuationCad2025  Decimal? @map("peak_valuation_cad_2025") @db.Decimal(20, 2)
+  companyStatus         String?  @map("company_status") @db.VarChar(50)
+  isRevenueMultiplier   Boolean  @default(false) @map("is_revenue_multiplier")
+  lastUpdated           DateTime @default(now()) @map("last_updated")
+
+  @@map("unicorns")
+}
+
+model CmaDecadeStat {
+  cma                 String @map("cma") @db.VarChar(100)
+  decade              String @map("decade") @db.VarChar(20)
+  unicornCount        Int    @map("unicorn_count")
+  unicornsPerMillionRes Decimal? @map("unicorns_per_million_res") @db.Decimal(10, 2)
+
+  @@id([cma, decade])
+  @@map("cma_decade_stats")
+}
+
+model CompanyOnCusp {
+  id             Int      @id @default(autoincrement())
+  companyName    String   @map("company_name") @db.VarChar(255)
+  hqCma          String?  @map("hq_cma") @db.VarChar(100)
+  sectorFocus    String?  @map("sector_focus") @db.VarChar(255)
+  identifiedDate DateTime @default(now()) @map("identified_date") @db.Date
+
+  @@map("companies_on_cusp")
+}
