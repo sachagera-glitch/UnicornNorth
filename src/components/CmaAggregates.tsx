@@ -30,7 +30,7 @@ export default function CmaAggregates({ unicorns, cmaMetadata }: Props) {
       <div className="section-header">
         <h2>Tech Hub Prominence</h2>
         <div className="divider" />
-        <p>Aggregate lifetime peak valuation by City, adjusted to 2025 constant CAD.</p>
+        <p>Aggregate lifetime peak valuation of unicorns founded or HQ'd within the city, adjusted to 2025 constant CAD.</p>
       </div>
 
       <div style={{ display: "grid", gap: "0.75rem" }}>

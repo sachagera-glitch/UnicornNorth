@@ -192,6 +192,7 @@ async function main() {
       ["Solace", "Ottawa-Gatineau", "Deep-Tech"],
       ["Turbopuffer", "Ottawa-Gatineau", "Deep-Tech"],
       ["Mindbridge.ai", "Ottawa-Gatineau", "Deep-Tech"],
+      ["Calian Group", "Ottawa-Gatineau", "Diversified"],
       ["Subterra", "Toronto", "CleanTech"],
       ["Salt XC", "Toronto", "MarTech"],
       ["Vena Solutions", "Toronto", "SaaS"],

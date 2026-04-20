@@ -17,6 +17,7 @@ const cuspData = [
   { name: "Jobber", cma: "Edmonton", val: 950, growth: 90, sector: "SaaS" },
   { name: "Vendasta", cma: "Saskatoon", val: 700, growth: 65, sector: "SaaS" },
   { name: "Vidyard", cma: "Kitchener-C-W", val: 600, growth: 60, sector: "MarTech" },
+  { name: "Calian Group", cma: "Ottawa-Gatineau", val: 823, growth: 10, sector: "Diversified" },
 ];
 
 export default function SuccessorRadar() {
