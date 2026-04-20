@@ -55,11 +55,11 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
     return acc;
   }, {} as Record<string, number>);
 
-  let dominantHub = "Toronto CMA";
+  let dominantHub = "Toronto";
   let dominantHubCount = 0;
   for (const [hub, count] of Object.entries(hubCounts)) {
     if (count > dominantHubCount) {
-      dominantHub = hub.includes("CMA") ? hub : `${hub} CMA`;
+      dominantHub = hub;
       dominantHubCount = count;
     }
   }
@@ -77,7 +77,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
 
   // 5. Historical Powerhouse (Ottawa is the historical king)
   const ottawaStats = cmaStats.find(s => s.cma === "Ottawa-Gatineau" && s.decade === "2020s");
-  const historicalPowerhouse = "Ottawa-Gatineau CMA";
+  const historicalPowerhouse = "Ottawa-Gatineau";
   const historicalPowerhouseCount = ottawaStats?.unicornCount || 0;
 
   // 6. Highest Individual Peak

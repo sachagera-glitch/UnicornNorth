@@ -164,7 +164,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
                 Founders{sortIndicator("founders")}
               </th>
               <th onClick={() => handleSort("hqCma")}>
-                HQ or Founded City (CMA){sortIndicator("hqCma")}
+                HQ or Founded City{sortIndicator("hqCma")}
               </th>
               <th onClick={() => handleSort("peakValuationCad2025")} style={{ textAlign: "right" }}>
                 Adj. Peak ($B)*{sortIndicator("peakValuationCad2025")}

@@ -17,7 +17,7 @@ const FOUNDERS: Founder[] = [
     rank: 1,
     name: "Tobias Lütke",
     company: "Shopify",
-    location: "Ottawa, ON",
+    location: "Ottawa/Toronto (moved 2023)",
     peak: "$300B+ market cap",
     description: "German-born Tobias \"Tobi\" Lütke immigrated to Canada in 2002 and co-founded Shopify in 2006 after building an e-commerce platform for his online snowboard shop, Snowdevil. What began as a side project using Ruby on Rails became the backbone of global e-commerce, powering millions of merchants in over 100 countries. Shopify went public in 2015, and under Lütke’s leadership grew into Canada’s second most valuable company with a market capitalization exceeding $200 billion. A core contributor to the Ruby on Rails framework and creator of open-source libraries like Active Merchant and Liquid, Lütke was named Globe and Mail CEO of the Year in 2014 and received the Meritorious Service Cross in 2018. With a personal net worth exceeding $12 billion, he ranks among Canada’s wealthiest individuals. He has championed AI integration at Shopify, donated over $1 million to environmental causes through Team Trees, and competes as a racing driver in the IMSA SportsCar Championship.",
     wikipediaUrl: "https://en.wikipedia.org/wiki/Tobias_L%C3%BCtke"

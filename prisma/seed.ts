@@ -22,7 +22,7 @@ async function main() {
     // ── Unicorns (100 companies - Alludo merged into Corel) ──────────────
     const unicorns = [
       // Name, HQ/CMA, Industry, Founders, Decade, Peak Val ($B), Status, Revenue Multiplier, Acquirer Region
-      ["Nortel / BNR", "Ottawa-Gatineau", "Telecom", "Walter Light", "1990s", 768.6, "Defunct", false, null],
+      ["Nortel / BNR", "Ottawa-Gatineau", "Telecom", null, "1990s", 768.6, "Defunct", false, null],
       ["JDS Uniphase (JDSU)", "Ottawa-Gatineau", "Telecom", "Jozef Straus; Kevin Kalkhoven", "1990s", 314.5, "Acquired", false, "US"],
       ["Shopify", "Ottawa-Gatineau", "E-commerce", "Tobias Lütke, Daniel Weinand, Scott Lake", "2010s", 300.0, "Public", false, null],
       ["BlackBerry (RIM)", "Kitchener-C-W", "Mobile", "Mike Lazaridis, Douglas Fregin", "1990s", 130.0, "Public", false, null],
@@ -31,7 +31,7 @@ async function main() {
       ["CGI Inc.", "Montréal", "IT Consulting", "Serge Godin, André Imbeau", "1990s", 37.5, "Public", false, null],
       ["360networks", "Vancouver", "Telecom", "Greg Maffei, Ledcor Group", "1990s", 36.0, "Defunct", false, null],
       ["Digital Equipment (Canada)", "Ottawa-Gatineau", "Hardware", "Ken Olsen (US parent)", "1990s", 25.0, "Acquired", false, "US"],
-      ["Newbridge Networks", "Ottawa-Gatineau", "Telecom", "Terry Matthews, Michael Cowpland", "1990s", 21.8, "Acquired", false, "European"],
+      ["Newbridge Networks", "Ottawa-Gatineau", "Telecom", "Terry Matthews", "1990s", 21.8, "Acquired", false, "European"],
       ["Lightspeed Commerce", "Montréal", "POS Software", "Dax Dasilva", "2010s", 21.0, "Public", false, null],
       ["Nuvei", "Montréal", "Fintech", "Philip Fayer", "2020s", 21.0, "Private (Advent)", false, null],
       ["OpenText", "Kitchener-C-W", "Software", "Tim Bray, Gaston Gonnet", "2000s", 18.0, "Public", false, null],
@@ -51,6 +51,7 @@ async function main() {
       ["SSENSE", "Montréal", "E-commerce", "Rami, Bassel, Firas Atallah", "2020s", 5.0, "Creditor Protection", false, null],
       ["Xanadu", "Toronto", "Quantum", "Christian Weedbrook", "2020s", 5.0, "Private", false, null],
       ["Geotab", "Toronto", "Telematics", "Neil Cawse", "2020s", 5.0, "Self-Funded", false, null],
+      ["EXFO", "Québec City", "Telecom", "Germain Lamonde", "2020s", 4.8, "Private (Lamonde)", false, null],
       ["LayerZero Labs", "Vancouver", "Web3", "Bryan Pellegrino et al.", "2020s", 4.5, "Private", false, null],
       ["Blockstream", "Montréal", "Web3", "Adam Back et al.", "2020s", 4.5, "Private", false, null],
       ["Clio", "Vancouver", "Legal Tech", "Jack Newton, Rian Gauvreau", "2020s", 4.3, "Private", false, null],
@@ -90,7 +91,7 @@ async function main() {
       ["Zarlink", "Ottawa-Gatineau", "Semiconductors", "David Smith", "1990s", 1.8, "Acquired", false, "US"],
       ["Thinkific", "Vancouver", "Edtech", "Greg Smith, Matt Smith", "2020s", 1.8, "Public", false, null],
       ["Ada", "Toronto", "AI", "Mike Murchison, David Baxter", "2020s", 1.7, "Private", false, null],
-      ["Hummingbird", "Ottawa-Gatineau", "Software", "Fred Hooper", "1990s", 1.5, "Acquired", false, "Canadian"],
+      ["Fulcrum (Hummingbird)", "Ottawa-Gatineau", "Software", "Fred Hooper", "1990s", 1.5, "Acquired", false, "Canadian"],
       ["eSentire", "Kitchener-C-W", "Cybersecurity", "Eldon Sprickerhoff", "2020s", 1.5, "Private", false, null],
       ["Hootsuite", "Vancouver", "Martech", "Ryan Holmes", "2010s", 1.5, "Private", false, null],
       ["Kik", "Kitchener-C-W", "Social/Web3", "Ted Livingston", "2010s", 1.5, "Defunct/Acquired US", false, "US"],

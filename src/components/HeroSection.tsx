@@ -14,7 +14,7 @@ export default function HeroSection({ totalUnicorns, aggregatePeak, hubCount }: 
   const stats = [
     { value: totalUnicorns.toString(), label: "Companies" },
     { value: formatValue(aggregatePeak).split(" ")[0], label: `Aggregate (${currency})` },
-    { value: hubCount.toString(), label: "CMAs" },
+    { value: hubCount.toString(), label: "Cities" },
     { value: "36", label: "Years" },
   ];
 
