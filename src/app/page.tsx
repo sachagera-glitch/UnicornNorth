@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import ClientPage from "./ClientPage";
+import { Unicorn, CmaDecadeStat } from "@prisma/client";
 
 export default async function Home() {
   const unicorns = await prisma.unicorn.findMany({
@@ -11,12 +12,12 @@ export default async function Home() {
   const cmaMetadata = await prisma.cmaMetadata.findMany();
 
   // Serialize Decimal to string for client components
-  const serializedUnicorns = unicorns.map((u) => ({
+  const serializedUnicorns = unicorns.map((u: Unicorn) => ({
     ...u,
     peakValuationCad2025: u.peakValuationCad2025?.toString() || null,
   }));
 
-  const serializedCmaStats = cmaStats.map((s) => ({
+  const serializedCmaStats = cmaStats.map((s: CmaDecadeStat) => ({
     ...s,
     unicornsPerMillionRes: s.unicornsPerMillionRes?.toString() || null,
   }));
