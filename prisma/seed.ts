@@ -104,7 +104,7 @@ async function main() {
       ["FreshBooks", "Toronto", "SaaS", "Mike McDerment", "2020s", 1.4, "Private", false, null],
       ["Benevity", "Calgary", "SaaS", "Bryan de Lottinville", "2020s", 1.4, "Private", false, null],
       ["Axelar", "Toronto", "Web3", "Sergey Gorbunov, Georgios Vlachos", "2020s", 1.4, "Private", false, null],
-      ["Neo Financial", "Calgary", "Fintech", "Andrew Chau, Jeff MacPherson", "2020s", 1.4, "Private", false, null],
+      ["Neo Financial", "Calgary", "Fintech", "Andrew Chau, Jeff Adamson, Kris Read, Chris Simair", "2020s", 1.4, "Private", false, null],
       ["Coveo", "Québec City", "AI/Search", "Laurent Simoneau, Richard Tessier", "2010s", 1.4, "Public", false, null],
       ["Vena Solutions", "Toronto", "Finance SaaS", "Don Picard, Rishi Grover", "2020s", 1.4, "Private", false, null],
       ["Vention", "Montréal", "Industrial AI", "Etienne Lacroix, Max Windisch", "2020s", 1.4, "Private", false, null],
