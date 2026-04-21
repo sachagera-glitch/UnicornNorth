@@ -65,9 +65,9 @@ export default function ValueConcentration({ data }: ValueConcentrationProps) {
               key={i} 
               style={{ 
                 display: "grid", 
-                gridTemplateColumns: "clamp(60px, 15vw, 120px) 1fr 60px", 
+                gridTemplateColumns: "clamp(80px, 20vw, 150px) 1fr 60px", 
                 alignItems: "center", 
-                gap: "1rem" 
+                gap: "0.75rem" 
               }}
             >
               <div style={{ 

@@ -222,9 +222,9 @@ export default function GoatFounders() {
 
         <div style={{ display: "grid", gap: "2rem" }}>
           {FOUNDERS.map((f) => (
-            <div key={f.rank} className="card" style={{ padding: "2.5rem", position: "relative", overflow: "hidden" }}>
+            <div key={f.rank} className="card" style={{ padding: "clamp(1.25rem, 5vw, 2.5rem)", position: "relative", overflow: "hidden" }}>
               {/* Background Rank */}
-              <div style={{
+              <div className="hidden-mobile" style={{
                 position: "absolute",
                 right: "-20px",
                 top: "-20px",
@@ -239,7 +239,7 @@ export default function GoatFounders() {
               </div>
 
               <div style={{ position: "relative", zIndex: 1 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }} className="stack-mobile">
                   <div>
                     <div style={{ 
                       fontSize: "0.85rem", 
@@ -274,7 +274,7 @@ export default function GoatFounders() {
                     </h3>
                   </div>
                   
-                  <div style={{ textAlign: "right" }}>
+                  <div className="text-right-desktop">
                     <div style={{ 
                       fontSize: "1.25rem", 
                       fontWeight: 700, 

@@ -10,6 +10,8 @@ const CUSP_LENSES: Record<string, { title: string; lens: string }> = {
   "Edmonton": { title: "Edmonton", lens: "New Node Hub" },
   "Saskatoon": { title: "Saskatoon", lens: "Prairie SaaS" },
   "Kitchener-C-W": { title: "Kitchener-C-W", lens: "Engagement Tech" },
+  "Calgary": { title: "Calgary", lens: "Energy-Tech" },
+  "Victoria": { title: "Victoria", lens: "Island SaaS" },
 };
 
 export default function OnTheCusp({ data }: { data: CuspRow[] }) {

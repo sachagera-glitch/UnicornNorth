@@ -89,6 +89,14 @@ export default function VitalityTab({ unicorns, cmaStats }: Props) {
   const constellation = unicorns.find(u => u.companyName.includes("Constellation Software"));
   const constellationPeak = constellation ? parseFloat(constellation.peakValuationCad2025 || "0") : 112;
 
+  // Toronto dominance
+  const torontoUnicorns = unicorns.filter(u => (u.hqCma || "").includes("Toronto"));
+  const torontoPct = total > 0 ? Math.round((torontoUnicorns.length / total) * 100) : 0;
+
+  // 2020s Boom
+  const recentUnicorns = unicorns.filter(u => (u.firstUnicornDecade || "").includes("2020s"));
+  const recentPct = total > 0 ? Math.round((recentUnicorns.length / total) * 100) : 0;
+
   // 4. Acquisitions
   const acqRegions = unicorns.reduce((acc, u) => {
     if (u.acquirerRegion) {
@@ -115,7 +123,7 @@ export default function VitalityTab({ unicorns, cmaStats }: Props) {
           <p>Current status of {total} Canadian tech unicorns</p>
         </div>
         
-        <div className="card" style={{ padding: "3rem", display: "flex", gap: "4rem", alignItems: "center", flexWrap: "wrap" }}>
+        <div className="card stack-mobile" style={{ padding: "clamp(1.25rem, 5vw, 3rem)", display: "flex", gap: "clamp(1.5rem, 5vw, 4rem)", alignItems: "center", flexWrap: "wrap" }}>
           {/* SVG Donut */}
           <div style={{ position: "relative", width: 240, height: 240 }}>
             <svg viewBox="0 0 42 42" style={{ transform: "rotate(-90deg)", width: "100%", height: "100%" }}>
@@ -164,7 +172,7 @@ export default function VitalityTab({ unicorns, cmaStats }: Props) {
           <p>What happened to Canadian unicorns — alive, absorbed, or gone</p>
         </div>
         
-        <div className="card" style={{ padding: "2rem" }}>
+        <div className="card" style={{ padding: "clamp(1.25rem, 5vw, 2rem)" }}>
           <div style={{ display: "flex", height: 40, borderRadius: 4, overflow: "hidden", marginBottom: "1rem" }}>
             <div style={{ flex: aliveCount, background: "var(--navy)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>Alive ({aliveCount})</div>
             <div style={{ flex: absorbedCount, background: "var(--gold)", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontSize: "0.8rem", fontWeight: 600 }}>Absorbed ({absorbedCount})</div>
@@ -193,7 +201,7 @@ export default function VitalityTab({ unicorns, cmaStats }: Props) {
           <p>Things that stood out in the data</p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "1rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
           {[
             {
               val: formatValue(valueDestroyed),
@@ -218,9 +226,21 @@ export default function VitalityTab({ unicorns, cmaStats }: Props) {
               valColor: "var(--burgundy)",
               title: "Constellation Software: the quiet giant",
               desc: `Canada's most successful serial acquirer is now valued at over ${formatValue(constellationPeak * 1_000_000_000)}, larger than BlackBerry ever was at its peak.`
+            },
+            {
+              val: `${torontoPct}%`,
+              valColor: "var(--navy)",
+              title: "Toronto's gravitational pull",
+              desc: `${torontoUnicorns.length} of ${total} unicorns are headquartered in the GTA — more than Ottawa, Waterloo, Montreal, and Vancouver combined.`
+            },
+            {
+              val: `${recentPct}%`,
+              valColor: "var(--gold)",
+              title: "The 2020s explosion",
+              desc: `${recentUnicorns.length} of ${total} unicorns achieved their valuation in the 2020s — a massive acceleration in ecosystem maturity.`
             }
           ].map((p, i) => (
-            <div key={i} className="card" style={{ padding: "2rem" }}>
+            <div key={i} className="card" style={{ padding: "1.5rem" }}>
               <div style={{ fontSize: "2rem", fontWeight: 800, color: p.valColor, marginBottom: "0.25rem" }}>{p.val}</div>
               <div style={{ fontWeight: 700, color: "var(--navy)", marginBottom: "0.75rem" }}>{p.title}</div>
               <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>{p.desc}</p>
@@ -237,10 +257,10 @@ export default function VitalityTab({ unicorns, cmaStats }: Props) {
           <p>Destination of the {totalAcquired} acquired unicorns</p>
         </div>
 
-        <div className="card" style={{ padding: "2.5rem" }}>
+        <div className="card" style={{ padding: "clamp(1.25rem, 5vw, 2.5rem)" }}>
           <div style={{ display: "grid", gap: "1rem", maxWidth: 600 }}>
             {acqData.map((a, i) => (
-              <div key={i} style={{ display: "grid", gridTemplateColumns: "100px 1fr", alignItems: "center", gap: "1rem" }}>
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "clamp(80px, 20vw, 120px) 1fr", alignItems: "center", gap: "1rem" }}>
                 <div style={{ fontSize: "0.85rem", fontWeight: 500, color: "var(--text-secondary)" }}>{a.label}</div>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                   <div style={{ height: 16, background: a.color, width: `${(a.count / Math.max(...acqData.map(d => d.count))) * 100}%`, minWidth: "10%", borderRadius: 2 }} />

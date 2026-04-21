@@ -79,6 +79,17 @@ h1, h2, h3, h4 {
   color: var(--navy);
 }
 
+.text-right-desktop {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .text-right-desktop {
+    text-align: left;
+  }
+}
+
+
 /* ── Section Layout ────────────────────────────────────────────────────── */
 
 .section {
@@ -327,6 +338,10 @@ h1, h2, h3, h4 {
   display: flex;
 }
 
+.hidden-desktop {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .section { padding: 1.5rem 1rem; }
   .section-header h2 { font-size: 1.5rem; }
@@ -346,7 +361,22 @@ h1, h2, h3, h4 {
 
   .grid-stack-mobile {
     grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
     gap: 1rem !important;
+  }
+
+  .hidden-desktop {
+    display: flex;
+  }
+
+  .industry-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+
+  .industry-tile {
+    grid-area: auto !important;
+    min-height: 120px;
   }
 
   .scroll-x {

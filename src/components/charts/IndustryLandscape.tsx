@@ -137,7 +137,7 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
       <div className="card" style={{ padding: "1.5rem", background: "var(--paper-warm)" }}>
         {/* Treemap-like Layout using CSS Grid */}
         <div 
-          className="grid-stack-mobile"
+          className="industry-grid"
           style={{ 
             display: "grid", 
             gridTemplateColumns: "repeat(12, 1fr)",
@@ -207,9 +207,9 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
           )}
 
           {/* Smaller ones (The rest) */}
-          <div className="stack-mobile" style={{ gridArea: "6 / 7 / 7 / 13", display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          <div className="industry-tile stack-mobile" style={{ gridArea: "6 / 7 / 7 / 13", display: "flex", gap: "8px", flexWrap: "wrap" }}>
             {sectors.slice(6).map(s => (
-               <div key={s.label} style={{ flex: 1, minWidth: "80px", background: s.color, borderRadius: "6px", padding: "0.75rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+               <div key={s.label} style={{ flex: 1, minWidth: "120px", background: s.color, borderRadius: "6px", padding: "0.75rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                   <div style={{ fontSize: "0.85rem", fontWeight: 700, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--slate)"].includes(s.color) ? "white" : "var(--navy)" }}>{s.label}</div>
                   <div style={{ fontSize: "0.7rem", fontWeight: 600, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--slate)"].includes(s.color) ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>{formatValueShort(s.value)}</div>
                </div>
@@ -229,6 +229,7 @@ function SectorTile({ sector, gridArea, format, showDetails, maxCompanies = 6 }:
 
   return (
     <div 
+      className="industry-tile"
       style={{ 
         gridArea, 
         background: sector.color, 
@@ -247,7 +248,10 @@ function SectorTile({ sector, gridArea, format, showDetails, maxCompanies = 6 }:
       </div>
       
       {showDetails && (
-        <div style={{ fontSize: "0.75rem", color: textColor, opacity: 0.8, fontWeight: 500, lineHeight: 1.4 }}>
+        <div 
+          className="hidden-mobile"
+          style={{ fontSize: "0.75rem", color: textColor, opacity: 0.8, fontWeight: 500, lineHeight: 1.4 }}
+        >
           — {sector.companies.slice(0, maxCompanies).join(", ")}
         </div>
       )}

@@ -42,7 +42,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       if (val >= 1_000_000) {
         return `${prefix}${(val / 1_000_000).toFixed(1)}M${suffix}`;
       }
-      return `${prefix}${val.toLocaleString()}${suffix}`;
+      return `${prefix}${val.toLocaleString()}B${suffix}`;
     },
     [currency]
   );
@@ -61,7 +61,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       if (val >= 1_000_000) {
         return `${prefix}${(val / 1_000_000).toFixed(0)}M`;
       }
-      return `${prefix}${val.toLocaleString()}`;
+      return `${prefix}${val.toLocaleString()}B`;
     },
     [currency]
   );

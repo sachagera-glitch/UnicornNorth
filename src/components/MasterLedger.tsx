@@ -208,7 +208,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
                   className="data-value"
                   style={{ textAlign: "right", fontSize: "0.85rem" }}
                 >
-                  ${parseFloat(u.peakValuationCad2025 || "0").toFixed(1)}
+                  {formatValueShort(parseFloat(u.peakValuationCad2025 || "0"))}
                 </td>
                 <td>{statusBadge(u.companyStatus)}</td>
               </tr>

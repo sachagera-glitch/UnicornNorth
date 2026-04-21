@@ -4,9 +4,9 @@ const AboutUs: React.FC = () => {
   return (
     <section className="section animate-in" style={{ maxWidth: "800px", margin: "0 auto" }}>
       <div className="section-header" style={{ textAlign: "center", marginBottom: "4rem" }}>
-        <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>
+        <h2 style={{ fontSize: "3rem", marginBottom: "1rem" }}>
           Honoring Canada’s <span style={{ color: "var(--red)" }}>Tech Builders</span>
-        </h1>
+        </h2>
         <div className="divider" style={{ margin: "0 auto 2rem" }} />
         <p style={{ fontSize: "1.2rem", color: "var(--navy)", fontWeight: 500, margin: "0 auto" }}>
           Unicorn North is dedicated to celebrating the founders who have shaped Canada’s technology ecosystem—from its earliest pioneers to today’s generation of builders.

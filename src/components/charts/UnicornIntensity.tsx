@@ -111,8 +111,8 @@ export default function UnicornIntensity({ unicorns }: UnicornIntensityProps) {
         <div style={{ display: "grid", gap: "1rem" }}>
           {displayData.length > 0 ? (
             displayData.map((item, i) => (
-              <div key={item.cma} style={{ display: "grid", gridTemplateColumns: "30px 180px 1fr 60px", alignItems: "center", gap: "1rem" }}>
-                <div style={{ 
+              <div key={item.cma} className="cma-item-grid" style={{ marginBottom: "0.5rem" }}>
+                <div className="cma-rank" style={{ 
                   fontSize: "1.1rem", 
                   fontWeight: 700, 
                   color: i < 3 ? "var(--gold)" : "var(--slate-light)",
@@ -120,10 +120,10 @@ export default function UnicornIntensity({ unicorns }: UnicornIntensityProps) {
                 }}>
                   {i + 1}
                 </div>
-                <div style={{ fontSize: "0.95rem", fontWeight: 600, color: "var(--navy)" }}>
+                <div className="cma-name" style={{ fontSize: "0.95rem", fontWeight: 600, color: "var(--navy)" }}>
                   {item.cma}
                 </div>
-                <div style={{ position: "relative", height: "2.5rem", background: "var(--cream-light)", borderRadius: "4px" }}>
+                <div className="cma-bar" style={{ position: "relative", height: "2.5rem", background: "var(--cream-light)", borderRadius: "4px" }}>
                   <div 
                     style={{ 
                       position: "absolute",
@@ -159,11 +159,14 @@ export default function UnicornIntensity({ unicorns }: UnicornIntensityProps) {
                     }}
                   >
                     <span style={{ paddingLeft: (item.rate / maxRate) > 0.8 ? "0" : "0.75rem" }}>
-                      {item.rate.toFixed(1)} per M
+                      {item.rate.toFixed(1)} <span className="hidden-mobile">per M</span>
                     </span>
                   </div>
                 </div>
-                <div style={{ fontSize: "0.85rem", color: "var(--slate-light)", textAlign: "right" }}>
+                <div className="cma-value" style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--navy)", fontFamily: "'Roboto Mono'", textAlign: "right" }}>
+                  <span className="hidden-desktop">{item.rate.toFixed(1)}</span>
+                </div>
+                <div className="cma-count" style={{ fontSize: "0.85rem", color: "var(--slate-light)", textAlign: "right" }}>
                   {item.count} co.
                 </div>
               </div>

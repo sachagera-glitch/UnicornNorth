@@ -35,8 +35,11 @@ export default function CmaAggregates({ unicorns, cmaMetadata }: Props) {
 
       <div style={{ display: "grid", gap: "0.75rem" }}>
         {data.map((c, i) => (
-          <div key={i} className="card" style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr 2fr", gap: "1.5rem", alignItems: "center",
+          <div key={i} className="card stack-mobile" style={{
+            display: "grid", 
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", 
+            gap: "1.5rem", 
+            alignItems: "center",
             padding: "1.25rem 1.75rem",
           }}>
             <div>

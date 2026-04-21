@@ -18,6 +18,14 @@ const cuspData = [
   { name: "Vendasta", cma: "Saskatoon", val: 700, growth: 65, sector: "SaaS" },
   { name: "Vidyard", cma: "Kitchener-C-W", val: 600, growth: 60, sector: "MarTech" },
   { name: "Calian Group", cma: "Ottawa-Gatineau", val: 823, growth: 10, sector: "Diversified" },
+  { name: "Propel Holdings", cma: "Toronto", val: 855, growth: 80, sector: "Fintech" },
+  { name: "Certn", cma: "Victoria", val: 600, growth: 75, sector: "Trust & ID" },
+  { name: "Kardium", cma: "Vancouver", val: 600, growth: 70, sector: "Medtech" },
+  { name: "Cyclic Materials", cma: "Toronto", val: 700, growth: 85, sector: "Cleantech" },
+  { name: "Eavor Technologies", cma: "Calgary", val: 650, growth: 90, sector: "Energy-Tech" },
+  { name: "GHGSat", cma: "Montréal", val: 600, growth: 65, sector: "Spacetech" },
+  { name: "Blackline Safety", cma: "Calgary", val: 510, growth: 60, sector: "IoT/Safety" },
+  { name: "UniUni", cma: "Vancouver", val: 975, growth: 85, sector: "Logistics" },
 ];
 
 export default function SuccessorRadar() {

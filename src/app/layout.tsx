@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://unicornnorth.ca"),
   title: "UnicornNorth — The Definitive Canadian Tech Ecosystem Ledger",
   description:
     "Explore the 99 companies that define the Canadian tech ecosystem. From Toronto's AI surge to Ottawa's telecom legacy and Vancouver's biotech hubs, track $2.14 Trillion in aggregate peak value creation.",
@@ -19,6 +20,21 @@ export const metadata: Metadata = {
     "tech economic data Canada",
   ],
   authors: [{ name: "UnicornNorth Research" }],
+  category: "Business & Finance",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/favicon.svg",
     apple: "/favicon.svg",
@@ -46,6 +62,11 @@ export const metadata: Metadata = {
     description: "Tracking the $2.14T evolution of the Canadian tech ecosystem.",
     images: ["/favicon.svg"],
   },
+  other: {
+    "geo.region": "CA",
+    "geo.placename": "Canada",
+    "dcterms.rightsHolder": "UnicornNorth",
+  },
 };
 
 export default function RootLayout({
@@ -54,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en-CA" className="h-full antialiased">
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-6BSDZ1Y1E8"
@@ -85,23 +106,44 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Dataset",
-              "name": "UnicornNorth Canadian Tech Ecosystem Ledger",
-              "description": "A comprehensive dataset of 99 Canadian unicorn companies representing $2.14T in aggregate peak valuation.",
-              "url": "https://unicornnorth.ca",
-              "keywords": "Canadian tech, Unicorns, Venture Capital, Toronto, Ottawa, Vancouver, Montreal",
-              "creator": {
-                "@type": "Organization",
-                "name": "UnicornNorth"
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "UnicornNorth",
+                "url": "https://unicornnorth.ca",
+                "description": "The Definitive Canadian Tech Ecosystem Ledger",
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "UnicornNorth",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://unicornnorth.ca/favicon.svg"
+                  }
+                }
               },
-              "spatialCoverage": "Canada",
-              "variableMeasured": ["Peak Valuation", "Industry", "HQ City", "Founding Year"]
-            }),
+              {
+                "@context": "https://schema.org",
+                "@type": "Dataset",
+                "name": "UnicornNorth Canadian Tech Ecosystem Ledger",
+                "description": "A comprehensive dataset of 99 Canadian unicorn companies representing $2.14T in aggregate peak valuation.",
+                "url": "https://unicornnorth.ca",
+                "keywords": "Canadian tech, Unicorns, Venture Capital, Toronto, Ottawa, Vancouver, Montreal",
+                "creator": {
+                  "@type": "Organization",
+                  "name": "UnicornNorth"
+                },
+                "spatialCoverage": {
+                  "@type": "Place",
+                  "name": "Canada"
+                },
+                "variableMeasured": ["Peak Valuation", "Industry", "HQ City", "Founding Year"]
+              }
+            ]),
           }}
         />
       </body>
     </html>
   );
 }
+

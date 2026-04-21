@@ -61,7 +61,7 @@ async function main() {
       ["MDA Space", "Toronto", "Space Tech", "John S. MacDonald", "2020s", 4.0, "Public", false, null],
       ["Tenstorrent", "Toronto", "AI Hardware", "Ljubisa Bajic", "2020s", 3.8, "Private", false, null],
       ["Mitel", "Ottawa-Gatineau", "Telecom", "Terry Matthews, Michael Cowpland", "2010s", 3.7, "Private (post-Ch. 11)", false, null],
-      ["Entrust", "Ottawa-Gatineau", "Cybersecurity", "Nortel spin-off", "2020s", 3.7, "Acquired", false, "US"],
+      ["Entrust", "Ottawa-Gatineau", "Cybersecurity", "Nortel spin-off", "2000s", 3.7, "Acquired", false, "US"],
       ["Fullscript", "Ottawa-Gatineau", "Digital Health", "Kyle Gustainis, Adam Landau", "2020s", 3.7, "Private", false, null],
       ["StackAdapt", "Toronto", "Adtech", "Vitaly Pecherskiy et al.", "2020s", 3.7, "Private", false, null],
       ["N-able", "Ottawa-Gatineau", "IT Software", "SolarWinds spin-off", "2020s", 3.1, "Public", false, null],
@@ -86,7 +86,7 @@ async function main() {
       ["Paper Education", "Montréal", "Edtech", "Philip Cutler", "2020s", 2.0, "Private (restructured)", false, null],
       ["Converge Technology Solutions", "Toronto", "IT Services", "Shaun Maine", "2020s", 2.0, "Public", false, null],
       ["Magnet Forensics", "Kitchener-C-W", "Cybersecurity", "Jad Saliba, Adam Belsher", "2020s", 1.9, "Acquired", false, "US"],
-      ["Assent", "Ottawa-Gatineau", "SaaS", "Andrew Waitman", "2020s", 1.8, "Private", false, null],
+      ["Assent", "Ottawa-Gatineau", "SaaS", "Matt Whitteker, Jonathan Hughes, Rob Imbeault, Andrew Waitman", "2020s", 1.8, "Private", false, null],
       ["Jane Software", "Vancouver", "Healthtech", "Trevor Johnston, Alison Taylor", "2020s", 1.8, "Private", false, null],
       ["Zarlink", "Ottawa-Gatineau", "Semiconductors", "David Smith", "1990s", 1.8, "Acquired", false, "US"],
       ["Thinkific", "Vancouver", "Edtech", "Greg Smith, Matt Smith", "2020s", 1.8, "Public", false, null],
@@ -108,7 +108,6 @@ async function main() {
       ["Coveo", "Québec City", "AI/Search", "Laurent Simoneau, Richard Tessier", "2010s", 1.4, "Public", false, null],
       ["Vena Solutions", "Toronto", "Finance SaaS", "Don Picard, Rishi Grover", "2020s", 1.4, "Private", false, null],
       ["Vention", "Montréal", "Industrial AI", "Etienne Lacroix, Max Windisch", "2020s", 1.4, "Private", false, null],
-      ["UniUni", "Vancouver", "Logistics", "Leo Li", "2020s", 1.4, "Private", false, null],
       ["Koho Financial", "Toronto", "Challenger Bank", "Daniel Eberhard", "2020s", 1.3, "Private", false, null],
       ["Dragonwave", "Ottawa-Gatineau", "Telecom", "Jean-Paul Baric", "2000s", 1.2, "Defunct", false, null],
       ["GaN Systems", "Ottawa-Gatineau", "Semiconductors", "Girvan Patterson, John Roberts", "2020s", 1.1, "Acquired", false, "European"],
@@ -201,6 +200,14 @@ async function main() {
       ["AlayaCare", "Montréal", "HealthTech"],
       ["Vendasta", "Saskatoon", "SaaS"],
       ["Vidyard", "Kitchener-C-W", "MarTech"],
+      ["Propel Holdings", "Toronto", "Fintech"],
+      ["Certn", "Victoria", "Trust & ID"],
+      ["Kardium", "Vancouver", "Medtech"],
+      ["Cyclic Materials", "Toronto", "Cleantech"],
+      ["Eavor Technologies", "Calgary", "Energy-Tech"],
+      ["GHGSat", "Montréal", "Spacetech"],
+      ["Blackline Safety", "Calgary", "IoT/Safety"],
+      ["UniUni", "Vancouver", "Logistics"],
     ];
 
     for (const c of onCusp) {
@@ -225,12 +232,14 @@ async function main() {
       ["Edmonton", "New Node Hub", "Crossed with Jobber."],
       ["Hamilton", "Edtech Expansion", "HQ for Prodigy Education."],
       ["Winnipeg", "Prairie AgTech", "Home to Farmers Edge."],
+      ["Victoria", "Island SaaS", "Growing hub for specialized software and remote talent."],
     ];
 
     for (const m of cmaMetadata) {
       await client.query(
         `INSERT INTO cma_metadata (cma, lens, description)
-         VALUES ($1, $2, $3)`,
+         VALUES ($1, $2, $3)
+         ON CONFLICT (cma) DO UPDATE SET lens = EXCLUDED.lens, description = EXCLUDED.description`,
         m
       );
     }
