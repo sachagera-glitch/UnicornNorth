@@ -9,7 +9,7 @@ const CUSP_LENSES: Record<string, { title: string; lens: string }> = {
   "Montréal": { title: "Montréal", lens: "Care Scale" },
   "Edmonton": { title: "Edmonton", lens: "New Node Hub" },
   "Saskatoon": { title: "Saskatoon", lens: "Prairie SaaS" },
-  "Kitchener-C-W": { title: "Kitchener-C-W", lens: "Engagement Tech" },
+  "Waterloo-Kitchener-C": { title: "Waterloo-Kitchener-C", lens: "Engagement Tech" },
   "Calgary": { title: "Calgary", lens: "Energy-Tech" },
   "Victoria": { title: "Victoria", lens: "Island SaaS" },
 };

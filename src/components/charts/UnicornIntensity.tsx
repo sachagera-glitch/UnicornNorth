@@ -13,7 +13,7 @@ const CMA_POPULATIONS: Record<string, Record<string, number>> = {
   "Ottawa-Gatineau": { "1990s": 0.80, "2000s": 1.00, "2010s": 1.20, "2020s": 1.488, "All time": 1.488 },
   "Toronto": { "1990s": 3.80, "2000s": 4.80, "2010s": 5.50, "2020s": 6.202, "All time": 6.202 },
   "Vancouver": { "1990s": 1.60, "2000s": 2.00, "2010s": 2.30, "2020s": 2.643, "All time": 2.643 },
-  "Kitchener-C-W": { "1990s": 0.35, "2000s": 0.42, "2010s": 0.48, "2020s": 0.576, "All time": 0.576 },
+  "Waterloo-Kitchener-C": { "1990s": 0.35, "2000s": 0.42, "2010s": 0.48, "2020s": 0.576, "All time": 0.576 },
   "Montréal": { "1990s": 3.20, "2000s": 3.50, "2010s": 3.90, "2020s": 4.292, "All time": 4.292 },
   "Calgary": { "1990s": 0.70, "2000s": 1.00, "2010s": 1.20, "2020s": 1.482, "All time": 1.482 },
   "Québec City": { "1990s": 0.60, "2000s": 0.70, "2010s": 0.80, "2020s": 0.839, "All time": 0.839 },
@@ -25,7 +25,7 @@ const CMA_POPULATIONS: Record<string, Record<string, number>> = {
 
 const CMA_COLORS: Record<string, string> = {
   "Ottawa-Gatineau": "var(--navy)",
-  "Kitchener-C-W": "var(--gold)",
+  "Waterloo-Kitchener-C": "var(--gold)",
   "Vancouver": "var(--red)",
   "Toronto": "var(--slate)",
   "St. John's": "var(--burgundy)",
