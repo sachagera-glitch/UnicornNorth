@@ -347,8 +347,10 @@ h1, h2, h3, h4 {
   .section-header h2 { font-size: 1.5rem; }
   .data-table { font-size: 0.75rem; }
   .data-table thead th, .data-table tbody td { padding: 0.4rem 0.5rem; }
-  .tab-bar { overflow-x: auto; padding: 0 1rem; }
-  .tab-item { padding: 0.7rem 1rem; font-size: 0.65rem; white-space: nowrap; }
+  .data-table thead th, .data-table tbody td { padding: 0.4rem 0.5rem; }
+  
+  /* .tab-bar { overflow-x: auto; padding: 0 1rem; }
+  .tab-item { padding: 0.7rem 1rem; font-size: 0.65rem; white-space: nowrap; } */
   
   .hidden-mobile {
     display: none !important;
@@ -452,3 +454,146 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 1.5rem;
 }
+
+/* ── Mobile Navigation ─────────────────────────────────────────────────── */
+
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  gap: 1rem;
+}
+
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  transition: opacity 0.2s;
+}
+
+.mobile-menu-btn:hover {
+  opacity: 0.8;
+}
+
+.mobile-nav-title {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--navy);
+}
+
+.mobile-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 22, 40, 0.5); /* var(--navy-deep) with opacity */
+  z-index: 100;
+  display: flex;
+}
+
+.mobile-drawer {
+  width: 280px;
+  max-width: 80vw;
+  background: var(--white);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--cream-light);
+}
+
+.mobile-drawer-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--navy);
+}
+
+.mobile-menu-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  transition: opacity 0.2s;
+}
+
+.mobile-menu-close-btn:hover {
+  color: var(--red);
+}
+
+.mobile-drawer-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.mobile-tab-item {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  color: var(--slate);
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-align: left;
+  transition: all 0.2s;
+  display: block;
+  width: 100%;
+}
+
+.mobile-tab-item:hover {
+  background: var(--cream-light);
+  color: var(--navy);
+}
+
+.mobile-tab-item.active {
+  color: var(--red);
+  font-weight: 700;
+  background: var(--cream);
+  border-left: 4px solid var(--red);
+  padding-left: calc(1.5rem - 4px);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeInOverlay 0.3s ease forwards;
+}
+

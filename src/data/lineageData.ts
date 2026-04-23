@@ -1,0 +1,561 @@
+export interface LineageNode {
+  id: string;
+  name: string;
+  type: 'company' | 'institution' | 'government' | 'other';
+  parent?: string;
+  year?: number;
+  description?: string;
+  relationship?: string;
+  isUnicorn?: boolean;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// NORTEL / BNR FAMILY TREE — extracted from Doyletech poster
+// ═══════════════════════════════════════════════════════════════════════
+export const NORTEL_DATA: LineageNode[] = [
+  // ── Roots ──
+  { id: 'northern-electric', name: 'Northern Electric', type: 'company', year: 1895, description: 'Manufacturing arm of Bell Canada; became Northern Telecom.' },
+  { id: 'bnr', name: 'Bell-Northern Research', type: 'institution', parent: 'northern-electric', year: 1971, description: 'Legendary R&D lab — spawned hundreds of Ottawa tech companies.' },
+  { id: 'nortel', name: 'Nortel Networks', type: 'company', parent: 'bnr', year: 1995, description: 'At peak ~$398B market cap, 30% of the TSE. Filed for bankruptcy 2009.', isUnicorn: true },
+
+  // ── Direct BNR Spinoffs ──
+  { id: 'mitel', name: 'Mitel', type: 'company', parent: 'bnr', year: 1973, description: 'Founded by Terry Matthews & Michael Cowpland from BNR.', relationship: 'Founder Spinoff', isUnicorn: true },
+  { id: 'mosaid', name: 'MOSAID Technologies', type: 'company', parent: 'bnr', year: 1975, description: 'Memory testing & IP licensing. Now Conversant IP.', relationship: 'Founder Spinoff' },
+  { id: 'jds-fitel', name: 'JDS Fitel', type: 'company', parent: 'bnr', year: 1981, description: 'Fibre optics pioneer; merged into JDS Uniphase.', relationship: 'Founder Spinoff' },
+  { id: 'newbridge', name: 'Newbridge Networks', type: 'company', parent: 'bnr', year: 1986, description: 'Terry Matthews\' second act; acquired by Alcatel for $7B.', relationship: 'Founder Spinoff', isUnicorn: true },
+  { id: 'sierra-wireless', name: 'Sierra Wireless', type: 'company', parent: 'bnr', year: 1993, description: 'IoT & wireless modules. Acquired by Semtech 2023.', relationship: 'Founder Spinoff' },
+  { id: 'tundra', name: 'Tundra Semiconductor', type: 'company', parent: 'bnr', year: 1995, description: 'Interconnect bridge chips for embedded systems.', relationship: 'Founder Spinoff' },
+  { id: 'catena', name: 'Catena Networks', type: 'company', parent: 'bnr', year: 1999, description: 'DSL access equipment.', relationship: 'Founder Spinoff' },
+  { id: 'sige', name: 'SiGe Semiconductor', type: 'company', parent: 'bnr', year: 1998, description: 'Silicon germanium RF chips. Acquired by Silicon Labs.', relationship: 'Founder Spinoff' },
+  { id: 'chipworks', name: 'Chipworks', type: 'company', parent: 'bnr', year: 1992, description: 'Reverse engineering & patent analysis firm.', relationship: 'Founder Spinoff' },
+  { id: 'fulcrum', name: 'Fulcrum (Hummingbird)', type: 'company', parent: 'bnr', year: 1983, description: 'Enterprise search. Acquired by Hummingbird.', relationship: 'Founder Spinoff', isUnicorn: true },
+  { id: 'callix', name: 'Callix', type: 'company', parent: 'bnr', year: 1999, description: 'Telecom equipment startup.', relationship: 'Founder Spinoff' },
+  { id: 'tropic', name: 'Tropic Networks', type: 'company', parent: 'bnr', year: 2000, description: 'Optical networking. Acquired by Alcatel.', relationship: 'Founder Spinoff' },
+  { id: 'ravel', name: 'Ravel Networks', type: 'company', parent: 'bnr', year: 2001, description: 'Optical networking startup.', relationship: 'Founder Spinoff' },
+  { id: 'dynalogic', name: 'Dynalogic', type: 'company', parent: 'bnr', year: 1980, description: 'Created the Hyperion — one of Canada\'s first laptops.', relationship: 'Founder Spinoff' },
+  { id: 'dynologiq', name: 'Dynologiq', type: 'company', parent: 'bnr', year: 1998, description: 'Network management software.', relationship: 'Founder Spinoff' },
+
+  // Expanded BNR Spinoffs transcribed from poster
+  { id: 'reltek', name: 'Reltek', type: 'company', parent: 'bnr' },
+  { id: 'calian-bnr', name: 'Calian', type: 'company', parent: 'reltek' },
+  { id: 'terapis', name: 'Terapi\'s', type: 'company', parent: 'bnr' },
+  { id: 'acera', name: 'Acera', type: 'company', parent: 'terapis' },
+  { id: 'synergy-micro', name: 'Synergy Microelectronics', type: 'company', parent: 'bnr' },
+  { id: 'micro-components', name: 'Micro Components', type: 'company', parent: 'synergy-micro' },
+  { id: 'semiconductor-insights', name: 'Semiconductor Insights', type: 'company', parent: 'bnr' },
+  { id: 'fidus', name: 'Fidus Systems', type: 'company', parent: 'semiconductor-insights' },
+  { id: 'quadiroc', name: 'QuadiRoc', type: 'company', parent: 'bnr' },
+  { id: 'enterasys', name: 'Enterasys', type: 'company', parent: 'quadiroc' },
+  { id: 'webplan', name: 'WebPLAN', type: 'company', parent: 'enterasys' },
+  { id: 'webhancer', name: 'Webhancer', type: 'company', parent: 'webplan' },
+  { id: 'carp-systems', name: 'Carp Systems', type: 'company', parent: 'bnr' },
+  { id: 'capilano', name: 'Capilano Cable', type: 'company', parent: 'mosaid' },
+  { id: 'trillium', name: 'Trillium Telephone', type: 'company', parent: 'bnr' },
+  { id: 'green-product', name: 'Green Product Design', type: 'company', parent: 'trillium' },
+  { id: 'siltronics', name: 'Siltronics', type: 'company', parent: 'bnr' },
+  { id: 'calmos', name: 'Calmos', type: 'company', parent: 'siltronics' },
+  { id: 'newbridge-micro', name: 'Newbridge Microsystems', type: 'company', parent: 'calmos' },
+  { id: 'tech-5', name: 'Tech 5', type: 'company', parent: 'bnr' },
+  { id: 'silcom', name: 'Silcom', type: 'company', parent: 'tech-5' },
+  { id: 'sagedata', name: 'SageData', type: 'company', parent: 'silcom' },
+  { id: 'istat', name: 'ISTAT', type: 'company', parent: 'silcom' },
+  { id: 'brytech', name: 'Brytech', type: 'company', parent: 'istat' },
+  { id: 'software-k', name: 'Software K', type: 'company', parent: 'bnr' },
+  { id: 'foundation-instruments', name: 'Foundation Instruments', type: 'company', parent: 'bnr' },
+  { id: 'techatronic', name: 'Techatronic', type: 'company', parent: 'foundation-instruments' },
+  { id: 'tes', name: 'TES', type: 'company', parent: 'bnr' },
+  { id: 'targa', name: 'Targa Electronics', type: 'company', parent: 'tes' },
+  { id: 'gastops-bnr', name: 'Gastops', type: 'company', parent: 'bnr' },
+  { id: 'jds-fitel-pioneer', name: 'JDS Fitel (Pioneer)', type: 'company', parent: 'bnr' },
+  { id: 'quantum', name: 'Quantum', type: 'company', parent: 'bnr' },
+  { id: 'qnx-system', name: 'QNX', type: 'company', parent: 'quantum' },
+  { id: 'applied-ai', name: 'Applied AI', type: 'company', parent: 'bnr' },
+  { id: 'cognitech', name: 'Cognitech', type: 'company', parent: 'applied-ai' },
+  { id: 'frieze', name: 'Frieze Fabrications', type: 'company', parent: 'bnr' },
+
+  // ── From Mitel ──
+  { id: 'corel', name: 'Corel', type: 'company', parent: 'mitel', year: 1985, description: 'Michael Cowpland founded after leaving Mitel. CorelDRAW.', relationship: 'Founder Spinoff', isUnicorn: true },
+  { id: 'wesley-clover', name: 'Wesley Clover', type: 'company', parent: 'mitel', year: 1972, description: 'Terry Matthews\' investment holding company.', relationship: 'Founder Vehicle' },
+  { id: 'celtic-house', name: 'Celtic House Venture Partners', type: 'company', parent: 'mitel', year: 1994, description: 'VC firm co-founded by Terry Matthews.', relationship: 'Founder Vehicle' },
+  { id: 'bytec-comterm', name: 'Bytec Comterm', type: 'company', parent: 'dynalogic' },
+  { id: 'bycanics', name: 'Bycanics', type: 'company', parent: 'bytec-comterm' },
+
+  // ── From Newbridge ──
+  { id: 'march-networks', name: 'March Networks', type: 'company', parent: 'newbridge', year: 2000, description: 'Intelligent video surveillance. Originally Loran Networks.', relationship: 'Spinoff' },
+  { id: 'counterpath', name: 'CounterPath', type: 'company', parent: 'newbridge', year: 2003, description: 'VoIP softphone technology.', relationship: 'Spinoff' },
+  { id: 'sonus', name: 'Sonus Networks', type: 'company', parent: 'newbridge', year: 1997, description: 'VoIP infrastructure.', relationship: 'Spinoff' },
+  { id: 'solana', name: 'Solana Networks', type: 'company', parent: 'newbridge', year: 2000, description: 'Network performance management.', relationship: 'Spinoff' },
+  { id: 'newlife', name: 'Newlife', type: 'company', parent: 'newbridge' },
+  { id: 'ecomba', name: 'Ecomba', type: 'company', parent: 'newbridge' },
+  { id: 'timestep', name: 'TimeStep', type: 'company', parent: 'newbridge' },
+  { id: 'vienna', name: 'Vienna Systems', type: 'company', parent: 'newbridge' },
+  { id: 'televersa', name: 'Televersa', type: 'company', parent: 'newbridge' },
+  { id: 'tencia', name: 'Tencia', type: 'company', parent: 'newbridge' },
+  { id: 'crosskeys', name: 'CrossKeys', type: 'company', parent: 'newbridge' },
+  { id: 'objec-wave', name: 'ObjectWave', type: 'company', parent: 'newbridge' },
+  { id: 'skystone', name: 'Skystone', type: 'company', parent: 'newbridge' },
+  { id: 'solidum', name: 'Solidum', type: 'company', parent: 'newbridge' },
+
+  // ── From Nortel directly ──
+  { id: 'entrust', name: 'Entrust Technologies', type: 'company', parent: 'nortel', year: 1994, description: 'PKI & digital security. Spun out of Nortel Secure Networks.', relationship: 'Spinoff', isUnicorn: true },
+  { id: 'dragonwave', name: 'DragonWave', type: 'company', parent: 'nortel', year: 2000, description: 'Microwave packet backhaul for mobile networks.', relationship: 'Founder Spinoff', isUnicorn: true },
+  { id: 'bridgewater', name: 'Bridgewater Systems', type: 'company', parent: 'nortel', year: 1997, description: 'Mobile data policy & charging. Acquired by Amdocs.', relationship: 'Founder Spinoff' },
+  { id: 'solace', name: 'Solace', type: 'company', parent: 'nortel', year: 2001, description: 'Event-driven architecture & messaging middleware.', relationship: 'Founder Spinoff' },
+  { id: 'innovance', name: 'Innovance Networks', type: 'company', parent: 'nortel', year: 2000, description: 'Optical cross-connect systems.', relationship: 'Founder Spinoff' },
+  { id: 'liquid-computing', name: 'Liquid Computing', type: 'company', parent: 'nortel', year: 2003, description: 'Blade-based HPC systems.', relationship: 'Founder Spinoff' },
+  { id: 'genband', name: 'Genband', type: 'company', parent: 'nortel', year: 2010, description: 'Acquired Nortel Carrier VoIP. Now Ribbon Communications.', relationship: 'Asset Acquisition' },
+  { id: 'nakina', name: 'Nakina Systems', type: 'company', parent: 'nortel', year: 2003, description: 'Network management software.', relationship: 'Founder Spinoff' },
+  { id: 'zhone', name: 'Zhone Technologies', type: 'company', parent: 'nortel', year: 1999, description: 'Broadband access equipment.', relationship: 'Founder Spinoff' },
+  { id: 'pleora', name: 'Pleora Technologies', type: 'company', parent: 'nortel', year: 2000, description: 'High-performance video networking.', relationship: 'Founder Spinoff' },
+  { id: 'breconridge', name: 'BreconRidge', type: 'company', parent: 'nortel', year: 2002, description: 'Contract electronics manufacturing.', relationship: 'Founder Spinoff' },
+  { id: 'btisystems', name: 'BTI Systems', type: 'company', parent: 'nortel', year: 2000, description: 'Optical packet networking. Acquired by Juniper.', relationship: 'Founder Spinoff' },
+  { id: 'eion', name: 'Eion Wireless', type: 'company', parent: 'nortel', year: 2001, description: 'Fixed broadband wireless access.', relationship: 'Founder Spinoff' },
+  { id: 'mxi-tech', name: 'MXI Technologies', type: 'company', parent: 'nortel', year: 1988, description: 'Maintenance management software.', relationship: 'Founder Spinoff' },
+  { id: 'zarlink', name: 'Zarlink Semiconductor', type: 'company', parent: 'nortel', year: 2001, description: 'Ultra-low-power wireless chips. Acquired by Microsemi.', relationship: 'Spinoff', isUnicorn: true },
+  { id: 'trellis', name: 'Trellis Networks', type: 'company', parent: 'nortel', year: 1999, description: 'Network optimization.', relationship: 'Founder Spinoff' },
+  { id: 'corvil', name: 'Corvil', type: 'company', parent: 'nortel', year: 2000, description: 'Network analytics for latency-sensitive trading.', relationship: 'Founder Spinoff' },
+
+  // Expanded Nortel Spinoffs transcribed from poster
+  { id: 'cambrian', name: 'Cambrian', type: 'company', parent: 'nortel' },
+  { id: 'altara', name: 'Altara', type: 'company', parent: 'cambrian' },
+  { id: 'pixstream', name: 'PixStream', type: 'company', parent: 'nortel' },
+  { id: 'digital-fairway', name: 'Digital Fairway', type: 'company', parent: 'nortel' },
+  { id: 'semaphore', name: 'Semaphore Solutions', type: 'company', parent: 'digital-fairway' },
+  { id: 'macadamian', name: 'Macadamian Technologies', type: 'company', parent: 'nortel' },
+  { id: 'stoneway', name: 'Stoneway Graphics', type: 'company', parent: 'macadamian' },
+  { id: '4test', name: '4Test', type: 'company', parent: 'nortel' },
+  { id: 'd-tali', name: 'D-Tali', type: 'company', parent: 'nortel' },
+  { id: 'simware', name: 'Simware', type: 'company', parent: 'nortel' },
+  { id: 'object-time', name: 'Object Time', type: 'company', parent: 'nortel' },
+  { id: 'west-end', name: 'West End', type: 'company', parent: 'nortel' },
+  { id: 'first-line', name: 'First Line Technologies', type: 'company', parent: 'nortel' },
+  { id: 'careville', name: 'Careville', type: 'company', parent: 'nortel' },
+  { id: 'consulting-systems', name: 'Consulting Systems', type: 'company', parent: 'careville' },
+  { id: 'jds-uniphase', name: 'JDS Uniphase (JDSU)', type: 'company', parent: 'jds-fitel-pioneer', isUnicorn: true },
+  { id: 'cadence', name: 'Cadence Design Systems', type: 'company', parent: 'nortel' },
+  { id: 'netpoint', name: 'NetPoint', type: 'company', parent: 'nortel' },
+  { id: 'inter-video', name: 'Inter Video', type: 'company', parent: 'nortel' },
+  { id: 'design-1st', name: 'Design 1st', type: 'company', parent: 'nortel' },
+  { id: 'atmos', name: 'ATMOS', type: 'company', parent: 'nortel' },
+  { id: 'design-pro', name: 'DesignPRO', type: 'company', parent: 'nortel' },
+  { id: 'e-bantu', name: 'E-Bantu', type: 'company', parent: 'nortel' },
+  { id: 'nemix', name: 'Nemix', type: 'company', parent: 'nortel' },
+  { id: 'luminos', name: 'Luminos', type: 'company', parent: 'nortel' },
+  { id: 'potensia', name: 'Potensia', type: 'company', parent: 'nortel' },
+  { id: 'metro-photonics', name: 'MetroPhotonics', type: 'company', parent: 'nortel' },
+  { id: 'galazar', name: 'Galazar Networks', type: 'company', parent: 'nortel' },
+  { id: 'signal-stream', name: 'Signal Stream', type: 'company', parent: 'nortel' },
+  { id: 'fidus-research', name: 'Fidus Research', type: 'company', parent: 'nortel' },
+  { id: 'cielo', name: 'Cielo', type: 'company', parent: 'nortel' },
+  { id: 'inno-cor', name: 'Inno Cor', type: 'company', parent: 'nortel' },
+  { id: 'cognimax', name: 'Cognimax', type: 'company', parent: 'nortel' },
+  { id: 'relevive', name: 'Relevive Data', type: 'company', parent: 'nortel' },
+  { id: 'minispeed', name: 'MiniSpeed Networks', type: 'company', parent: 'nortel' },
+  { id: 'zucomte', name: 'Zucomte', type: 'company', parent: 'nortel' },
+  { id: 'compra', name: 'Compra', type: 'company', parent: 'nortel' },
+  { id: 'alosa', name: 'Alosa', type: 'company', parent: 'nortel' },
+  { id: 'jscsys', name: 'JSCSys', type: 'company', parent: 'nortel' },
+  { id: 'campus-link', name: 'Campus Link', type: 'company', parent: 'nortel' },
+  { id: 'altronics', name: 'Altronics', type: 'company', parent: 'nortel' },
+  { id: 'voice-logic', name: 'Voice Logic', type: 'company', parent: 'altronics' },
+  { id: 'recon-media', name: 'Recon Media', type: 'company', parent: 'altronics' },
+  { id: 'electronic-courthouse', name: 'Electronic Courthouse', type: 'company', parent: 'altronics' },
+  { id: 'artium', name: 'Artium', type: 'company', parent: 'altronics' },
+  { id: 'century-21', name: 'Century 21', type: 'company', parent: 'altronics' },
+  { id: 'cyros-core', name: 'Cyros Core', type: 'company', parent: 'altronics' },
+  { id: 'da-tech', name: 'DA Tech', type: 'company', parent: 'altronics' },
+  { id: 'tri-com', name: 'Tri-Com', type: 'company', parent: 'altronics' },
+  { id: 'macinery', name: 'Macinery', type: 'company', parent: 'nortel' },
+  { id: 'ss-systems', name: 'SS Systems', type: 'company', parent: 'nortel' },
+  { id: 'kloovark', name: 'KLOOVark', type: 'company', parent: 'nortel' },
+  { id: 'cg-interactive', name: 'CG Interactive', type: 'company', parent: 'nortel' },
+  { id: 'first-sense', name: 'First Sense', type: 'company', parent: 'nortel' },
+  { id: 'acura', name: 'Acura', type: 'company', parent: 'nortel' },
+  { id: 'absure', name: 'Absure Networks', type: 'company', parent: 'nortel' },
+  { id: 'makena', name: 'Makena', type: 'company', parent: 'nortel' },
+  { id: 'wing-tech', name: 'Wing Tech', type: 'company', parent: 'nortel' },
+  { id: 'red-sky', name: 'Red Sky Mobile', type: 'company', parent: 'nortel' },
+  { id: 'mahim', name: 'Mahim', type: 'company', parent: 'nortel' },
+  { id: 'sedna', name: 'Sedna Wireless', type: 'company', parent: 'nortel' },
+  { id: 'os-security', name: 'OS Security', type: 'company', parent: 'nortel' },
+  { id: 'new-opptics', name: 'New Opptics', type: 'company', parent: 'nortel' },
+  { id: 'ravia', name: 'Ravia', type: 'company', parent: 'nortel' },
+  { id: 'edge-networks', name: 'Edge Networks', type: 'company', parent: 'nortel' },
+  { id: 'viscone', name: 'Viscone', type: 'company', parent: 'nortel' },
+  { id: 'phenomenal', name: 'Phenomenal', type: 'company', parent: 'nortel' },
+  { id: 'sion', name: 'SION International', type: 'company', parent: 'nortel' },
+  { id: 'ali-analog', name: 'Ali-Analog', type: 'company', parent: 'nortel' },
+  { id: 'digi-tech', name: 'Digi-Tech', type: 'company', parent: 'nortel' },
+  { id: 'innovative', name: 'Innovative', type: 'company', parent: 'nortel' },
+  { id: 'tarrba', name: 'Tarrba Systems', type: 'company', parent: 'nortel' },
+  { id: 'optiview', name: 'Optiview', type: 'company', parent: 'nortel' },
+  { id: 'xilinx', name: 'Xilinx', type: 'company', parent: 'nortel' },
+  { id: 'databeacon', name: 'DataBeacon', type: 'company', parent: 'nortel' },
+  { id: 'tally', name: 'Tally Canada', type: 'company', parent: 'nortel' },
+  { id: 'epocal', name: 'Epocal', type: 'company', parent: 'nortel' },
+  { id: 'z-design', name: 'Z Design', type: 'company', parent: 'nortel' },
+  { id: 'microsennx', name: 'MicroSennx', type: 'company', parent: 'nortel' },
+  { id: 'provence', name: 'Provence', type: 'company', parent: 'nortel' },
+  { id: 'chano', name: 'Chano Systems', type: 'company', parent: 'nortel' },
+  { id: 'jcs', name: 'JCS Fitel', type: 'company', parent: 'nortel' },
+
+  { id: 'gan-systems', name: 'GaN Systems', type: 'company', parent: 'nortel', description: 'Founded by Nortel alumni. Acquired for $830M.', isUnicorn: true },
+  { id: 'wilan', name: 'WiLAN', type: 'company', parent: 'nortel', description: 'Pioneered Wi-Fi/OFDM tech. IP licensing.', isUnicorn: true },
+
+  // ── Nortel Asset Acquisitions ──
+  { id: 'ciena', name: 'Ciena (Ottawa)', type: 'company', parent: 'nortel', year: 2010, description: 'Acquired Nortel Optical — Ottawa is their largest R&D centre.', relationship: 'Asset Acquisition' },
+  { id: 'ericsson-ott', name: 'Ericsson (Ottawa)', type: 'company', parent: 'nortel', year: 2009, description: 'Acquired Nortel CDMA & LTE wireless assets.', relationship: 'Asset Acquisition' },
+  { id: 'avaya', name: 'Avaya (Ottawa)', type: 'company', parent: 'nortel', year: 2009, description: 'Acquired Nortel Enterprise Solutions unit.', relationship: 'Asset Acquisition' },
+
+  // ── Second-generation from Nortel diaspora ──
+  { id: 'kinaxis', name: 'Kinaxis', type: 'company', parent: 'nortel', year: 1984, description: 'Supply chain management. Served Nortel as early client.', relationship: 'Ecosystem', isUnicorn: true },
+  { id: 'qnx', name: 'QNX Software Systems', type: 'company', parent: 'nortel', year: 1980, description: 'RTOS. Acquired by BlackBerry / Harman.', relationship: 'Ecosystem' },
+  { id: 'smart-tech', name: 'SMART Technologies', type: 'company', parent: 'nortel', year: 1987, description: 'Interactive whiteboards. Many ex-Nortel in leadership.', relationship: 'Talent Pipeline' },
+
+  // ── From Bell Canada / Stentor ──
+  { id: 'bell-canada', name: 'Bell Canada / Stentor', type: 'company', year: 1880, description: 'Parent of Northern Electric. Major ecosystem anchor.' },
+  { id: 'bce', name: 'BCE Inc', type: 'company', parent: 'bell-canada', year: 1983, description: 'Bell Canada Enterprises holding company.', isUnicorn: true },
+  { id: 'bcs', name: 'Bell Canada Solutions', type: 'company', parent: 'bell-canada', year: 1998, description: 'IT consulting arm.' },
+  { id: 'nimcat', name: 'Nimcat Networks', type: 'company', parent: 'bell-canada', year: 2000, description: 'Content networking.' },
+  { id: 'amdocs-ott', name: 'Amdocs (Ottawa)', type: 'company', parent: 'bell-canada', year: 2005, description: 'Acquired multiple Bell/Nortel alumni companies.' },
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// NRC & GOVERNMENT FAMILY TREE — extracted from Government Influence poster
+// ═══════════════════════════════════════════════════════════════════════
+export const NRC_GOV_DATA: LineageNode[] = [
+  // ── ROOTS ──
+  { id: 'nrc', name: 'National Research Council', type: 'government', year: 1916, description: 'Canada\'s primary national R&D agency.' },
+  { id: 'gov-labor', name: 'Government Labor Organizations', type: 'government' },
+  { id: 'drte-crc', name: 'DRTE / CRC', type: 'institution', description: 'Defence Research Telecom Est. / Communications Research Centre.' },
+  { id: 'ottawa-hospital', name: 'Ottawa Hospital Research', type: 'institution' },
+  { id: 'ottawa-board-ed', name: 'Ottawa Board of Education', type: 'institution' },
+
+  // ── OTTAWA HOSPITAL ──
+  { id: 'aerobiology', name: 'Aerobiology Research', type: 'company', parent: 'ottawa-hospital' },
+  { id: 'media-x', name: 'Media-X Systems', type: 'company', parent: 'aerobiology' },
+  { id: 'biodensity', name: 'BioDensity', type: 'company', parent: 'media-x' },
+  { id: 'cryptomatrix', name: 'CryptoMatrix', type: 'company', parent: 'biodensity' },
+  { id: 'vocantas', name: 'Vocantas', type: 'company', parent: 'cryptomatrix' },
+
+  // ── OTTAWA BOARD OF EDUCATION ──
+  { id: 'b-c', name: 'B!C', type: 'company', parent: 'ottawa-board-ed' },
+  { id: 'proteus', name: 'Proteus', type: 'company', parent: 'b-c' },
+  { id: 'netcentric', name: 'Netcentric Technologies', type: 'company', parent: 'proteus' },
+  { id: 'm-pinnacle', name: 'M-Pinnacle', type: 'company', parent: 'netcentric' },
+  { id: 'emphesis', name: 'Emphesis Systems', type: 'company', parent: 'm-pinnacle' },
+
+  // ── GOV LABOR ORGANIZATIONS ──
+  { id: 'pylon', name: 'Pylon', type: 'company', parent: 'gov-labor' },
+  { id: 'senco', name: 'Senco', type: 'company', parent: 'gov-labor' },
+  { id: 'accl', name: 'ACCL', type: 'company', parent: 'gov-labor' },
+  { id: 'presentey', name: 'Presentey', type: 'company', parent: 'gov-labor' },
+  { id: 'cfl', name: 'CFL', type: 'company', parent: 'pylon' },
+  { id: 'verraterm', name: 'Verraterm', type: 'company', parent: 'cfl' },
+  { id: 'pearle', name: 'Pearle', type: 'company', parent: 'verraterm' },
+  { id: 'dendron', name: 'Dendron', type: 'company', parent: 'pearle' },
+  { id: 'comtech', name: 'Comtech', type: 'company', parent: 'dendron' },
+  { id: 'amtek', name: 'Amtek', type: 'company', parent: 'verraterm' },
+  { id: 'rusio', name: 'RUSIO', type: 'company', parent: 'amtek' },
+  { id: 'fbg', name: 'FBG Consultants', type: 'company', parent: 'dendron' },
+  { id: 'kelyx', name: 'Kelyx Biosciences', type: 'company', parent: 'fbg' },
+  { id: 'net-edge', name: 'National Edge Technologies', type: 'company', parent: 'kelyx' },
+  { id: 'ramtelecom', name: 'RAMTelecom', type: 'company', parent: 'net-edge' },
+  { id: 'fibronics', name: 'Fibronics Systems', type: 'company', parent: 'comtech' },
+  { id: 'beogen', name: 'Beogen', type: 'company', parent: 'fibronics' },
+  { id: 'priiva', name: 'Priiva Environments', type: 'company', parent: 'beogen' },
+  { id: 'precitech', name: 'Precitech Design', type: 'company', parent: 'comtech' },
+  { id: 'educom', name: 'EDUCOM TS', type: 'company', parent: 'precitech' },
+  { id: 'env-mgmt', name: 'Environmental Management', type: 'company', parent: 'educom' },
+  { id: 'nanometrics', name: 'Nanometrics', type: 'company', parent: 'comtech' },
+  { id: 'enon', name: 'Enon', type: 'company', parent: 'nanometrics' },
+  { id: 'mfb', name: 'MFB Technologies', type: 'company', parent: 'enon' },
+
+  // ── DRTE / CRC ──
+  { id: 'a-t-schindler', name: 'A.T. Schindler', type: 'company', parent: 'drte-crc' },
+  { id: 'telesat', name: 'Telesat', type: 'company', parent: 'drte-crc', year: 1969, isUnicorn: true },
+  { id: 'spar', name: 'SPAR Aerospace', type: 'company', parent: 'drte-crc', isUnicorn: true },
+  { id: 'mda', name: 'MDA', type: 'company', parent: 'spar', year: 1969, isUnicorn: true },
+  { id: 'spar-ltd', name: 'SPAR Ltd', type: 'company', parent: 'spar' },
+  { id: 'cal', name: 'CAL', type: 'company', parent: 'drte-crc' },
+  { id: 'tmi', name: 'TMI', type: 'company', parent: 'drte-crc' },
+  { id: 'miller', name: 'Miller Communications', type: 'company', parent: 'drte-crc' },
+  { id: 'norpak', name: 'Norpak (CRC)', type: 'company', parent: 'drte-crc' },
+  
+  // From Telesat
+  { id: 'logen', name: 'Logen', type: 'company', parent: 'telesat' },
+  { id: 'telemus', name: 'Telemus', type: 'company', parent: 'logen' },
+  { id: 'tactical-tech', name: 'Tactical Technologies', type: 'company', parent: 'telemus' },
+  { id: 'omega', name: 'Omega Simulation', type: 'company', parent: 'tactical-tech' },
+  { id: 'routes', name: 'Routes Astrophysical Engineering', type: 'company', parent: 'omega' },
+  { id: 'pricaplex', name: 'Pricaplex', type: 'company', parent: 'telesat' },
+  { id: 'ancor-sys', name: 'Ancor Sys', type: 'company', parent: 'pricaplex' },
+  { id: 'exce-tron', name: 'Exce-Tron', type: 'company', parent: 'ancor-sys' },
+  { id: 'bns', name: 'BNS Technologies', type: 'company', parent: 'exce-tron' },
+  { id: 'emc', name: 'EMC Consulting', type: 'company', parent: 'bns' },
+  { id: 'pam-vran', name: 'Pam-Vran', type: 'company', parent: 'emc' },
+  { id: 'dna-genotek', name: 'DNA Genotek', type: 'company', parent: 'pam-vran' },
+  { id: 'vistar', name: 'Vistar', type: 'company', parent: 'telesat' },
+  { id: 's-com', name: 'S-COM Satellite', type: 'company', parent: 'vistar' },
+  { id: 'skywave-mobile', name: 'SkyWave Mobile', type: 'company', parent: 's-com' },
+  
+  // From CAL
+  { id: 'skywave-elec', name: 'SkyWave Electronics', type: 'company', parent: 'cal' },
+  { id: 's-calian', name: 'S-Calian', type: 'company', parent: 'skywave-elec' },
+  { id: 'calian', name: 'Calian', type: 'company', parent: 's-calian' },
+  { id: 'astrocom', name: 'AstroCom Associates', type: 'company', parent: 'calian' },
+  
+  // From TMI
+  { id: 'idion', name: 'IDION', type: 'company', parent: 'tmi' },
+  { id: 'diversitel', name: 'Diversitel', type: 'company', parent: 'idion' },
+  { id: 'innovative-tech', name: 'Innovative Tech', type: 'company', parent: 'diversitel' },
+  { id: 'mysky', name: 'MySky Networks', type: 'company', parent: 'innovative-tech' },
+  { id: 'fomint', name: 'Fomint', type: 'company', parent: 'mysky' },
+
+  // From Miller
+  { id: 'radifacts', name: 'Radifacts', type: 'company', parent: 'miller' },
+  { id: 'clearonics', name: 'Clearonics', type: 'company', parent: 'radifacts' },
+  { id: 'sim-optics', name: 'Sim-Optics', type: 'company', parent: 'clearonics' },
+
+  // From Norpak
+  { id: 'desktop-prod', name: 'Desktop Productions', type: 'company', parent: 'norpak' },
+  { id: 'romaton', name: 'Romaton', type: 'company', parent: 'desktop-prod' },
+  { id: 'mds-nordion', name: 'MDS Nordion', type: 'company', parent: 'romaton', isUnicorn: true },
+  { id: 'nightscape', name: 'Nightscape', type: 'company', parent: 'mds-nordion' },
+  { id: 'thompson', name: 'Thompson & Device Group', type: 'company', parent: 'norpak' },
+  { id: 'emard', name: 'Emard', type: 'company', parent: 'thompson' },
+  { id: 'thematronics', name: 'Thematronics', type: 'company', parent: 'emard' },
+  { id: 'imageries', name: 'Imageries', type: 'company', parent: 'thematronics' },
+  { id: 'mevex', name: 'Mevex', type: 'company', parent: 'norpak' },
+  { id: 'multicorp', name: 'Multicorp', type: 'company', parent: 'mevex' },
+  { id: 'on-x', name: 'ON-X', type: 'company', parent: 'multicorp' },
+  { id: 'canreal', name: 'Canreal', type: 'company', parent: 'on-x' },
+
+  // ── NATIONAL RESEARCH COUNCIL (NRC) ──
+  { id: 'cognos', name: 'Cognos', type: 'company', parent: 'nrc', year: 1969, isUnicorn: true },
+  { id: 'mechron', name: 'Mechron', type: 'company', parent: 'nrc', year: 1949 },
+  { id: 'filtran', name: 'Filtran', type: 'company', parent: 'mechron' },
+  { id: 'cd-dataplot', name: 'Canadian Dataplot', type: 'company', parent: 'filtran' },
+  { id: 'asi', name: 'ASI', type: 'company', parent: 'cd-dataplot' },
+  { id: 'marmak', name: 'Marmak', type: 'company', parent: 'asi' },
+  { id: 'contenta', name: 'CONTENTA', type: 'company', parent: 'marmak' },
+  { id: 'metro-photo', name: 'MetroPhotonics', type: 'company', parent: 'contenta' },
+  { id: 'opto-works', name: 'OptoWorks', type: 'company', parent: 'metro-photo' },
+
+  { id: 'computing-devices', name: 'Computing Devices', type: 'company', parent: 'nrc', year: 1948 },
+  { id: 'wr-davis', name: 'W.R. Davis Engineering', type: 'company', parent: 'computing-devices' },
+  { id: 'biometric', name: 'Biometric', type: 'company', parent: 'wr-davis' },
+  { id: 'dune-eng', name: 'Dune Engineering', type: 'company', parent: 'biometric' },
+  { id: 'ds-eng', name: 'D&S Engineering', type: 'company', parent: 'computing-devices' },
+  { id: 'can-astro', name: 'Canadian Astronautics', type: 'company', parent: 'ds-eng' },
+  { id: 'cal-corp', name: 'CAL Corp', type: 'company', parent: 'can-astro' },
+  { id: 'ems-tech', name: 'EMS Technologies', type: 'company', parent: 'cal-corp' },
+
+  { id: 'kom', name: 'K.O.M.', type: 'company', parent: 'computing-devices' },
+  { id: 'husky', name: 'Husky', type: 'company', parent: 'kom' },
+  { id: 'rom-net', name: 'ROM Networks', type: 'company', parent: 'husky' },
+  { id: 'merova', name: 'Merova Engineering', type: 'company', parent: 'rom-net' },
+
+  { id: 'rms-realtime', name: 'RMS Real-Time', type: 'company', parent: 'computing-devices' },
+  { id: 'dbl', name: 'DBL', type: 'company', parent: 'rms-realtime' },
+  { id: 'total-alert', name: 'Total Alert', type: 'company', parent: 'dbl' },
+  { id: 'crothers', name: 'Crothers Technologies', type: 'company', parent: 'total-alert' },
+
+  { id: 'hypernetics', name: 'Hypernetics', type: 'company', parent: 'computing-devices', year: 1972 },
+  { id: 'maintek', name: 'Maintek', type: 'company', parent: 'hypernetics' },
+  { id: 'seprotech', name: 'Seprotech', type: 'company', parent: 'maintek' },
+  { id: 'viga', name: 'Viga Systems', type: 'company', parent: 'seprotech' },
+  { id: 'qanter', name: 'Qanter Computers', type: 'company', parent: 'viga' },
+  { id: 'chaos-data', name: 'Chaos Data Systems', type: 'company', parent: 'qanter' },
+  { id: 'cdx', name: 'CDX', type: 'company', parent: 'chaos-data' },
+  { id: 'domani', name: 'Domani Engineering', type: 'company', parent: 'maintek' },
+  { id: 'toth', name: 'Toth', type: 'company', parent: 'domani' },
+
+  { id: 'guideline', name: 'Guideline', type: 'company', parent: 'computing-devices', year: 1956 },
+  { id: 'didak', name: 'Didak', type: 'company', parent: 'guideline' },
+  { id: 'kao-didak', name: 'KAO-Didak', type: 'company', parent: 'didak' },
+  { id: 'zomax', name: 'Zomax Canada', type: 'company', parent: 'kao-didak' },
+  { id: 'optenia', name: 'Optenia', type: 'company', parent: 'zomax' },
+
+  { id: 'compris', name: 'Compris', type: 'company', parent: 'computing-devices', year: 1979 },
+  { id: 'brancker', name: 'Brancker', type: 'company', parent: 'compris' },
+  { id: 'ap', name: 'A&P', type: 'company', parent: 'brancker' },
+  { id: 'chiliac', name: 'Chiliac', type: 'company', parent: 'ap' },
+  { id: 'sussex', name: 'Sussex Research', type: 'company', parent: 'chiliac' },
+  { id: 'innovative', name: 'Innovative Technologies', type: 'company', parent: 'sussex' },
+  { id: 'iti-photonic', name: 'ITI Photonic', type: 'company', parent: 'innovative' },
+
+  { id: 'eda', name: 'EDA', type: 'company', parent: 'computing-devices' },
+  { id: 'gentian', name: 'Gentian', type: 'company', parent: 'eda' },
+  { id: 'image-machine', name: 'Image Machine Vision', type: 'company', parent: 'gentian' },
+  { id: 'ceramac', name: 'Ceramac Optical Systems', type: 'company', parent: 'image-machine' },
+  { id: 'introquest', name: 'IntroQuest', type: 'company', parent: 'ceramac' },
+  { id: 'imagetree', name: 'ImageTree', type: 'company', parent: 'introquest' },
+
+  { id: 'instronics', name: 'Instronics', type: 'company', parent: 'computing-devices', year: 1967 },
+  { id: 'sonotek', name: 'Sonotek', type: 'company', parent: 'instronics' },
+  { id: 'senstar', name: 'Senstar Stellar', type: 'company', parent: 'sonotek' },
+  { id: 'vitesse', name: 'Vitesse', type: 'company', parent: 'senstar' },
+  { id: 'ionarytics', name: 'Ionarytics', type: 'company', parent: 'vitesse' },
+
+  { id: 'prior-data-sci', name: 'PRIOR Data Sciences', type: 'company', parent: 'computing-devices', year: 1976 },
+  { id: 'software-kinetics', name: 'Software Kinetics', type: 'company', parent: 'prior-data-sci' },
+  { id: 'gallium', name: 'Gallium', type: 'company', parent: 'software-kinetics' },
+  { id: 'pharmagap', name: 'PharmaGap', type: 'company', parent: 'gallium' },
+  { id: 'terravox', name: 'Terravox Technologies', type: 'company', parent: 'pharmagap' },
+
+  { id: 'federal-systems', name: 'Federal Systems', type: 'company', parent: 'computing-devices' },
+  { id: 'systemhouse', name: 'Systemhouse', type: 'company', parent: 'federal-systems', isUnicorn: true },
+  { id: 'blueair', name: 'BlueAir Networks', type: 'company', parent: 'systemhouse' },
+  { id: 'nitidus', name: 'Nitidus', type: 'company', parent: 'blueair' },
+
+  { id: 'versaterm2', name: 'Versaterm', type: 'company', parent: 'computing-devices', year: 1977 },
+
+  { id: 'de-instruments', name: 'D.E. Instruments', type: 'company', parent: 'computing-devices' },
+  { id: 'dy4', name: 'DY 4 Systems', type: 'company', parent: 'de-instruments' },
+  { id: 'cmac', name: 'C-MAC Industries', type: 'company', parent: 'dy4' },
+  { id: 'solectron', name: 'Solectron', type: 'company', parent: 'cmac' },
+  { id: 'celestica', name: 'Celestica', type: 'company', parent: 'solectron' },
+
+  { id: 'leigh-inst', name: 'Leigh Instruments', type: 'company', parent: 'nrc', year: 1961 },
+  { id: 'nash-harrison', name: 'Nash & Harrison', type: 'company', parent: 'leigh-inst' },
+  { id: 'h-ross', name: 'H. Ross Machining', type: 'company', parent: 'leigh-inst' },
+  { id: 'h-qa', name: 'H-Q.A.', type: 'company', parent: 'h-ross' },
+  { id: 'brock-circuits', name: 'Brock Circuits', type: 'company', parent: 'leigh-inst' },
+  { id: 'arctic', name: 'Arctic', type: 'company', parent: 'brock-circuits' },
+  { id: 'prologa', name: 'Prologa Systems', type: 'company', parent: 'leigh-inst' },
+  { id: 'formal-sys', name: 'Formal Systems', type: 'company', parent: 'prologa' },
+  { id: 'occam', name: 'Occam', type: 'company', parent: 'formal-sys' },
+  { id: 'vln', name: 'VLN Advanced Technologies', type: 'company', parent: 'occam' },
+  { id: 'diffraction', name: 'Diffraction', type: 'company', parent: 'leigh-inst' },
+  { id: 'asr', name: 'ASR Technologies', type: 'company', parent: 'diffraction' },
+  { id: 'mango-dsp', name: 'Mango DSP', type: 'company', parent: 'asr' },
+  { id: 'visimage', name: 'Visimage', type: 'company', parent: 'diffraction' },
+  { id: 'wave-prec', name: 'Wave Precision', type: 'company', parent: 'visimage' },
+  { id: 'broadwave', name: 'Broadwave', type: 'company', parent: 'wave-prec' },
+  { id: 'lum-optics', name: 'Lumonics Optics', type: 'company', parent: 'leigh-inst' },
+  { id: 'lightmach', name: 'LightMach', type: 'company', parent: 'lum-optics' },
+  { id: 'dilligan', name: 'Dilligan', type: 'company', parent: 'lightmach' },
+
+  { id: 'sps', name: 'SPS', type: 'company', parent: 'nrc', year: 1969 },
+  { id: 'interoptics', name: 'Interoptics', type: 'company', parent: 'sps' },
+  { id: 'bcon2', name: 'B-Con', type: 'company', parent: 'interoptics' },
+  { id: 'canamico', name: 'Canamico', type: 'company', parent: 'bcon2' },
+  { id: 'gastops', name: 'GasTOPS', type: 'company', parent: 'sps' },
+  { id: 'hymarc2', name: 'Hymarc', type: 'company', parent: 'sps' },
+  { id: 'lumar', name: 'Lumar Technologies', type: 'company', parent: 'hymarc2' },
+  { id: 'lum-optics-group', name: 'Lumonics Optics Group', type: 'company', parent: 'lumar' },
+  { id: 'farrington', name: 'Farrington Lockwood', type: 'company', parent: 'sps' },
+
+  { id: 'lumonics-base', name: 'Lumonics', type: 'company', parent: 'nrc', year: 1970, isUnicorn: true },
+  { id: 'jambalaya', name: 'Jambalaya', type: 'company', parent: 'lumonics-base' },
+  { id: 'sige2', name: 'SiGe', type: 'company', parent: 'jambalaya' },
+  { id: 'sigen', name: 'SIGEN', type: 'company', parent: 'sige2' },
+  { id: 'shapegrabber', name: 'ShapeGrabber', type: 'company', parent: 'sigen' },
+  { id: 'luminista', name: 'Luminista', type: 'company', parent: 'shapegrabber' },
+  { id: 'ndma', name: 'NDMA Technologies', type: 'company', parent: 'luminista' },
+  { id: 'bmy-optical', name: 'BMY Optical', type: 'company', parent: 'lumonics-base' },
+  { id: 'amiknow', name: 'Amiknow', type: 'company', parent: 'bmy-optical' },
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// COGNOS FAMILY TREE — extracted from ecosystem poster
+// ═══════════════════════════════════════════════════════════════════════
+export const COGNOS_DATA: LineageNode[] = [
+  // ── Roots ──
+  { id: 'quasar-systems', name: 'Quasar Systems', type: 'company', description: 'Renamed to Cognos in 1982.' },
+  { id: 'cognos-root', name: 'Cognos', type: 'company', parent: 'quasar-systems', isUnicorn: true, description: 'BI & analytics giant. Acquired by IBM for $5B.' },
+
+  // Branch 1: NUTAT
+  { id: 'nutat', name: 'NUTAT Technologies', type: 'company', parent: 'cognos-root' },
+  { id: 'magardi', name: 'Magardi', type: 'company', parent: 'nutat', year: 1985 },
+  { id: 'visual-computing', name: 'Visual Computing', type: 'company', parent: 'magardi' },
+  { id: 'coast-software', name: 'Coast Software', type: 'company', parent: 'visual-computing' },
+  { id: 'saraide', name: 'Saraide', type: 'company', parent: 'visual-computing' },
+
+  // Under Saraide
+  { id: 'forland', name: 'Forland', type: 'company', parent: 'saraide' },
+  { id: 'imatics', name: 'Imatics', type: 'company', parent: 'forland' },
+  { id: 'coradix', name: 'Coradix', type: 'company', parent: 'imatics', year: 1995 },
+  { id: 'lri-informatics', name: 'LRI Informatics', type: 'company', parent: 'imatics' },
+  { id: 'iota', name: 'IOTA', type: 'company', parent: 'imatics' },
+  { id: 'taral', name: 'Taral Networks', type: 'company', parent: 'forland', year: 2000 },
+  { id: 'airwide', name: 'Airwide Solutions', type: 'company', parent: 'taral', year: 2004 },
+
+  { id: 'datajungle', name: 'DataJungle', type: 'company', parent: 'saraide', year: 2000 },
+  { id: 'olap-at-work', name: 'OLAP@WORK', type: 'company', parent: 'saraide' },
+  { id: 'thinktools', name: 'ThinkTools', type: 'company', parent: 'olap-at-work' },
+  { id: 'mosaic-mapping', name: 'Mosaic Mapping', type: 'company', parent: 'olap-at-work' },
+
+  // Branch 2: Nextwork
+  { id: 'nextwork', name: 'Nextwork', type: 'company', parent: 'cognos-root' },
+  { id: 'workcentral-csi', name: 'WorkCentral CSI', type: 'company', parent: 'nextwork' },
+  { id: 'quotecall', name: 'QuoteCall', type: 'company', parent: 'workcentral-csi', year: 1999 },
+  { id: 'workcentral', name: 'WorkCentral', type: 'company', parent: 'quotecall' },
+  { id: 'emailgen', name: 'Emailgen Systems', type: 'company', parent: 'workcentral' },
+  { id: 'critical-telecom', name: 'Critical Telecom', type: 'company', parent: 'emailgen', year: 2003 },
+
+  // Branch 3: Storm
+  { id: 'storm-internet', name: 'Storm Internet Services', type: 'company', parent: 'cognos-root' },
+
+  // Branch 4: Internet Access
+  { id: 'internet-access', name: 'Internet Access', type: 'company', parent: 'cognos-root' },
+  { id: 'romel', name: 'Romel', type: 'company', parent: 'internet-access', year: 1995 },
+  { id: 'domainsatcost', name: 'DomainsAtCost.ca', type: 'company', parent: 'romel' },
+  { id: 'momentous', name: 'Momentous.ca', type: 'company', parent: 'domainsatcost' },
+  { id: 'zip-ca', name: 'Zip.ca', type: 'company', parent: 'momentous' },
+  { id: 'cvo-ca', name: 'CVO.ca', type: 'company', parent: 'momentous' },
+  { id: 'hostmaster', name: 'Hostmaster.ca', type: 'company', parent: 'momentous' },
+  { id: 'echelon', name: 'Echelon', type: 'company', parent: 'momentous' },
+  { id: 'equal-it', name: 'e-qual-IT', type: 'company', parent: 'echelon' },
+
+  // Branch 5: vp.systems
+  { id: 'vp-systems', name: 'vp.systems', type: 'company', parent: 'cognos-root', year: 1997 },
+
+  // Branch 6: Microhm Systems
+  { id: 'microhm', name: 'Microhm Systems', type: 'company', parent: 'cognos-root' },
+
+  // Branch 7: Web Discovery
+  { id: 'web-discovery', name: 'Web Discovery', type: 'company', parent: 'cognos-root', year: 1997 },
+
+  // Roots from DLM Industries
+  { id: 'dlm-industries', name: 'DLM Industries', type: 'company' },
+  { id: 'pcel-research', name: 'P-CEL Research', type: 'company', parent: 'dlm-industries' },
+  { id: 'crupax', name: 'Crupax Security', type: 'company', parent: 'pcel-research', year: 2001 },
+  { id: 'florasong', name: 'Florasong', type: 'company', parent: 'crupax', year: 2003 },
+
+  { id: 'kamber', name: 'Kamber Systems', type: 'company', parent: 'dlm-industries' },
+  { id: 'wavecell', name: 'WaveCell', type: 'company', parent: 'kamber', year: 1998 },
+  { id: 'suite42', name: 'suite42.com', type: 'company', parent: 'wavecell' },
+  { id: 'leverus', name: 'Leverus', type: 'company', parent: 'wavecell', year: 2000 },
+  { id: 'eod', name: 'EOD Performance', type: 'company', parent: 'leverus', year: 1999 },
+  { id: 'spectra-nova', name: 'Spectra-Nova Technologies', type: 'company', parent: 'eod', year: 2002 },
+  { id: 'spectra-solaris', name: 'Spectra-Solaris', type: 'company', parent: 'spectra-nova', year: 2004 },
+
+  { id: 'terra-aerospace', name: 'Terra Aerospace', type: 'company', parent: 'dlm-industries' },
+  { id: 'newsun', name: 'NewSun Technologies', type: 'company', parent: 'terra-aerospace' }
+];
+
+export const LINEAGE_ROOTS = {
+  nortel: {
+    name: 'Nortel & BNR',
+    data: NORTEL_DATA,
+    description: 'The "Silicon Valley North" legacy — from Northern Electric to hundreds of telecom, optical, and software spinoffs.'
+  },
+  nrc_gov: {
+    name: 'NRC & Government',
+    data: NRC_GOV_DATA,
+    description: 'Government influence and the National Research Council (NRC) seeding deep-tech spinoffs in defence, aerospace, and computing since the mid-20th century.'
+  },
+  cognos: {
+    name: 'Cognos',
+    data: COGNOS_DATA,
+    description: 'The sprawling ecosystem seeded by Canada\'s first major software success story, spanning business intelligence, telecommunications software, and early web platforms.'
+  },
+  shopify: {
+    name: 'Shopify',
+    data: [],
+    description: 'The modern commerce engine — tracing the lineage of Canada\'s most successful contemporary tech giant.',
+    isComingSoon: true
+  }
+};

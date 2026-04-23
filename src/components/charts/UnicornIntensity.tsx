@@ -164,7 +164,8 @@ export default function UnicornIntensity({ unicorns }: UnicornIntensityProps) {
                   </div>
                 </div>
                 <div className="cma-value" style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--navy)", fontFamily: "'Roboto Mono'", textAlign: "right" }}>
-                  <span className="hidden-desktop">{item.rate.toFixed(1)}</span>
+                  <span className="hidden-mobile">{item.rate.toFixed(1)}</span>
+                  <span className="hidden-desktop" style={{ color: "var(--slate-light)", fontWeight: 500 }}>{item.count} co.</span>
                 </div>
                 <div className="cma-count" style={{ fontSize: "0.85rem", color: "var(--slate-light)", textAlign: "right" }}>
                   {item.count} co.

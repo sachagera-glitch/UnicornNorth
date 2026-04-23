@@ -19,6 +19,7 @@ import VitalityTab from "@/components/VitalityTab";
 import CmaRegionalSplit from "@/components/charts/CmaRegionalSplit";
 import IndustryLandscape from "@/components/charts/IndustryLandscape";
 import GoatFounders from "@/components/GoatFounders";
+import LineageTab from "@/components/LineageTab";
 import ValueConcentration from "@/components/charts/ValueConcentration";
 import AboutUs from "@/components/AboutUs";
 
@@ -140,6 +141,10 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
             <UnicornIntensity unicorns={unicorns} />
             <NarwhalFlow />
           </div>
+        )}
+
+        {activeTab === "lineage" && (
+          <LineageTab />
         )}
 
         {activeTab === "founders" && (

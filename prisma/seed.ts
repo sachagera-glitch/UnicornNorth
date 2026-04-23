@@ -63,7 +63,7 @@ async function main() {
       ["Tenstorrent", "Toronto", "AI Hardware", "Ljubisa Bajic", "2020s", 3.8, "Private", false, null],
       ["Mitel", "Ottawa-Gatineau", "Telecom", "Terry Matthews, Michael Cowpland", "2010s", 3.7, "Private (post-Ch. 11)", false, null],
       ["Entrust", "Ottawa-Gatineau", "Cybersecurity", "Nortel spin-off", "2000s", 3.7, "Acquired", false, "US"],
-      ["Fullscript", "Ottawa-Gatineau", "Digital Health", "Kyle Gustainis, Adam Landau", "2020s", 3.7, "Private", false, null],
+      ["Fullscript", "Ottawa-Gatineau", "Digital Health", "Kyle Braatz, Brad Dyment, Chris Wise", "2020s", 3.7, "Private", false, null],
       ["StackAdapt", "Toronto", "Adtech", "Vitaly Pecherskiy et al.", "2020s", 3.7, "Private", false, null],
       ["N-able", "Ottawa-Gatineau", "IT Software", "SolarWinds spin-off", "2020s", 3.1, "Public", false, null],
       ["Docebo", "Toronto", "Edtech/LMS", "Claudio Erba", "2020s", 3.0, "Public", false, null],
