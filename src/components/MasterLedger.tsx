@@ -127,6 +127,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
           }}
         >
           <option value="all">All Peak Decades**</option>
+          <option value="1980s">1980s Peak</option>
           <option value="1990s">1990s Peak</option>
           <option value="2000s">2000s Peak</option>
           <option value="2010s">2010s Peak</option>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 
@@ -43,10 +43,10 @@ const FOUNDERS: Founder[] = [
   {
     rank: 4,
     name: "Terry Matthews",
-    company: "Mitel / Newbridge Networks",
+    company: "Mitel / Newbridge Networks / DragonWave",
     location: "Ottawa, ON (Kanata)",
-    peak: "$25.5B combined peak",
-    description: "Sir Terry Matthews, born in Newport, Wales, is the godfather of Ottawa’s tech sector and has founded or funded over 100 companies in high-tech communications. After emigrating to Canada and joining Microsystems International, he co-founded Mitel in 1972 with Michael Cowpland. Mitel became a global leader in PBX systems and telecom semiconductors before British Telecom acquired a controlling stake in 1985. Undeterred, Matthews founded Newbridge Networks in 1986, building it into a worldwide data networking powerhouse with $1.8 billion in revenue and 6,500 employees. Alcatel acquired Newbridge for $7.1 billion in 2000, making Matthews the largest single shareholder in the French telecom giant and a billionaire. He later reacquired Mitel and invested over $600 million to reinvent it. Wales’ first billionaire, Matthews was knighted in 2001, holds an OBE, and is an Officer of the Order of Canada. He also owns the Celtic Manor Resort, which hosted the 2010 Ryder Cup and the 2014 NATO summit. Through Wesley Clover, he continues to invest in and incubate emerging tech firms.",
+    peak: "$28.5B combined peak",
+    description: "Sir Terry Matthews, born in Newport, Wales, is the godfather of Ottawa’s tech sector and has founded or funded over 100 companies in high-tech communications. After emigrating to Canada and joining Microsystems International, he co-founded Mitel in 1972 with Michael Cowpland. Mitel became a global leader in PBX systems and telecom semiconductors before British Telecom acquired a controlling stake in 1985. Undeterred, Matthews founded Newbridge Networks in 1986, building it into a worldwide data networking powerhouse with $1.8 billion in revenue and 6,500 employees. Alcatel acquired Newbridge for $7.1 billion in 2000, making Matthews the largest single shareholder in the French telecom giant and a billionaire. He later reacquired Mitel and invested over $600 million to reinvent it. Matthews was also a principal investor in DragonWave, an Ottawa-based microwave packet backhaul company that reached a peak valuation of $1.2 billion before being acquired. Wales’ first billionaire, Matthews was knighted in 2001, holds an OBE, and is an Officer of the Order of Canada. He also owns the Celtic Manor Resort, which hosted the 2010 Ryder Cup and the 2014 NATO summit. Through Wesley Clover, he continues to invest in and incubate emerging tech firms.",
     wikipediaUrl: "https://en.wikipedia.org/wiki/Terry_Matthews"
   },
   {
@@ -63,7 +63,7 @@ const FOUNDERS: Founder[] = [
     name: "Michael Cowpland",
     company: "Mitel / Corel",
     location: "Ottawa, ON",
-    peak: "$10.3B combined peak",
+    peak: "$12.1B combined peak",
     description: "Michael Cowpland is one of Canada’s most prolific tech entrepreneurs, having co-founded two major technology companies in Ottawa’s Silicon Valley North. Born in Sussex, England, Cowpland co-founded Mitel with Terry Matthews in 1972, growing it into a global telecom equipment manufacturer before British Telecom’s acquisition. He then founded Corel Corporation in 1985, which became best known for CorelDRAW, a graphics software suite that at its peak rivaled Adobe. Corel also acquired WordPerfect from Novell and developed a Linux distribution, positioning itself as a challenger to Microsoft’s office software dominance. At its dot-com peak, Corel’s market capitalization exceeded $6 billion. Cowpland’s contributions helped establish Ottawa as one of Canada’s premier technology corridors, seeding an ecosystem of talent and innovation that spawned dozens of subsequent companies.",
     wikipediaUrl: "https://en.wikipedia.org/wiki/Michael_Cowpland"
   },
