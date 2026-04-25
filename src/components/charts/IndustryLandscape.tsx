@@ -65,6 +65,7 @@ const SECTOR_MAPPING: Record<string, string> = {
   "AI Hardware": "AI",
   "Industrial AI": "AI",
   "AI/Search": "AI",
+  "Health": "Health",
   "Healthtech": "Health",
   "Biotech": "Health",
   "Digital Health": "Health",
