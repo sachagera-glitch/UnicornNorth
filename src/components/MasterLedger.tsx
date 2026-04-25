@@ -177,7 +177,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
                 Founded{sortIndicator("foundedYear")}
               </th>
               <th onClick={() => handleSort("companyAgeYears")} style={{ textAlign: "center" }}>
-                Age{sortIndicator("companyAgeYears")}
+                Years in Existence{sortIndicator("companyAgeYears")}
               </th>
               <th onClick={() => handleSort("peakValuationCad2025")} style={{ textAlign: "right" }}>
                 Adj. Peak ($B)*{sortIndicator("peakValuationCad2025")}
