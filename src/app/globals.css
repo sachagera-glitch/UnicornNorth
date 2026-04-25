@@ -209,6 +209,10 @@ h1, h2, h3, h4 {
   margin-left: 0.25rem;
 }
 
+.hover-row:hover {
+  background: rgba(0, 32, 78, 0.04) !important;
+}
+
 /* ── Cards ─────────────────────────────────────────────────────────────── */
 
 .card {

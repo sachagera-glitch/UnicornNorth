@@ -113,8 +113,70 @@ export default function VitalityTab({ unicorns, cmaStats }: Props) {
   const totalAcquired = acqData.reduce((acc, d) => acc + d.count, 0);
   const usAcqPct = totalAcquired > 0 ? Math.round(((acqRegions["US"] || 0) / totalAcquired) * 100) : 0;
 
+  // 5. Longest Lasting Companies (Top 10 Oldest)
+  const oldestCompanies = [...unicorns]
+    .filter(u => u.companyAgeYears !== null)
+    .sort((a, b) => (b.companyAgeYears || 0) - (a.companyAgeYears || 0))
+    .slice(0, 10);
+
   return (
     <div className="animate-in">
+      {/* ── Longest Lasting Companies ──────────────────────────────── */}
+      <section className="section">
+        <div className="section-header">
+          <h2>Longest Lasting Companies</h2>
+          <div className="divider" />
+          <p>The top 10 oldest companies in the Canadian tech ecosystem</p>
+        </div>
+        
+        <div className="card" style={{ padding: "0", overflow: "hidden" }}>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontSize: "0.9rem", minWidth: "900px" }}>
+              <thead>
+                <tr style={{ background: "rgba(0, 32, 78, 0.03)", borderBottom: "1px solid var(--border)" }}>
+                  <th style={{ padding: "1rem 1.5rem", fontWeight: 700, color: "var(--navy)", width: "60px" }}>Rank</th>
+                  <th style={{ padding: "1rem 1.5rem", fontWeight: 700, color: "var(--navy)" }}>Company</th>
+                  <th style={{ padding: "1rem 1.5rem", fontWeight: 700, color: "var(--navy)" }}>HQ / City</th>
+                  <th style={{ padding: "1rem 1.5rem", fontWeight: 700, color: "var(--navy)" }}>Founded</th>
+                  <th style={{ padding: "1rem 1.5rem", fontWeight: 700, color: "var(--navy)" }}>Status</th>
+                  <th style={{ padding: "1rem 1.5rem", fontWeight: 700, color: "var(--navy)", textAlign: "right" }}>Peak Value</th>
+                  <th style={{ padding: "1rem 1.5rem", fontWeight: 700, color: "var(--navy)", textAlign: "right" }}>Years in Existence</th>
+                </tr>
+              </thead>
+              <tbody>
+                {oldestCompanies.map((u, i) => (
+                  <tr key={u.id} style={{ borderBottom: i === oldestCompanies.length - 1 ? "none" : "1px solid var(--border-light)", transition: "background 0.2s" }} className="hover-row">
+                    <td style={{ padding: "0.75rem 1.5rem", color: "var(--text-secondary)", fontWeight: 600 }}>#{i + 1}</td>
+                    <td style={{ padding: "0.75rem 1.5rem", fontWeight: 700, color: "var(--navy)" }}>{u.companyName}</td>
+                    <td style={{ padding: "0.75rem 1.5rem", color: "var(--text-secondary)", fontSize: "0.85rem" }}>{u.hqCma}</td>
+                    <td style={{ padding: "0.75rem 1.5rem", color: "var(--text-secondary)" }}>{u.foundedYear}</td>
+                    <td style={{ padding: "0.75rem 1.5rem" }}>
+                      <span style={{ 
+                        fontSize: "0.7rem", 
+                        padding: "0.2rem 0.5rem", 
+                        borderRadius: "4px", 
+                        background: (u.companyStatus || "").toLowerCase().includes("active") || (u.companyStatus || "").toLowerCase().includes("private") || (u.companyStatus || "").toLowerCase().includes("public") ? "rgba(40, 167, 69, 0.1)" : "rgba(108, 117, 125, 0.1)",
+                        color: (u.companyStatus || "").toLowerCase().includes("active") || (u.companyStatus || "").toLowerCase().includes("private") || (u.companyStatus || "").toLowerCase().includes("public") ? "#28a745" : "var(--text-secondary)",
+                        fontWeight: 700,
+                        textTransform: "uppercase"
+                      }}>
+                        {u.companyStatus}
+                      </span>
+                    </td>
+                    <td style={{ padding: "0.75rem 1.5rem", textAlign: "right", fontWeight: 600, color: "var(--navy)", fontFamily: "var(--font-mono)", fontSize: "0.85rem" }}>
+                      {formatValue(parseFloat(u.peakValuationCad2025 || "0") * 1_000_000_000)}
+                    </td>
+                    <td style={{ padding: "0.75rem 1.5rem", textAlign: "right", fontWeight: 800, color: "var(--red)", fontSize: "1rem" }}>
+                      {u.companyAgeYears}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* ── Where are they now? ─────────────────────────────────────── */}
       <section className="section">
         <div className="section-header">
