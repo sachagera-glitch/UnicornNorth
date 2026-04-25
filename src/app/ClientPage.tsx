@@ -50,7 +50,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
     acc + (parseFloat(u.peakValuationCad2025 || "0") * 1_000_000_000), 0
   );
 
-  // 3. Dominant Hub (Total counts)
+  // 3. Hub Calculations
   const hubCounts = unicorns.reduce((acc, u) => {
     if (u.hqCma) acc[u.hqCma] = (acc[u.hqCma] || 0) + 1;
     return acc;
@@ -65,21 +65,38 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
     }
   }
 
-  // 4. Highest Per-Capita (Search across all decades and regions for the peak intensity)
+  // 4. Dynamic Per-Capita (Using approx populations from 2021/2026 data)
+  const CMA_POPULATIONS: Record<string, number> = {
+    "Toronto": 6204000,
+    "Montréal": 4291000,
+    "Vancouver": 2641000,
+    "Ottawa-Gatineau": 1488000,
+    "Waterloo-Kitchener-C": 575000,
+    "Calgary": 1600000,
+    "Edmonton": 1500000,
+    "Québec City": 840000,
+    "St. John's": 213000,
+    "Hamilton": 800000,
+    "Winnipeg": 850000,
+  };
+
   let highestPerCapita = "Ottawa-Gatineau";
   let highestPerCapitaRate = "0.00";
-  for (const s of cmaStats) {
-    if (parseFloat(s.unicornsPerMillionRes || "0") > parseFloat(highestPerCapitaRate)) {
-      highestPerCapita = s.cma;
-      highestPerCapitaRate = s.unicornsPerMillionRes || "0.00";
+  
+  for (const [hub, count] of Object.entries(hubCounts)) {
+    const pop = CMA_POPULATIONS[hub];
+    if (pop) {
+      const rate = (count / pop) * 1_000_000;
+      if (rate > parseFloat(highestPerCapitaRate)) {
+        highestPerCapita = hub;
+        highestPerCapitaRate = rate.toFixed(1);
+      }
     }
   }
 
-  // 5. Historical Powerhouse (Ottawa is the historical king)
+  // 5. Historical Powerhouse (Ottawa is the historical king by legacy/density)
   const historicalPowerhouse = "Ottawa-Gatineau";
-  const historicalPowerhouseCount = cmaStats
-    .filter(s => s.cma === historicalPowerhouse)
-    .reduce((acc, s) => acc + s.unicornCount, 0);
+  const historicalPowerhouseCount = hubCounts[historicalPowerhouse] || 0;
 
   // 6. Highest Individual Peak
   const highestIndividual = unicorns[0]; // Ordered by peak in page.tsx
