@@ -12,6 +12,8 @@ datasource db {
 model Unicorn {
   id                    Int      @id @default(autoincrement())
   companyName           String   @map("company_name") @db.VarChar(255)
+  foundedYear           Int?     @map("founded_year")
+  foundedAge            Int?     @map("founded_age")
   hqCma                 String?  @map("hq_cma") @db.VarChar(100)
   industry              String?  @db.VarChar(100)
   founders              String?  @db.Text
