@@ -22,25 +22,25 @@ async function main() {
     // ── Unicorns (100 companies - Alludo merged into Corel) ──────────────
     const unicorns = [
       // Name, HQ/CMA, Industry, Founders, Decade, Peak Val ($B), Status, Revenue Multiplier, Acquirer Region
-      ["Nortel / BNR", 1895, "Ottawa-Gatineau", "Telecom", "N/A", "1990s", 768.6, "Defunct", false, null],
+      ["Nortel / BNR", 1895, "Ottawa-Gatineau", "Telecom", "N/A", "1990s", 768.6, "Defunct", false, null, 2009],
       ["JDS Uniphase (JDSU)", 1981, "Ottawa-Gatineau", "Telecom", "Jozef Straus; Kevin Kalkhoven", "1990s", 295.0, "Acquired", false, "US"],
       ["Shopify", 2006, "Ottawa-Gatineau", "E-commerce", "Tobias Lütke, Daniel Weinand, Scott Lake", "2010s", 300.0, "Public", false, null],
       ["BlackBerry (RIM)", 1984, "Waterloo-Kitchener-C", "Mobile", "Mike Lazaridis, Douglas Fregin", "1990s", 130.0, "Public", false, null],
       ["Constellation Software", 1995, "Toronto", "Software", "Mark Leonard", "2010s", 112.0, "Public", false, null],
       ["Celestica", 1994, "Toronto", "Hardware", "Eugene Polistuk", "1990s", 50.0, "Public", false, null],
       ["CGI Inc.", 1976, "Montréal", "IT Consulting", "Serge Godin, André Imbeau", "1990s", 37.5, "Public", false, null],
-      ["360networks", 1998, "Vancouver", "Telecom", "Greg Maffei, Ledcor Group", "1990s", 36.0, "Defunct", false, null],
-      ["Digital Equipment (Canada)", 1963, "Ottawa-Gatineau", "Hardware", "Ken Olsen (US parent)", "1990s", 25.0, "Acquired", false, "US"],
-      ["Newbridge Networks", 1986, "Ottawa-Gatineau", "Telecom", "Terry Matthews", "1990s", 21.8, "Acquired", false, "European"],
+      ["360networks", 1998, "Vancouver", "Telecom", "Greg Maffei, Ledcor Group", "1990s", 36.0, "Defunct", false, null, 2001],
+      ["Digital Equipment (Canada)", 1963, "Ottawa-Gatineau", "Hardware", "Ken Olsen (US parent)", "1990s", 25.0, "Acquired", false, "US", 1998],
+      ["Newbridge Networks", 1986, "Ottawa-Gatineau", "Telecom", "Terry Matthews", "1990s", 21.8, "Acquired", false, "European", 2000],
       ["Lightspeed Commerce", 2005, "Montréal", "POS Software", "Dax Dasilva", "2010s", 21.0, "Public", false, null],
       ["Nuvei", 2003, "Montréal", "Fintech", "Philip Fayer", "2020s", 21.0, "Private (Advent)", false, null],
       ["OpenText", 1991, "Waterloo-Kitchener-C", "Software", "Tim Bray, Gaston Gonnet", "2000s", 18.0, "Public", false, null],
       ["AbCellera Biologics", 2012, "Vancouver", "Biotech", "Carl Hansen", "2020s", 15.7, "Public (declined)", false, null],
       ["Xanadu", 2016, "Toronto", "Quantum", "Christian Weedbrook", "2020s", 13.3, "Private", false, null],
-      ["ATI Technologies", 1985, "Toronto", "Semiconductors", "Lee Ka Lau et al.", "1990s", 12.6, "Acquired", false, "US"],
+      ["ATI Technologies", 1985, "Toronto", "Semiconductors", "Lee Ka Lau et al.", "1990s", 12.6, "Acquired", false, "US", 2006],
       ["Hut 8 Corp", 2017, "Toronto", "Web3", "Marc van der Chijs", "2020s", 11.6, "Public", false, null],
       ["Dapper Labs", 2018, "Vancouver", "Web3", "Roham Gharegozlou et al.", "2020s", 11.2, "Private", false, null],
-      ["Cognos", 1969, "Ottawa-Gatineau", "BI Software", "Michael Potter, Alan Guedes", "1990s", 10.7, "Acquired", false, "US"],
+      ["Cognos", 1969, "Ottawa-Gatineau", "BI Software", "Michael Potter, Alan Guedes", "1990s", 10.7, "Acquired", false, "US", 2008],
       ["Telesat", 1969, "Ottawa-Gatineau", "Satellite Tech", "Govt. of Canada (privatized)", "1990s", 10.3, "Public", false, null],
       ["1Password", 2005, "Toronto", "Cybersecurity", "Dave Teare, Roustem Karimov", "2020s", 10.3, "Private", false, null],
       ["Telus International (TIXT)", 2005, "Vancouver", "Tech Services", "Darren Entwistle (Telus)", "2020s", 10.0, "Public", false, null],
@@ -125,14 +125,17 @@ async function main() {
     ];
 
     for (const u of unicorns) {
-      const foundedYear = u[1];
-      const foundedAge = typeof foundedYear === 'number' ? (2026 - foundedYear) : null;
-      const ageBasis = "Active: age uses current year (2026)";
+      const foundedYear = u[1] as number;
+      const endYear = u[10] as number | undefined;
+      const age = endYear ? (endYear - foundedYear) : (2026 - foundedYear);
+      const ageBasis = endYear 
+        ? `Inactive: age from ${foundedYear} to ${endYear}`
+        : "Active: age uses current year (2026)";
       
       await client.query(
-        `INSERT INTO unicorns (company_name, founded_year, founded_age, company_age_years, age_basis, hq_cma, industry, founders, first_unicorn_decade, peak_valuation_cad_2025, company_status, is_revenue_multiplier, acquirer_region)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
-        [u[0], foundedYear, foundedAge, foundedAge, ageBasis, u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9]]
+        `INSERT INTO unicorns (company_name, founded_year, company_age_years, age_basis, hq_cma, industry, founders, first_unicorn_decade, peak_valuation_cad_2025, company_status, is_revenue_multiplier, acquirer_region)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+        [u[0], foundedYear, age, ageBasis, u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9]]
       );
     }
     console.log(`✅ Seeded ${unicorns.length} unicorns`);
