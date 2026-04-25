@@ -65,11 +65,10 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
     }
   }
 
-  // 4. Highest Per-Capita (Using 2020s stats from DB)
-  const stats2020s = cmaStats.filter(s => s.decade === "2020s");
+  // 4. Highest Per-Capita (Search across all decades and regions for the peak intensity)
   let highestPerCapita = "Ottawa-Gatineau";
   let highestPerCapitaRate = "0.00";
-  for (const s of stats2020s) {
+  for (const s of cmaStats) {
     if (parseFloat(s.unicornsPerMillionRes || "0") > parseFloat(highestPerCapitaRate)) {
       highestPerCapita = s.cma;
       highestPerCapitaRate = s.unicornsPerMillionRes || "0.00";
@@ -77,9 +76,10 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
   }
 
   // 5. Historical Powerhouse (Ottawa is the historical king)
-  const ottawaStats = cmaStats.find(s => s.cma === "Ottawa-Gatineau" && s.decade === "2020s");
   const historicalPowerhouse = "Ottawa-Gatineau";
-  const historicalPowerhouseCount = ottawaStats?.unicornCount || 0;
+  const historicalPowerhouseCount = cmaStats
+    .filter(s => s.cma === historicalPowerhouse)
+    .reduce((acc, s) => acc + s.unicornCount, 0);
 
   // 6. Highest Individual Peak
   const highestIndividual = unicorns[0]; // Ordered by peak in page.tsx
