@@ -19,7 +19,7 @@ async function main() {
     await client.query("DELETE FROM cma_decade_stats");
     await client.query("DELETE FROM unicorns");
 
-    // ── Unicorns (100 companies - Alludo merged into Corel) ──────────────
+    // ── Unicorns (102 companies - Alludo merged into Corel) ──────────────
     const unicorns = [
       ["Nortel / BNR", 1895, 114, "Capped at 2009: Filed Ch. 11 / CCAA bankruptcy in 2009", "Ottawa-Gatineau", "Telecom", 'N/A', "1990s", 768.6, "Defunct", false, null],
       ["JDS Uniphase (JDSU)", 1981, 34, "Capped at 2015: Split into Lumentum & Viavi 2015; JDSU name retired", "Ottawa-Gatineau", "Telecom", 'Jozef Straus; Kevin Kalkhoven', "1990s", 295.0, "Acquired", false, 'US'],
@@ -45,9 +45,11 @@ async function main() {
       ["Telus International (TIXT)", 2005, 21, "Active: age uses current year (2026)", "Vancouver", "Tech Services", 'Darren Entwistle (Telus)', "2020s", 10.0, "Public", false, null],
       ["Cohere", 2019, 7, "Active: age uses current year (2026)", "Toronto", "AI", 'Aidan Gomez, Ivan Zhang, Nick Frosst', "2020s", 9.5, "Private", false, null],
       ["Hopper", 2007, 19, "Active: age uses current year (2026)", "Montréal", "Travel Tech", 'Frederic Lalonde', "2020s", 7.4, "Private", false, null],
+      ["MDS Nordion", 1946, 64, "Acquired by Sterigenics (now Sotera Health) 2014", "Ottawa-Gatineau", "Health", "n/a", "2000s", 8.0, "Acquired", false, "US"],
       ["Kinaxis", 1984, 42, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Supply Chain", 'Duncan Klett, Bob Ashe', "2010s", 6.8, "Public", false, null],
       ["Corel (Alludo)", 1985, 41, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Software", 'Michael Cowpland', "1990s", 6.6, "Private", false, null],
       ["PointClickCare", 2000, 26, "Active: age uses current year (2026)", "Toronto", "Healthtech", 'Mike Oldfield, Dave Friesen', "2020s", 5.9, "Private", false, null],
+      ["Lumonics", 1970, 36, "Merged with General Scanning 1999; original operations wound down 2002-2006", "Ottawa-Gatineau", "Telecom", "Alan Buchanan, Gordon Mauchel, Allan Crawford", "2000s", 5.0, "Acquired", false, "US"],
       ["Wealthsimple", 2014, 12, "Active: age uses current year (2026)", "Toronto", "Fintech", 'Michael Katchen', "2020s", 5.0, "Private", false, null],
       ["SSENSE", 2003, 23, "Active: age uses current year (2026)", "Montréal", "E-commerce", 'Rami, Bassel, Firas Atallah', "2020s", 5.0, "Creditor Protection", false, null],
       ["Geotab", 2000, 26, "Active: age uses current year (2026)", "Toronto", "Telematics", 'Neil Cawse', "2020s", 5.0, "Self-Funded", false, null],

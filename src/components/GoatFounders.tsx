@@ -192,6 +192,15 @@ const FOUNDERS: Founder[] = [
     peak: "$4.5B valuation",
     description: "Raquel Urtasun is a globally renowned AI researcher and the founder of Waabi, a Toronto-based autonomous driving company that uses generative AI to develop self-driving truck technology. Before founding Waabi in 2021, she served as Chief Scientist at Uber ATG (Advanced Technologies Group) and is a professor of computer science at the University of Toronto and a co-founder of the Vector Institute for Artificial Intelligence. Urtasun has published over 200 research papers and is one of the most cited researchers in computer vision and machine learning. Waabi raised $200 million in its initial funding round at a $4.5 billion valuation, reflecting extraordinary investor confidence in her technical vision. Her approach of using AI-first simulation to train autonomous vehicles rather than relying on billions of miles of real-world driving data represents a paradigm shift in the industry. Urtasun is frequently cited as one of the most influential women in AI globally.",
     wikipediaUrl: "https://en.wikipedia.org/wiki/Raquel_Urtasun"
+  },
+  {
+    rank: 21,
+    name: "Alan Buchanan, Gordon Mauchel, Allan Crawford",
+    company: "Lumonics",
+    location: "Ottawa, ON (Kanata)",
+    peak: "$5B adjusted peak",
+    description: "Lumonics, founded in 1970 by Alan Buchanan, Gordon Mauchel, and Allan Crawford, was a pioneer in global laser manufacturing and the first venture-capital-financed high-tech company in Ottawa’s Kanata region, now known as 'Silicon Valley North.' Specializing in pulsed gas laser technology, Lumonics became the third-largest laser company in the world by the mid-1980s. Its breakthrough LaserMark system set the global standard for high-speed industrial marking. The company’s success laid the foundation for Ottawa’s emergence as a global technology hub, spawning a lineage of talent and innovation that continues to influence the Canadian tech ecosystem today. Lumonics merged with General Scanning Inc. in 1999 and was later acquired by GSI Group, leaving a lasting legacy as one of Canada’s most significant industrial technology success stories.",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Lumonics"
   }
 ];
 
@@ -203,11 +212,11 @@ export default function GoatFounders() {
           <h2>GOAT Founders</h2>
           <div className="divider" />
           <p>The Greatest Of All Time: Architects of Canada's tech legacy.</p>
-          <p style={{ 
-            fontSize: "0.85rem", 
-            color: "var(--gold)", 
-            opacity: 0.9, 
-            marginTop: "0.75rem", 
+          <p style={{
+            fontSize: "0.85rem",
+            color: "var(--gold)",
+            opacity: 0.9,
+            marginTop: "0.75rem",
             fontWeight: 600,
             letterSpacing: "0.05em",
             textTransform: "uppercase",
@@ -241,26 +250,26 @@ export default function GoatFounders() {
               <div style={{ position: "relative", zIndex: 1 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }} className="stack-mobile">
                   <div>
-                    <div style={{ 
-                      fontSize: "0.85rem", 
-                      fontWeight: 700, 
-                      color: "var(--gold)", 
-                      textTransform: "uppercase", 
+                    <div style={{
+                      fontSize: "0.85rem",
+                      fontWeight: 700,
+                      color: "var(--gold)",
+                      textTransform: "uppercase",
                       letterSpacing: "0.1em",
                       marginBottom: "0.5rem",
                       fontFamily: "'Roboto Mono'"
                     }}>
                       Founder Rank #{f.rank}
                     </div>
-                    <h3 style={{ 
-                      fontSize: "2.5rem", 
-                      fontFamily: "'Playfair Display', serif", 
+                    <h3 style={{
+                      fontSize: "2.5rem",
+                      fontFamily: "'Playfair Display', serif",
                       color: "var(--navy)",
                       margin: 0
                     }}>
-                      <a 
-                        href={f.wikipediaUrl} 
-                        target="_blank" 
+                      <a
+                        href={f.wikipediaUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="founder-link"
                         style={{
@@ -273,11 +282,11 @@ export default function GoatFounders() {
                       </a>
                     </h3>
                   </div>
-                  
+
                   <div className="text-right-desktop">
-                    <div style={{ 
-                      fontSize: "1.25rem", 
-                      fontWeight: 700, 
+                    <div style={{
+                      fontSize: "1.25rem",
+                      fontWeight: 700,
                       color: "var(--navy)",
                       fontFamily: "'Roboto Mono'",
                       marginBottom: "0.25rem"
@@ -290,11 +299,11 @@ export default function GoatFounders() {
                   </div>
                 </div>
 
-                <div style={{ 
-                  display: "flex", 
-                  gap: "2rem", 
-                  marginBottom: "2rem", 
-                  padding: "1rem 0", 
+                <div style={{
+                  display: "flex",
+                  gap: "2rem",
+                  marginBottom: "2rem",
+                  padding: "1rem 0",
                   borderTop: "1px solid var(--border-light)",
                   borderBottom: "1px solid var(--border-light)"
                 }}>
@@ -304,9 +313,9 @@ export default function GoatFounders() {
                   </div>
                 </div>
 
-                <div style={{ 
-                  fontSize: "1.05rem", 
-                  lineHeight: 1.7, 
+                <div style={{
+                  fontSize: "1.05rem",
+                  lineHeight: 1.7,
                   color: "var(--text-secondary)",
                   fontFamily: "'Inter', sans-serif",
                   maxWidth: "900px"
@@ -318,12 +327,12 @@ export default function GoatFounders() {
           ))}
         </div>
 
-        <div style={{ 
-          marginTop: "4rem", 
-          padding: "3rem", 
-          background: "var(--navy)", 
-          borderRadius: "12px", 
-          color: "white" 
+        <div style={{
+          marginTop: "4rem",
+          padding: "3rem",
+          background: "var(--navy)",
+          borderRadius: "12px",
+          color: "white"
         }}>
           <h3 style={{ fontFamily: "'Playfair Display'", fontSize: "2rem", marginBottom: "1.5rem" }}>Methodology & Notes</h3>
           <p style={{ opacity: 0.8, lineHeight: 1.6, fontSize: "1rem", maxWidth: "1000px" }}>
