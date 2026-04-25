@@ -34,7 +34,7 @@ async function main() {
       ["Lightspeed Commerce", 2005, 21, "Active: age uses current year (2026)", "Montréal", "POS Software", 'Dax Dasilva', "2010s", 21.0, "Public", false, null],
       ["Nuvei", 2003, 23, "Active: age uses current year (2026)", "Montréal", "Fintech", 'Philip Fayer', "2020s", 21.0, "Private (Advent)", false, null],
       ["OpenText", 1991, 35, "Active: age uses current year (2026)", "Waterloo-Kitchener-C", "Software", 'Tim Bray, Gaston Gonnet', "2000s", 18.0, "Public", false, null],
-      ["AbCellera Biologics", 2012, 14, "Active: age uses current year (2026)", "Vancouver", "Biotech", 'Carl Hansen', "2020s", 15.7, "Public (declined)", false, null],
+      ["AbCellera Biologics", 2012, 14, "Active: age uses current year (2026)", "Vancouver", "Biotech", 'Carl Hansen', "2020s", 15.7, "Public", false, null],
       ["Xanadu", 2016, 10, "Active: age uses current year (2026)", "Toronto", "Quantum", 'Christian Weedbrook', "2020s", 13.3, "Private", false, null],
       ["ATI Technologies", 1985, 25, "Capped at 2010: ATI brand officially retired Aug 2010 (AMD acquired 2006)", "Toronto", "Semiconductors", 'Lee Ka Lau et al.', "1990s", 12.6, "Acquired", false, 'US'],
       ["Hut 8 Corp", 2017, 9, "Active: age uses current year (2026)", "Toronto", "Web3", 'Marc van der Chijs', "2020s", 11.6, "Public", false, null],
