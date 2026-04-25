@@ -14,6 +14,8 @@ model Unicorn {
   companyName           String   @map("company_name") @db.VarChar(255)
   foundedYear           Int?     @map("founded_year")
   foundedAge            Int?     @map("founded_age")
+  companyAgeYears       Int?     @map("company_age_years")
+  ageBasis              String?  @map("age_basis") @db.Text
   hqCma                 String?  @map("hq_cma") @db.VarChar(100)
   industry              String?  @db.VarChar(100)
   founders              String?  @db.Text

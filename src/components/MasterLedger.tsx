@@ -5,7 +5,7 @@ import { useCurrency } from "./CurrencyContext";
 
 import { type UnicornRow } from "@/types";
 
-type SortField = "companyName" | "hqCma" | "peakValuationCad2025" | "companyStatus" | "founders" | "foundedYear" | "foundedAge";
+type SortField = "companyName" | "hqCma" | "peakValuationCad2025" | "companyStatus" | "founders" | "foundedYear" | "companyAgeYears";
 
 function statusBadge(status: string | null) {
   const s = (status || "").toLowerCase();
@@ -53,7 +53,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
       if (sortField === "peakValuationCad2025") {
         av = parseFloat(a.peakValuationCad2025 || "0");
         bv = parseFloat(b.peakValuationCad2025 || "0");
-      } else if (sortField === "foundedYear" || sortField === "foundedAge") {
+      } else if (sortField === "foundedYear" || sortField === "companyAgeYears") {
         av = a[sortField] || 0;
         bv = b[sortField] || 0;
       } else {
@@ -176,8 +176,8 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
               <th onClick={() => handleSort("foundedYear")} style={{ textAlign: "center" }}>
                 Founded{sortIndicator("foundedYear")}
               </th>
-              <th onClick={() => handleSort("foundedAge")} style={{ textAlign: "center" }}>
-                Age{sortIndicator("foundedAge")}
+              <th onClick={() => handleSort("companyAgeYears")} style={{ textAlign: "center" }}>
+                Age{sortIndicator("companyAgeYears")}
               </th>
               <th onClick={() => handleSort("peakValuationCad2025")} style={{ textAlign: "right" }}>
                 Adj. Peak ($B)*{sortIndicator("peakValuationCad2025")}
@@ -218,7 +218,7 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
                   {u.foundedYear}
                 </td>
                 <td style={{ textAlign: "center", fontWeight: 600, color: "var(--navy)", fontSize: "0.75rem", fontFamily: "'Roboto Mono'" }}>
-                  {u.foundedAge}
+                  {u.companyAgeYears}
                 </td>
                 <td
                   className="data-value"

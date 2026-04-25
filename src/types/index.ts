@@ -3,6 +3,8 @@ export interface UnicornRow {
   companyName: string;
   foundedYear: number | null;
   foundedAge: number | null;
+  companyAgeYears: number | null;
+  ageBasis: string | null;
   hqCma: string | null;
   industry: string | null;
   founders: string | null;

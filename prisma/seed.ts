@@ -127,11 +127,12 @@ async function main() {
     for (const u of unicorns) {
       const foundedYear = u[1];
       const foundedAge = typeof foundedYear === 'number' ? (2026 - foundedYear) : null;
+      const ageBasis = "Active: age uses current year (2026)";
       
       await client.query(
-        `INSERT INTO unicorns (company_name, founded_year, founded_age, hq_cma, industry, founders, first_unicorn_decade, peak_valuation_cad_2025, company_status, is_revenue_multiplier, acquirer_region)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
-        [u[0], foundedYear, foundedAge, u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9]]
+        `INSERT INTO unicorns (company_name, founded_year, founded_age, company_age_years, age_basis, hq_cma, industry, founders, first_unicorn_decade, peak_valuation_cad_2025, company_status, is_revenue_multiplier, acquirer_region)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
+        [u[0], foundedYear, foundedAge, foundedAge, ageBasis, u[2], u[3], u[4], u[5], u[6], u[7], u[8], u[9]]
       );
     }
     console.log(`✅ Seeded ${unicorns.length} unicorns`);
