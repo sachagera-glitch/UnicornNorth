@@ -152,7 +152,7 @@ async function main() {
     const cmaStats = [
       // Ottawa-Gatineau
       ["Ottawa-Gatineau", "1990s", 10, 12.50],
-      ["Ottawa-Gatineau", "2000s", 12, 12.00],
+      ["Ottawa-Gatineau", "2000s", 14, 14.00],
       ["Ottawa-Gatineau", "2010s", 15, 12.50],
       ["Ottawa-Gatineau", "2020s", 21, 14.11],
 

@@ -4,7 +4,7 @@ const ERAS = [
   {
     years: "1990s–2000s",
     title: "The telecom boom",
-    desc: "Nearly all value in Ottawa-Gatineau. Telecom/hardware dominated. 13 of 15 unicorns were infrastructure companies.",
+    desc: "Nearly all value in Ottawa-Gatineau. Telecom/hardware dominated. 19 of 21 unicorns in this era were infrastructure or industrial pioneers.",
     trait: "Massive scale, concentrated geography, catastrophic bust",
     color: "var(--red)",
   },
