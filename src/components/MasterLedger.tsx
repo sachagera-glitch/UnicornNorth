@@ -5,7 +5,7 @@ import { useCurrency } from "./CurrencyContext";
 
 import { type UnicornRow } from "@/types";
 
-type SortField = "companyName" | "hqCma" | "peakValuationCad2025" | "companyStatus" | "founders";
+type SortField = "companyName" | "hqCma" | "peakValuationCad2025" | "companyStatus" | "founders" | "foundedYear" | "foundedAge";
 
 function statusBadge(status: string | null) {
   const s = (status || "").toLowerCase();
@@ -53,9 +53,12 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
       if (sortField === "peakValuationCad2025") {
         av = parseFloat(a.peakValuationCad2025 || "0");
         bv = parseFloat(b.peakValuationCad2025 || "0");
+      } else if (sortField === "foundedYear" || sortField === "foundedAge") {
+        av = a[sortField] || 0;
+        bv = b[sortField] || 0;
       } else {
-        av = (a[sortField] || "").toLowerCase();
-        bv = (b[sortField] || "").toLowerCase();
+        av = (a[sortField] as string || "").toLowerCase();
+        bv = (b[sortField] as string || "").toLowerCase();
       }
       if (av < bv) return sortDir === "asc" ? -1 : 1;
       if (av > bv) return sortDir === "asc" ? 1 : -1;
@@ -170,6 +173,12 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
               <th onClick={() => handleSort("hqCma")}>
                 HQ or Founded City{sortIndicator("hqCma")}
               </th>
+              <th onClick={() => handleSort("foundedYear")} style={{ textAlign: "center" }}>
+                Founded{sortIndicator("foundedYear")}
+              </th>
+              <th onClick={() => handleSort("foundedAge")} style={{ textAlign: "center" }}>
+                Age{sortIndicator("foundedAge")}
+              </th>
               <th onClick={() => handleSort("peakValuationCad2025")} style={{ textAlign: "right" }}>
                 Adj. Peak ($B)*{sortIndicator("peakValuationCad2025")}
               </th>
@@ -205,6 +214,12 @@ export default function MasterLedger({ data }: { data: UnicornRow[] }) {
                   {u.founders}
                 </td>
                 <td style={{ color: "var(--slate)" }}>{u.hqCma}</td>
+                <td style={{ textAlign: "center", color: "var(--slate-light)", fontSize: "0.75rem", fontFamily: "'Roboto Mono'" }}>
+                  {u.foundedYear}
+                </td>
+                <td style={{ textAlign: "center", fontWeight: 600, color: "var(--navy)", fontSize: "0.75rem", fontFamily: "'Roboto Mono'" }}>
+                  {u.foundedAge}
+                </td>
                 <td
                   className="data-value"
                   style={{ textAlign: "right", fontSize: "0.85rem" }}
