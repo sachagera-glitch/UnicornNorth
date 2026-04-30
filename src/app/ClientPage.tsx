@@ -132,7 +132,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
               highestIndividualName={highestIndividualName}
             />
             <TechEras />
-            <ValueEpochs />
+            <ValueEpochs unicorns={unicorns} />
             <IndustryLandscape data={unicorns} />
             <CmaRegionalSplit data={unicorns} />
           </div>

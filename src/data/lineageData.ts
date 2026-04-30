@@ -197,7 +197,6 @@ export const NORTEL_DATA: LineageNode[] = [
   { id: 'microsennx', name: 'MicroSennx', type: 'company', parent: 'nortel' },
   { id: 'provence', name: 'Provence', type: 'company', parent: 'nortel' },
   { id: 'chano', name: 'Chano Systems', type: 'company', parent: 'nortel' },
-  { id: 'jcs', name: 'JCS Fitel', type: 'company', parent: 'nortel' },
 
   { id: 'gan-systems', name: 'GaN Systems', type: 'company', parent: 'nortel', description: 'Founded by Nortel alumni. Acquired for $830M.', isUnicorn: true },
   { id: 'wilan', name: 'WiLAN', type: 'company', parent: 'nortel', description: 'Pioneered Wi-Fi/OFDM tech. IP licensing.', isUnicorn: true },

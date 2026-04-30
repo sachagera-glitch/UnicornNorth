@@ -29,36 +29,56 @@ const NODES: SankeyNode[] = [
 ];
 
 const LINKS: SankeyLink[] = [
-  { source: "canada", target: "ontario", value: 50 },
-  { source: "canada", target: "quebec", value: 20 },
-  { source: "canada", target: "bc", value: 20 },
-  { source: "canada", target: "atlantic", value: 8 },
-  { source: "canada", target: "prairies", value: 7 },
-  { source: "ontario", target: "ottawa", value: 28 },
-  { source: "ontario", target: "toronto", value: 15 },
-  { source: "ontario", target: "kwc", value: 8 },
-  { source: "quebec", target: "montreal", value: 20 },
-  { source: "bc", target: "vancouver", value: 20 },
-  { source: "prairies", target: "calgary", value: 7 },
-  { source: "atlantic", target: "atlantic_cma", value: 8 },
-  { source: "ottawa", target: "telecom", value: 16 },
-  { source: "ottawa", target: "health", value: 8 },
-  { source: "ottawa", target: "ecommerce", value: 4 },
-  { source: "ottawa", target: "software", value: 2 },
-  { source: "toronto", target: "ai", value: 5 },
-  { source: "toronto", target: "fintech", value: 4 },
-  { source: "toronto", target: "other_sector", value: 6 },
-  { source: "kwc", target: "telecom", value: 4 },
-  { source: "kwc", target: "software", value: 4 },
-  { source: "montreal", target: "ecommerce", value: 8 },
-  { source: "montreal", target: "fintech", value: 6 },
-  { source: "montreal", target: "other_sector", value: 6 },
-  { source: "vancouver", target: "other_sector", value: 12 },
-  { source: "vancouver", target: "ai", value: 8 },
-  { source: "calgary", target: "fintech", value: 4 },
-  { source: "calgary", target: "other_sector", value: 3 },
+  // Canada to Provinces
+  { source: "canada", target: "ontario", value: 1778 },
+  { source: "canada", target: "quebec", value: 106 },
+  { source: "canada", target: "bc", value: 103 },
+  { source: "canada", target: "atlantic", value: 4 },
+  { source: "canada", target: "prairies", value: 5 },
+  
+  // Provinces to CMAs
+  { source: "ontario", target: "ottawa", value: 1488 },
+  { source: "ontario", target: "toronto", value: 290 },
+  { source: "ontario", target: "kwc", value: 157 },
+  { source: "quebec", target: "montreal", value: 106 },
+  { source: "bc", target: "vancouver", value: 103 },
+  { source: "prairies", target: "calgary", value: 5 },
+  { source: "atlantic", target: "atlantic_cma", value: 4 },
+
+  // Ottawa Sectors
+  { source: "ottawa", target: "telecom", value: 1097 },
+  { source: "ottawa", target: "ecommerce", value: 300 },
+  { source: "ottawa", target: "software", value: 30 },
+  { source: "ottawa", target: "health", value: 12 },
+  { source: "ottawa", target: "other_sector", value: 49 },
+
+  // Toronto Sectors
+  { source: "toronto", target: "software", value: 112 },
+  { source: "toronto", target: "ai", value: 19 },
+  { source: "toronto", target: "fintech", value: 12 },
+  { source: "toronto", target: "health", value: 7 },
+  { source: "toronto", target: "other_sector", value: 140 },
+
+  // Kitchener Sectors
+  { source: "kwc", target: "telecom", value: 130 },
+  { source: "kwc", target: "software", value: 18 },
+  { source: "kwc", target: "other_sector", value: 9 },
+
+  // Montreal Sectors
+  { source: "montreal", target: "fintech", value: 42 },
+  { source: "montreal", target: "ecommerce", value: 5 },
+  { source: "montreal", target: "other_sector", value: 59 },
+
+  // Vancouver Sectors
+  { source: "vancouver", target: "telecom", value: 36 },
+  { source: "vancouver", target: "ai", value: 16 },
+  { source: "vancouver", target: "health", value: 3 },
+  { source: "vancouver", target: "other_sector", value: 48 },
+
+  // Calgary/Atlantic
+  { source: "calgary", target: "fintech", value: 1.4 },
+  { source: "calgary", target: "other_sector", value: 3.6 },
   { source: "atlantic_cma", target: "fintech", value: 4 },
-  { source: "atlantic_cma", target: "other_sector", value: 4 },
 ];
 
 export default function NarwhalFlow() {
@@ -69,24 +89,47 @@ export default function NarwhalFlow() {
   const nodePositions: Record<string, {x:number;y:number;h:number}> = {};
   [0,1,2,3].forEach(l => {
     const nodesInLevel = NODES.filter(n => n.x === l);
+    const levelTotal = l === 0 ? 2162 : LINKS.filter(link => {
+      const targetNode = NODES.find(n => n.id === link.target);
+      return targetNode && targetNode.x === l;
+    }).reduce((sum, link) => sum + link.value, 0);
+
     const availH = H - 2*PAD;
-    const nodeH = Math.min(availH / nodesInLevel.length - 8, 50);
-    const totalH = nodesInLevel.length * nodeH + (nodesInLevel.length - 1) * 8;
-    const startY = PAD + (availH - totalH) / 2;
-    nodesInLevel.forEach((node, i) => {
-      nodePositions[node.id] = { x: levelX[l], y: startY + i*(nodeH+8), h: nodeH };
+    const scale = availH / (levelTotal || 1);
+    
+    let currentY = PAD;
+    nodesInLevel.forEach((node) => {
+      const nodeValue = l === 0 ? 2162 : LINKS.filter(link => 
+        (l === 1 || l === 2 || l === 3) && link.target === node.id
+      ).reduce((sum, link) => sum + link.value, 0);
+      
+      const h = Math.max(nodeValue * scale, 2); // Minimum 2px height
+      nodePositions[node.id] = { x: levelX[l], y: currentY, h: h };
+      currentY += h + 8;
+    });
+
+    // Center the level
+    const totalLevelH = currentY - PAD - 8;
+    const offset = (availH - totalLevelH) / 2;
+    nodesInLevel.forEach(node => {
+      nodePositions[node.id].y += offset;
     });
   });
 
   const linkPaths = LINKS.map((link, i) => {
     const src = nodePositions[link.source], tgt = nodePositions[link.target];
     if (!src || !tgt) return null;
+    
+    // For a real Sankey, we'd need to track offsets within the node. 
+    // For now, we'll just use the center for simpler implementation, 
+    // but the thickness will be proportional.
     const srcX = src.x + NODE_W, srcY = src.y + src.h/2;
     const tgtX = tgt.x, tgtY = tgt.y + tgt.h/2;
     const midX = (srcX + tgtX) / 2;
+    const scale = (H - 2*PAD) / 2162;
     return {
       path: `M${srcX},${srcY} C${midX},${srcY} ${midX},${tgtY} ${tgtX},${tgtY}`,
-      thickness: Math.max(link.value * 0.4, 1.5), index: i,
+      thickness: Math.max(link.value * scale, 1.5), index: i,
     };
   });
 

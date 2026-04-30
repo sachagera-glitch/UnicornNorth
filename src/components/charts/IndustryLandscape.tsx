@@ -21,6 +21,8 @@ const SECTOR_MAPPING: Record<string, string> = {
   "Telecom": "Telecom",
   "Mobile": "Telecom",
   "Telecom/IP": "Telecom",
+  "Satellite Tech": "Telecom",
+  "Tech Services": "Telecom",
   "E-commerce": "E-commerce / SaaS",
   "POS Software": "E-commerce / SaaS",
   "SaaS": "E-commerce / SaaS",
@@ -34,12 +36,14 @@ const SECTOR_MAPPING: Record<string, string> = {
   "Home Services": "E-commerce / SaaS",
   "Martech": "E-commerce / SaaS",
   "Ancillary Rev": "E-commerce / SaaS",
+  "Adtech": "E-commerce / SaaS",
   "Software": "Software",
   "IT Consulting": "Software",
   "IT Services": "Software",
   "Edtech": "Software",
   "Edtech/LMS": "Software",
-  "Cybersecurity": "Software",
+  "Cybersecurity": "Cybersecurity",
+  "Identity/Risk": "Cybersecurity",
   "BI Software": "Software",
   "IT Software": "Software",
   "Audit/Tax": "Software",
@@ -50,13 +54,13 @@ const SECTOR_MAPPING: Record<string, string> = {
   "Mobility": "Software",
   "HR Tech": "Software",
   "Enterprise SW": "Software",
-  "Tech Services": "Software",
   "Hardware": "Hardware",
   "Semiconductors": "Hardware",
   "Broadcast": "Hardware",
   "Auto Tech": "Hardware",
   "Quantum": "Hardware",
   "Telematics": "Hardware",
+  "Space Tech": "Hardware",
   "Fintech": "Fintech",
   "Challenger Bank": "Fintech",
   "Web3": "Web3",
@@ -73,8 +77,6 @@ const SECTOR_MAPPING: Record<string, string> = {
   "Cleantech": "Clean",
   "Agtech": "Clean",
   "AgTech": "Clean",
-  "Space Tech": "Other",
-  "Satellite Tech": "Other",
   "Logistics": "Other",
   "Food Tech": "Other",
 };
@@ -106,6 +108,7 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
       "E-commerce / SaaS": "var(--gold)",
       "Software": "var(--red)",
       "Hardware": "var(--slate)",
+      "Cybersecurity": "var(--navy-deep, #0A1628)",
       "Fintech": "var(--burgundy)",
       "AI": "var(--slate-light)",
       "Web3": "var(--navy-light, #1e3a8a)",
@@ -211,8 +214,8 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
           <div className="industry-tile stack-mobile" style={{ gridArea: "6 / 7 / 7 / 13", display: "flex", gap: "8px", flexWrap: "wrap" }}>
             {sectors.slice(6).map(s => (
                <div key={s.label} style={{ flex: 1, minWidth: "120px", background: s.color, borderRadius: "6px", padding: "0.75rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                  <div style={{ fontSize: "0.85rem", fontWeight: 700, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--slate)"].includes(s.color) ? "white" : "var(--navy)" }}>{s.label}</div>
-                  <div style={{ fontSize: "0.7rem", fontWeight: 600, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--slate)"].includes(s.color) ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>{formatValueShort(s.value)}</div>
+                  <div style={{ fontSize: "0.85rem", fontWeight: 700, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)"].includes(s.color) ? "white" : "var(--navy)" }}>{s.label}</div>
+                  <div style={{ fontSize: "0.7rem", fontWeight: 600, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)"].includes(s.color) ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>{formatValueShort(s.value)}</div>
                </div>
             ))}
           </div>
@@ -224,7 +227,7 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
 }
 
 function SectorTile({ sector, gridArea, format, showDetails, maxCompanies = 6 }: { sector: SectorData, gridArea: string, format: (v: number) => string, showDetails?: boolean, maxCompanies?: number }) {
-  const isDark = ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--slate)"].includes(sector.color);
+  const isDark = ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)"].includes(sector.color);
   const textColor = isDark ? "white" : "var(--navy)";
   const subColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.4)";
 

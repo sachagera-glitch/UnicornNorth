@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useMemo } from "react";
 import {
   AreaChart,
   Area,
@@ -10,37 +11,139 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import { type UnicornRow } from "@/types";
 
-// Aggregate market cap data by decade and sector (simplified from PRD)
-const epochData = [
-  { year: "1990", Telecom: 800, Ecommerce: 0, AI: 0, Software: 10, Other: 5 },
-  { year: "1995", Telecom: 1200, Ecommerce: 0, AI: 0, Software: 20, Other: 10 },
-  { year: "1998", Telecom: 1100, Ecommerce: 0, AI: 0, Software: 40, Other: 15 },
-  { year: "2000", Telecom: 1405, Ecommerce: 5, AI: 0, Software: 50, Other: 71 },
-  { year: "2002", Telecom: 305, Ecommerce: 5, AI: 0, Software: 30, Other: 18 },
-  { year: "2005", Telecom: 205, Ecommerce: 8, AI: 0, Software: 45, Other: 22 },
-  { year: "2008", Telecom: 125, Ecommerce: 12, AI: 0, Software: 55, Other: 21 },
-  { year: "2010", Telecom: 85, Ecommerce: 20, AI: 0, Software: 60, Other: 20 },
-  { year: "2013", Telecom: 50, Ecommerce: 80, AI: 5, Software: 76, Other: 15 },
-  { year: "2015", Telecom: 40, Ecommerce: 150, AI: 10, Software: 90, Other: 20 },
-  { year: "2017", Telecom: 30, Ecommerce: 280, AI: 20, Software: 95, Other: 30 },
-  { year: "2019", Telecom: 25, Ecommerce: 350, AI: 40, Software: 100, Other: 45 },
-  { year: "2020", Telecom: 20, Ecommerce: 420, AI: 55, Software: 110, Other: 50 },
-  { year: "2021", Telecom: 18, Ecommerce: 380, AI: 80, Software: 120, Other: 60 },
-  { year: "2023", Telecom: 15, Ecommerce: 300, AI: 120, Software: 130, Other: 70 },
-  { year: "2025", Telecom: 12, Ecommerce: 280, AI: 180, Software: 140, Other: 80 },
-  { year: "2026", Telecom: 10, Ecommerce: 260, AI: 220, Software: 145, Other: 85 },
-];
+interface ValueEpochsProps {
+  unicorns: UnicornRow[];
+}
+
+const SECTOR_MAPPING: Record<string, string> = {
+  "Telecom": "Telecom",
+  "Mobile": "Telecom",
+  "Telecom/IP": "Telecom",
+  "Satellite Tech": "Telecom",
+  "Tech Services": "Telecom",
+  "E-commerce": "Ecommerce",
+  "POS Software": "Ecommerce",
+  "SaaS": "Ecommerce",
+  "Travel Tech": "Ecommerce",
+  "Supply Chain": "Ecommerce",
+  "Legal Tech": "Ecommerce",
+  "Legal Tech SaaS": "Ecommerce",
+  "Vertical SaaS": "Ecommerce",
+  "Finance SaaS": "Ecommerce",
+  "D2C Furniture": "Ecommerce",
+  "Home Services": "Ecommerce",
+  "Martech": "Ecommerce",
+  "Ancillary Rev": "Ecommerce",
+  "Adtech": "Ecommerce",
+  "Software": "Software",
+  "IT Consulting": "Software",
+  "IT Services": "Software",
+  "Edtech": "Software",
+  "Edtech/LMS": "Software",
+  "Cybersecurity": "Cybersecurity",
+  "Identity/Risk": "Cybersecurity",
+  "BI Software": "Software",
+  "IT Software": "Software",
+  "Audit/Tax": "Software",
+  "Identity": "Software",
+  "Compliance": "Software",
+  "EHSQ": "Software",
+  "DDI SaaS": "Software",
+  "Mobility": "Software",
+  "HR Tech": "Software",
+  "Enterprise SW": "Software",
+  "Hardware": "Hardware",
+  "Semiconductors": "Hardware",
+  "Broadcast": "Hardware",
+  "Auto Tech": "Hardware",
+  "Quantum": "Hardware",
+  "Telematics": "Hardware",
+  "Space Tech": "Hardware",
+  "AI": "AI",
+  "AI Hardware": "AI",
+  "Industrial AI": "AI",
+  "AI/Search": "AI",
+  "Web3": "Web3",
+  "Social/Web3": "Web3",
+  "Fintech": "Fintech",
+  "Challenger Bank": "Fintech",
+  "Cleantech": "Clean",
+  "Agtech": "Clean",
+  "AgTech": "Clean",
+};
 
 const COLORS = {
   Telecom: "#00204E",
-  Ecommerce: "#8B0000",
-  AI: "#C9A84C",
-  Software: "#3182CE",
-  Other: "#A0AEC0",
+  Ecommerce: "#C9A84C",
+  Software: "#C41E3A",
+  Hardware: "#4A5568",
+  Cybersecurity: "#0A1628",
+  AI: "#94A3B8",
+  Web3: "#1A3A5C",
+  Fintech: "#8B1A1A",
+  Other: "#DDD6CA",
 };
 
-export default function ValueEpochs() {
+const YEARS = [
+  1990, 1995, 1998, 2000, 2002, 2005, 2008, 2010, 2013, 2015, 2017, 2019, 2020, 2021, 2023, 2025, 2026
+];
+
+export default function ValueEpochs({ unicorns }: ValueEpochsProps) {
+  const epochData = useMemo(() => {
+    return YEARS.map(year => {
+      const dataPoint: any = { year: year.toString() };
+      
+      // Initialize buckets
+      Object.keys(COLORS).forEach(key => dataPoint[key] = 0);
+
+      unicorns.forEach(u => {
+        const sector = SECTOR_MAPPING[u.industry || ""] || "Other";
+        const peakVal = parseFloat(u.peakValuationCad2025 || "0");
+        const founded = u.foundedYear || 1990;
+        
+        let currentContrib = 0;
+
+        if (sector === "Telecom") {
+          // Legacy Telecom Bubble Logic
+          if (year <= 2000) {
+            // Ramp up to peak in 2000
+            const ramp = Math.max(0, (year - founded) / (2000 - founded + 1));
+            currentContrib = peakVal * Math.min(1, ramp);
+          } else {
+            // Exponential decay after 2000
+            const yearsSincePeak = year - 2000;
+            const decay = Math.pow(0.5, yearsSincePeak / 2); // Half every 2 years
+            currentContrib = peakVal * decay;
+          }
+        } else {
+          // Modern Sector Logic
+          // Ramp up from founded to peak (assuming peak is near now/2025)
+          const peakYear = 2025;
+          if (year < founded) {
+            currentContrib = 0;
+          } else if (year <= peakYear) {
+            const ramp = (year - founded) / (peakYear - founded + 1);
+            currentContrib = peakVal * ramp;
+          } else {
+            // Stable after peak
+            currentContrib = peakVal;
+          }
+        }
+
+        dataPoint[sector] += currentContrib;
+      });
+
+      // Round for cleaner chart
+      Object.keys(COLORS).forEach(key => {
+        dataPoint[key] = Math.round(dataPoint[key]);
+      });
+
+      return dataPoint;
+    });
+  }, [unicorns]);
+
   return (
     <section id="epochs" className="section">
       <div className="section-header">
