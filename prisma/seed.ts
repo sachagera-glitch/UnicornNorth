@@ -123,6 +123,8 @@ async function main() {
       ["Banyon Software", 2016, 10, "Active: age uses current year (2026)", "Toronto", "Vertical SaaS", 'David Fajardo', "2020s", 1.0, "HoldCo", false, null],
       ["Farmers Edge", 2005, 21, "Active: age uses current year (2026)", "Winnipeg", "AgTech", 'Wade Barnes', "2020s", 1.0, "Delisted", false, null],
       ["Copperleaf Technologies", 2000, 24, "Capped at 2024: Acquired by IFS Aug 2024; de-listed and absorbed", "Vancouver", "Enterprise SW", 'Judi Hess', "2020s", 1.0, "Acquired (IFS)", false, 'European'],
+      ["Nord Quantique", 2020, 6, "Active: age uses current year (2026)", "Sherbrooke", "Quantum", 'Julien Camirand Lemyre; Philippe St-Jean', "2020s", 1.96, "Private", false, null],
+      ["Photonic", 2016, 10, "Active: age uses current year (2026)", "Vancouver", "Quantum", 'Stephanie Simmons; Michael Thewalt', "2020s", 2.70, "Private", false, null],
     ];
 
     for (const u of unicorns) {
@@ -166,7 +168,7 @@ async function main() {
       ["Vancouver", "1990s", 1, 0.63],
       ["Vancouver", "2000s", 1, 0.50],
       ["Vancouver", "2010s", 2, 0.87],
-      ["Vancouver", "2020s", 20, 7.57],
+      ["Vancouver", "2020s", 21, 7.95],
 
       // Waterloo-Kitchener-C
       ["Waterloo-Kitchener-C", "1990s", 1, 2.85],
@@ -189,6 +191,7 @@ async function main() {
       ["Edmonton", "2020s", 1, 0.71],
       ["Hamilton", "2020s", 1, 1.27],
       ["Winnipeg", "2020s", 1, 1.20],
+      ["Sherbrooke", "2020s", 1, 2.10],
     ];
 
     for (const s of cmaStats) {
@@ -247,6 +250,7 @@ async function main() {
       ["Edmonton", "New Node Hub", "Crossed with Jobber."],
       ["Hamilton", "Edtech Expansion", "HQ for Prodigy Education."],
       ["Winnipeg", "Prairie AgTech", "Home to Farmers Edge."],
+      ["Sherbrooke", "Quantum Valley", "Global leader in quantum computing and cooling tech."],
       ["Victoria", "Island SaaS", "Growing hub for specialized software and remote talent."],
     ];
 

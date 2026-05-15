@@ -78,6 +78,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
     "St. John's": 213000,
     "Hamilton": 800000,
     "Winnipeg": 850000,
+    "Sherbrooke": 173000,
   };
 
   let highestPerCapita = "Ottawa-Gatineau";

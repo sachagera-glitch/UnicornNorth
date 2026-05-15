@@ -58,9 +58,9 @@ const SECTOR_MAPPING: Record<string, string> = {
   "Semiconductors": "Hardware",
   "Broadcast": "Hardware",
   "Auto Tech": "Hardware",
-  "Quantum": "Hardware",
   "Telematics": "Hardware",
   "Space Tech": "Hardware",
+  "Quantum": "Quantum",
   "Fintech": "Fintech",
   "Challenger Bank": "Fintech",
   "Web3": "Web3",
@@ -113,6 +113,7 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
       "AI": "var(--slate-light)",
       "Web3": "var(--navy-light, #1e3a8a)",
       "Health": "var(--red-dark, #7f1d1d)",
+      "Quantum": "#6B46C1",
       "Clean": "var(--border)",
       "Other": "var(--slate)",
     };
@@ -212,10 +213,10 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
 
           {/* Smaller ones (The rest) */}
           <div className="industry-tile stack-mobile" style={{ gridArea: "6 / 7 / 7 / 13", display: "flex", gap: "8px", flexWrap: "wrap" }}>
-            {sectors.slice(6).map(s => (
+             {sectors.slice(6).map(s => (
                <div key={s.label} style={{ flex: 1, minWidth: "120px", background: s.color, borderRadius: "6px", padding: "0.75rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                  <div style={{ fontSize: "0.85rem", fontWeight: 700, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)"].includes(s.color) ? "white" : "var(--navy)" }}>{s.label}</div>
-                  <div style={{ fontSize: "0.7rem", fontWeight: 600, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)"].includes(s.color) ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>{formatValueShort(s.value)}</div>
+                  <div style={{ fontSize: "0.85rem", fontWeight: 700, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)", "#6B46C1"].includes(s.color) ? "white" : "var(--navy)" }}>{s.label}</div>
+                  <div style={{ fontSize: "0.7rem", fontWeight: 600, color: ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)", "#6B46C1"].includes(s.color) ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>{formatValueShort(s.value)}</div>
                </div>
             ))}
           </div>
@@ -227,7 +228,7 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
 }
 
 function SectorTile({ sector, gridArea, format, showDetails, maxCompanies = 6 }: { sector: SectorData, gridArea: string, format: (v: number) => string, showDetails?: boolean, maxCompanies?: number }) {
-  const isDark = ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)"].includes(sector.color);
+  const isDark = ["var(--navy)", "var(--burgundy)", "var(--red)", "var(--red-dark, #7f1d1d)", "var(--navy-light, #1e3a8a)", "var(--navy-deep, #0A1628)", "var(--slate)", "#6B46C1"].includes(sector.color);
   const textColor = isDark ? "white" : "var(--navy)";
   const subColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.4)";
 

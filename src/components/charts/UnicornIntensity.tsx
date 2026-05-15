@@ -21,6 +21,7 @@ const CMA_POPULATIONS: Record<string, Record<string, number>> = {
   "Edmonton": { "1990s": 0.80, "2000s": 1.00, "2010s": 1.20, "2020s": 1.418, "All time": 1.418 },
   "Hamilton": { "1990s": 0.60, "2000s": 0.70, "2010s": 0.75, "2020s": 0.785, "All time": 0.785 },
   "Winnipeg": { "1990s": 0.65, "2000s": 0.70, "2010s": 0.78, "2020s": 0.835, "All time": 0.835 },
+  "Sherbrooke": { "1990s": 0.14, "2000s": 0.15, "2010s": 0.16, "2020s": 0.173, "All time": 0.173 },
 };
 
 const CMA_COLORS: Record<string, string> = {
@@ -35,6 +36,7 @@ const CMA_COLORS: Record<string, string> = {
   "Hamilton": "var(--navy-light, #1e3a8a)",
   "Winnipeg": "var(--slate)",
   "Edmonton": "var(--slate-light)",
+  "Sherbrooke": "var(--purple)",
 };
 
 export default function UnicornIntensity({ unicorns }: UnicornIntensityProps) {

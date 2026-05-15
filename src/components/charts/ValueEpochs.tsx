@@ -58,9 +58,9 @@ const SECTOR_MAPPING: Record<string, string> = {
   "Semiconductors": "Hardware",
   "Broadcast": "Hardware",
   "Auto Tech": "Hardware",
-  "Quantum": "Hardware",
   "Telematics": "Hardware",
   "Space Tech": "Hardware",
+  "Quantum": "Quantum",
   "AI": "AI",
   "AI Hardware": "AI",
   "Industrial AI": "AI",
@@ -83,6 +83,7 @@ const COLORS = {
   AI: "#94A3B8",
   Web3: "#1A3A5C",
   Fintech: "#8B1A1A",
+  Quantum: "#6B46C1",
   Other: "#DDD6CA",
 };
 
