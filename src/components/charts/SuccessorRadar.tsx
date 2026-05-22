@@ -5,7 +5,6 @@ import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Responsive
 const cuspData = [
   { name: "Solink", cma: "Ottawa-Gatineau", val: 700, growth: 85, sector: "Deep-Tech" },
   { name: "Solace", cma: "Ottawa-Gatineau", val: 600, growth: 70, sector: "Deep-Tech" },
-  { name: "Turbopuffer", cma: "Ottawa-Gatineau", val: 800, growth: 95, sector: "Deep-Tech" },
   { name: "Mindbridge.ai", cma: "Ottawa-Gatineau", val: 550, growth: 60, sector: "Deep-Tech" },
   { name: "Subterra", cma: "Toronto", val: 650, growth: 75, sector: "CleanTech" },
   { name: "Salt XC", cma: "Toronto", val: 500, growth: 65, sector: "MarTech" },

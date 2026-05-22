@@ -125,6 +125,7 @@ async function main() {
       ["Copperleaf Technologies", 2000, 24, "Capped at 2024: Acquired by IFS Aug 2024; de-listed and absorbed", "Vancouver", "Enterprise SW", 'Judi Hess', "2020s", 1.0, "Acquired (IFS)", false, 'European'],
       ["Nord Quantique", 2020, 6, "Active: age uses current year (2026)", "Sherbrooke", "Quantum", 'Julien Camirand Lemyre; Philippe St-Jean', "2020s", 1.96, "Private", false, null],
       ["Photonic", 2016, 10, "Active: age uses current year (2026)", "Vancouver", "Quantum", 'Stephanie Simmons; Michael Thewalt', "2020s", 2.70, "Private", false, null],
+      ["Turbopuffer", 2023, 3, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Simon Hørup Eskildsen; Justine Li", "2020s", 2.0, "Private", false, null],
     ];
 
     for (const u of unicorns) {
@@ -156,7 +157,7 @@ async function main() {
       ["Ottawa-Gatineau", "1990s", 10, 12.50],
       ["Ottawa-Gatineau", "2000s", 14, 14.00],
       ["Ottawa-Gatineau", "2010s", 15, 12.50],
-      ["Ottawa-Gatineau", "2020s", 21, 14.11],
+      ["Ottawa-Gatineau", "2020s", 22, 14.78],
 
       // Toronto
       ["Toronto", "1990s", 2, 0.50],
@@ -207,7 +208,6 @@ async function main() {
     const onCusp = [
       ["Solink", "Ottawa-Gatineau", "Deep-Tech"],
       ["Solace", "Ottawa-Gatineau", "Deep-Tech"],
-      ["Turbopuffer", "Ottawa-Gatineau", "Deep-Tech"],
       ["Mindbridge.ai", "Ottawa-Gatineau", "Deep-Tech"],
       ["Calian Group", "Ottawa-Gatineau", "Diversified"],
       ["Subterra", "Toronto", "CleanTech"],

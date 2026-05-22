@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "search": "npx tsx check_db.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {
