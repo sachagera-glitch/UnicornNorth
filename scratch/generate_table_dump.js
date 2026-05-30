@@ -82,7 +82,7 @@ const unicorns = [
   ["Hut 8 Corp", 2017, 9, "Active: age uses current year (2026)", "Toronto", "Web3", 'Marc van der Chijs', "2020s", 11.6, "Public", false, null],
   ["Dapper Labs", 2018, 8, "Active: age uses current year (2026)", "Vancouver", "Web3", 'Roham Gharegozlou et al.', "2020s", 11.2, "Private", false, null],
   ["Cognos", 1969, 39, "Capped at 2008: Acquired by IBM 2008; rebranded IBM Cognos", "Ottawa-Gatineau", "BI Software", 'Michael Potter, Alan Guedes', "1990s", 10.7, "Acquired", false, 'US'],
-  ["Telesat", 1969, 57, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Satellite Tech", 'Govt. of Canada (privatized)', "1990s", 10.3, "Public", false, null],
+  ["Telesat", 1969, 57, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Satellite Tech", 'Govt. of Canada (privatized)', "2000s", 4.7, "Public", false, null],
   ["1Password", 2005, 21, "Active: age uses current year (2026)", "Toronto", "Cybersecurity", 'Dave Teare, Roustem Karimov', "2020s", 10.3, "Private", false, null],
   ["Telus International (TIXT)", 2005, 21, "Active: age uses current year (2026)", "Vancouver", "Tech Services", 'Darren Entwistle (Telus)', "2020s", 10.0, "Public", false, null],
   ["Cohere", 2019, 7, "Active: age uses current year (2026)", "Toronto", "AI", 'Aidan Gomez, Ivan Zhang, Nick Frosst', "2020s", 9.5, "Private", false, null],
