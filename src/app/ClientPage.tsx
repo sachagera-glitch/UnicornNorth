@@ -22,6 +22,7 @@ import GoatFounders from "@/components/GoatFounders";
 import LineageTab from "@/components/LineageTab";
 import ValueConcentration from "@/components/charts/ValueConcentration";
 import AboutUs from "@/components/AboutUs";
+import SubscribeBanner from "@/components/SubscribeBanner";
 
 import { 
   type UnicornRow, 
@@ -114,6 +115,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
         aggregatePeak={aggregatePeak}
         hubCount={hubCount}
       />
+      <SubscribeBanner />
       <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
 
       <main style={{ minHeight: "60vh" }}>

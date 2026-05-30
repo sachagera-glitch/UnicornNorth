@@ -55,3 +55,11 @@ model CmaMetadata {
 
   @@map("cma_metadata")
 }
+
+model Subscriber {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique @db.VarChar(320)
+  subscribedAt DateTime @default(now()) @map("subscribed_at")
+
+  @@map("subscribers")
+}

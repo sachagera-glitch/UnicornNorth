@@ -41,7 +41,7 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
 
   return (
     <>
-      <div style={{ background: "var(--cream-light)", borderBottom: "2px solid var(--border)" }}>
+      <div style={{ background: "var(--cream-light)", borderBottom: "2px solid var(--border)", position: "relative", zIndex: 20 }}>
         {/* Desktop Navigation — hidden on mobile via existing CSS class */}
         <nav className="tab-bar hidden-mobile">
           {TABS.map((tab) => (
