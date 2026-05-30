@@ -23,10 +23,14 @@ export default function SubscribeBanner() {
         body: JSON.stringify({ email: email.trim() }),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        setErrorMsg(data.error || "Something went wrong.");
+        // Try to parse JSON error, but fall back if server returned HTML
+        let msg = "Something went wrong. Please try again.";
+        try {
+          const data = await res.json();
+          if (data.error) msg = data.error;
+        } catch { /* non-JSON response (e.g. HTML error page) */ }
+        setErrorMsg(msg);
         setStatus("error");
         return;
       }
@@ -99,6 +103,7 @@ export default function SubscribeBanner() {
           <div className="subscribe-input-wrap">
             <input
               id="subscribe-email"
+              name="email"
               type="email"
               placeholder="your@email.com"
               value={email}
@@ -109,6 +114,7 @@ export default function SubscribeBanner() {
               className="subscribe-input"
               required
               aria-label="Email address"
+              autoComplete="email"
             />
             <button
               type="submit"
