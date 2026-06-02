@@ -206,7 +206,22 @@ export default function LineageTab() {
           justifyContent: "space-between",
           alignItems: "center"
         }}>
-          <span>Source: Lineage data inspired by the research and family tree mapping provided by Doyletech Corporation.</span>
+          {activeRootKey === "shopify" ? (
+            <span>
+              Shopify lineage tree courtesy of Larry Macdonald. For details, see his book:{" "}
+              <a
+                href="https://www.amazon.ca/Shopify-Story-commerce-Empowering-Entrepreneurs/dp/1770417494"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--red)", textDecoration: "underline" }}
+              >
+                The Shopify Story
+              </a>
+              .
+            </span>
+          ) : (
+            <span>Source: Lineage data inspired by the research and family tree mapping provided by Doyletech Corporation.</span>
+          )}
           <span style={{ fontFamily: "'Roboto Mono'", fontWeight: 600 }}>
             Help us research & build the tree — contact <a href="mailto:admin@unicornnorth.com" style={{ color: "var(--red)" }}>admin@unicornnorth.com</a>
           </span>
