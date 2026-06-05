@@ -207,8 +207,12 @@ export default function LineageTab() {
           alignItems: "center"
         }}>
           {activeRootKey === "shopify" ? (
-            <span>
-              Shopify lineage tree courtesy of Larry Macdonald. For details, see his book:{" "}
+            <span style={{ lineHeight: "1.5" }}>
+              Shopify lineage tree courtesy of Larry MacDonald. Please note that it is a working copy; if any errors or omissions are found, help us out and send them to{" "}
+              <a href="mailto:admin@unicornnorth.com" style={{ color: "var(--red)", textDecoration: "underline" }}>
+                admin@unicornnorth.com
+              </a>
+              . Curious about Shopify and how it scaled up within 20 years to become a global e-commerce platform empowering millions of entrepreneurs? An in-depth explanation can be found in Larry MacDonald’s book,{" "}
               <a
                 href="https://www.amazon.ca/Shopify-Story-commerce-Empowering-Entrepreneurs/dp/1770417494"
                 target="_blank"
@@ -222,9 +226,11 @@ export default function LineageTab() {
           ) : (
             <span>Source: Lineage data inspired by the research and family tree mapping provided by Doyletech Corporation.</span>
           )}
-          <span style={{ fontFamily: "'Roboto Mono'", fontWeight: 600 }}>
-            Help us research & build the tree — contact <a href="mailto:admin@unicornnorth.com" style={{ color: "var(--red)" }}>admin@unicornnorth.com</a>
-          </span>
+          {activeRootKey !== "shopify" && (
+            <span style={{ fontFamily: "'Roboto Mono'", fontWeight: 600 }}>
+              Help us research & build the tree — contact <a href="mailto:admin@unicornnorth.com" style={{ color: "var(--red)" }}>admin@unicornnorth.com</a>
+            </span>
+          )}
         </div>
       </div>
     </section>
