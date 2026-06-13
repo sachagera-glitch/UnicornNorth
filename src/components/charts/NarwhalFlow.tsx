@@ -30,18 +30,18 @@ const NODES: SankeyNode[] = [
 
 const LINKS: SankeyLink[] = [
   // Canada to Provinces
-  { source: "canada", target: "ontario", value: 1780 },
-  { source: "canada", target: "quebec", value: 106 },
-  { source: "canada", target: "bc", value: 103 },
+  { source: "canada", target: "ontario", value: 1782 },
+  { source: "canada", target: "quebec", value: 107 },
+  { source: "canada", target: "bc", value: 104 },
   { source: "canada", target: "atlantic", value: 4 },
   { source: "canada", target: "prairies", value: 5 },
   
   // Provinces to CMAs
-  { source: "ontario", target: "ottawa", value: 1490 },
-  { source: "ontario", target: "toronto", value: 290 },
+  { source: "ontario", target: "ottawa", value: 1491 },
+  { source: "ontario", target: "toronto", value: 291 },
   { source: "ontario", target: "kwc", value: 157 },
-  { source: "quebec", target: "montreal", value: 106 },
-  { source: "bc", target: "vancouver", value: 103 },
+  { source: "quebec", target: "montreal", value: 107 },
+  { source: "bc", target: "vancouver", value: 104 },
   { source: "prairies", target: "calgary", value: 5 },
   { source: "atlantic", target: "atlantic_cma", value: 4 },
 
@@ -51,12 +51,12 @@ const LINKS: SankeyLink[] = [
   { source: "ottawa", target: "software", value: 30 },
   { source: "ottawa", target: "health", value: 12 },
   { source: "ottawa", target: "ai", value: 2 },
-  { source: "ottawa", target: "other_sector", value: 49 },
+  { source: "ottawa", target: "other_sector", value: 50 },
 
   // Toronto Sectors
   { source: "toronto", target: "software", value: 112 },
-  { source: "toronto", target: "ai", value: 19 },
-  { source: "toronto", target: "fintech", value: 12 },
+  { source: "toronto", target: "ai", value: 21 },
+  { source: "toronto", target: "fintech", value: 11 },
   { source: "toronto", target: "health", value: 7 },
   { source: "toronto", target: "other_sector", value: 140 },
 
@@ -66,7 +66,7 @@ const LINKS: SankeyLink[] = [
   { source: "kwc", target: "other_sector", value: 9 },
 
   // Montreal Sectors
-  { source: "montreal", target: "fintech", value: 42 },
+  { source: "montreal", target: "fintech", value: 43 },
   { source: "montreal", target: "ecommerce", value: 5 },
   { source: "montreal", target: "other_sector", value: 59 },
 
@@ -75,6 +75,7 @@ const LINKS: SankeyLink[] = [
   { source: "vancouver", target: "ai", value: 16 },
   { source: "vancouver", target: "health", value: 3 },
   { source: "vancouver", target: "other_sector", value: 48 },
+  { source: "vancouver", target: "fintech", value: 1.3 },
 
   // Calgary/Atlantic
   { source: "calgary", target: "fintech", value: 1.4 },
@@ -90,7 +91,7 @@ export default function NarwhalFlow() {
   const nodePositions: Record<string, {x:number;y:number;h:number}> = {};
   [0,1,2,3].forEach(l => {
     const nodesInLevel = NODES.filter(n => n.x === l);
-    const levelTotal = l === 0 ? 2164 : LINKS.filter(link => {
+    const levelTotal = l === 0 ? 2169 : LINKS.filter(link => {
       const targetNode = NODES.find(n => n.id === link.target);
       return targetNode && targetNode.x === l;
     }).reduce((sum, link) => sum + link.value, 0);
@@ -100,7 +101,7 @@ export default function NarwhalFlow() {
     
     let currentY = PAD;
     nodesInLevel.forEach((node) => {
-      const nodeValue = l === 0 ? 2164 : LINKS.filter(link => 
+      const nodeValue = l === 0 ? 2169 : LINKS.filter(link => 
         (l === 1 || l === 2 || l === 3) && link.target === node.id
       ).reduce((sum, link) => sum + link.value, 0);
       
@@ -127,7 +128,7 @@ export default function NarwhalFlow() {
     const srcX = src.x + NODE_W, srcY = src.y + src.h/2;
     const tgtX = tgt.x, tgtY = tgt.y + tgt.h/2;
     const midX = (srcX + tgtX) / 2;
-    const scale = (H - 2*PAD) / 2164;
+    const scale = (H - 2*PAD) / 2169;
     return {
       path: `M${srcX},${srcY} C${midX},${srcY} ${midX},${tgtY} ${tgtX},${tgtY}`,
       thickness: Math.max(link.value * scale, 1.5), index: i,

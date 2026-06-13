@@ -19,7 +19,7 @@ async function main() {
     await client.query("DELETE FROM cma_decade_stats");
     await client.query("DELETE FROM unicorns");
 
-    // ── Unicorns (102 companies - Alludo merged into Corel) ──────────────
+    // ── Unicorns (108 companies) ──────────────
     const unicorns = [
       ["Nortel / BNR", 1895, 114, "Capped at 2009: Filed Ch. 11 / CCAA bankruptcy in 2009", "Ottawa-Gatineau", "Telecom", 'N/A', "1990s", 768.6, "Defunct", false, null],
       ["JDS Uniphase (JDSU)", 1981, 34, "Capped at 2015: Split into Lumentum & Viavi 2015; JDSU name retired", "Ottawa-Gatineau", "Telecom", 'Jozef Straus; Kevin Kalkhoven', "1990s", 295.0, "Acquired", false, 'US'],
@@ -110,7 +110,7 @@ async function main() {
       ["Coveo", 2005, 21, "Active: age uses current year (2026)", "Québec City", "AI", 'Laurent Simoneau, Richard Tessier', "2010s", 1.4, "Public", false, null],
       ["Vena Solutions", 2011, 15, "Active: age uses current year (2026)", "Toronto", "Finance SaaS", 'Don Picard, Rishi Grover', "2020s", 1.4, "Private", false, null],
       ["Vention", 2016, 10, "Active: age uses current year (2026)", "Montréal", "Industrial AI", 'Etienne Lacroix, Max Windisch', "2020s", 1.4, "Private", false, null],
-      ["Koho Financial", 2014, 12, "Active: age uses current year (2026)", "Toronto", "Challenger Bank", 'Daniel Eberhard', "2020s", 1.3, "Private", false, null],
+      ["Koho Financial", 2014, 12, "Active: age uses current year (2026)", "Vancouver", "Challenger Bank", 'Daniel Eberhard', "2020s", 1.3, "Private", false, null],
       ["Dragonwave", 2000, 17, "Capped at 2017: Filed bankruptcy 2017; assets sold, brand defunct", "Ottawa-Gatineau", "Telecom", 'Jean-Paul Baric', "2000s", 1.2, "Acquired", false, 'European'],
       ["GaN Systems", 2008, 15, "Capped at 2023: Acquired by Infineon Oct 2023; fully integrated", "Ottawa-Gatineau", "Semiconductors", 'Girvan Patterson, John Roberts', "2020s", 1.1, "Acquired", false, 'European'],
       ["League", 2014, 12, "Active: age uses current year (2026)", "Toronto", "Healthtech", 'Mike Serbinis', "2020s", 1.2, "Private", false, null],
@@ -126,6 +126,9 @@ async function main() {
       ["Nord Quantique", 2020, 6, "Active: age uses current year (2026)", "Sherbrooke", "Quantum", 'Julien Camirand Lemyre; Philippe St-Jean', "2020s", 1.96, "Private", false, null],
       ["Photonic", 2016, 10, "Active: age uses current year (2026)", "Vancouver", "Quantum", 'Stephanie Simmons; Michael Thewalt', "2020s", 2.70, "Private", false, null],
       ["Turbopuffer", 2023, 3, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Simon Hørup Eskildsen; Justine Li", "2020s", 2.0, "Private", false, null],
+      ["Beacon Software", 2024, 2, "Active: age uses current year (2026)", "Toronto", "AI Rollup", 'Nilam Ganeshthiran, Divya Gupta', "2020s", 1.95, "Private", false, null],
+      ["Nesto", 2018, 8, "Active: age uses current year (2026)", "Montréal", "Fintech", 'Malik Yacout et al.', "2020s", 1.47, "Private", false, null],
+      ["Calian Group", 1982, 44, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Defence/Space", 'Larry O\'Brien', "2020s", 1.06, "Public", false, null],
     ];
 
     for (const u of unicorns) {
@@ -157,7 +160,7 @@ async function main() {
       ["Ottawa-Gatineau", "1990s", 10, 12.50],
       ["Ottawa-Gatineau", "2000s", 14, 14.00],
       ["Ottawa-Gatineau", "2010s", 15, 12.50],
-      ["Ottawa-Gatineau", "2020s", 22, 14.78],
+      ["Ottawa-Gatineau", "2020s", 23, 15.46],
 
       // Toronto
       ["Toronto", "1990s", 2, 0.50],
@@ -169,7 +172,7 @@ async function main() {
       ["Vancouver", "1990s", 1, 0.63],
       ["Vancouver", "2000s", 1, 0.50],
       ["Vancouver", "2010s", 2, 0.87],
-      ["Vancouver", "2020s", 21, 7.95],
+      ["Vancouver", "2020s", 22, 8.33],
 
       // Waterloo-Kitchener-C
       ["Waterloo-Kitchener-C", "1990s", 1, 2.85],
@@ -181,7 +184,7 @@ async function main() {
       ["Montréal", "1990s", 1, 0.31],
       ["Montréal", "2000s", 1, 0.28],
       ["Montréal", "2010s", 2, 0.51],
-      ["Montréal", "2020s", 10, 2.33],
+      ["Montréal", "2020s", 11, 2.56],
 
       // St. John's
       ["St. John's", "2020s", 1, 4.69],
@@ -209,10 +212,10 @@ async function main() {
       ["Solink", "Ottawa-Gatineau", "Deep-Tech"],
       ["Solace", "Ottawa-Gatineau", "Deep-Tech"],
       ["Mindbridge.ai", "Ottawa-Gatineau", "Deep-Tech"],
-      ["Calian Group", "Ottawa-Gatineau", "Diversified"],
+
       ["Subterra", "Toronto", "CleanTech"],
       ["Salt XC", "Toronto", "MarTech"],
-      ["Vena Solutions", "Toronto", "SaaS"],
+
       ["Ecopia AI", "Toronto", "AI"],
       ["Klue", "Vancouver", "SaaS"],
       ["AlayaCare", "Montréal", "HealthTech"],
