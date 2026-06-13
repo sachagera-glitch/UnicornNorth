@@ -36,8 +36,11 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" }
+    ],
+    apple: "/icon-512.png",
   },
   openGraph: {
     title: "UnicornNorth — The Canadian Tech Ecosystem Ledger",
@@ -49,7 +52,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/favicon.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "UnicornNorth Canadian Tech Ledger",
@@ -60,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "UnicornNorth — Canadian Tech Ledger",
     description: "Tracking the $2.17T evolution of the Canadian tech ecosystem.",
-    images: ["/favicon.svg"],
+    images: ["/og-image.png"],
   },
   other: {
     "geo.region": "CA",
@@ -118,7 +121,7 @@ export default function RootLayout({
                   "name": "UnicornNorth",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://unicornnorth.ca/favicon.svg"
+                    "url": "https://unicornnorth.ca/icon-512.png"
                   }
                 }
               },
