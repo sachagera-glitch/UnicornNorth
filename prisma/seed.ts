@@ -129,6 +129,7 @@ async function main() {
       ["Beacon Software", 2024, 2, "Active: age uses current year (2026)", "Toronto", "AI Rollup", 'Nilam Ganeshthiran, Divya Gupta', "2020s", 1.95, "Private", false, null],
       ["Nesto", 2018, 8, "Active: age uses current year (2026)", "Montréal", "Fintech", 'Malik Yacout et al.', "2020s", 1.47, "Private", false, null],
       ["Calian Group", 1982, 44, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Defence/Space", 'Larry O\'Brien', "2020s", 1.06, "Public", false, null],
+      ["Ranovus", 2012, 14, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Semiconductors", "Hamid Arabzadeh, Saeid Aramideh", "2020s", 2.12, "Private", false, null],
     ];
 
     for (const u of unicorns) {
@@ -160,7 +161,7 @@ async function main() {
       ["Ottawa-Gatineau", "1990s", 10, 12.50],
       ["Ottawa-Gatineau", "2000s", 14, 14.00],
       ["Ottawa-Gatineau", "2010s", 15, 12.50],
-      ["Ottawa-Gatineau", "2020s", 23, 15.46],
+      ["Ottawa-Gatineau", "2020s", 24, 16.14],
 
       // Toronto
       ["Toronto", "1990s", 2, 0.50],
