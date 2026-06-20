@@ -130,6 +130,7 @@ async function main() {
       ["Nesto", 2018, 8, "Active: age uses current year (2026)", "Montréal", "Fintech", 'Malik Yacout et al.', "2020s", 1.47, "Private", false, null],
       ["Calian Group", 1982, 44, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Defence/Space", 'Larry O\'Brien', "2020s", 1.06, "Public", false, null],
       ["Ranovus", 2012, 14, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Semiconductors", "Hamid Arabzadeh, Saeid Aramideh", "2020s", 2.12, "Private", false, null],
+      ["Eddyfi Technologies", 2009, 17, "Capped at 2026: Acquired", "Québec City", "NDT/Inspection", "Martin Thériault", "2020s", 2.00, "Acquired", false, "US"],
     ];
 
     for (const u of unicorns) {
@@ -192,7 +193,7 @@ async function main() {
 
       // Others (placeholders for 2020s)
       ["Calgary", "2020s", 2, 1.35],
-      ["Québec City", "2020s", 2, 2.38],
+      ["Québec City", "2020s", 3, 3.57],
       ["Edmonton", "2020s", 1, 0.71],
       ["Hamilton", "2020s", 1, 1.27],
       ["Winnipeg", "2020s", 1, 1.20],
