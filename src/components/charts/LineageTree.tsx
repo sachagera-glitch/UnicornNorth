@@ -316,10 +316,42 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
         {/* Nodes */}
         {layout.nodes.map((node) => {
           const isUni = node.isUnicorn;
-          const fill = isUni ? "var(--navy)" : "var(--white)";
-          const stroke = isUni ? "var(--gold)" : "var(--border)";
-          const textCol = isUni ? "#fff" : "var(--navy)";
-          const subCol = isUni ? "rgba(255,255,255,0.6)" : "var(--slate-light)";
+          const rel = node.relationship || '';
+          const isAlumniStartup = rel === 'Alumni Startup';
+          const isAcquisition = rel === 'Acquisition';
+          const isAlumniFund = rel === 'Alumni Fund';
+
+          let fill: string;
+          let stroke: string;
+          let textCol: string;
+          let subCol: string;
+
+          if (isUni) {
+            fill = "var(--navy)";
+            stroke = "var(--gold)";
+            textCol = "#fff";
+            subCol = "rgba(255,255,255,0.6)";
+          } else if (isAlumniStartup) {
+            fill = "#FFF7ED";
+            stroke = "#E67E22";
+            textCol = "#7C3A10";
+            subCol = "#B45309";
+          } else if (isAcquisition) {
+            fill = "#EEF2FF";
+            stroke = "#6366F1";
+            textCol = "#312E81";
+            subCol = "#6366F1";
+          } else if (isAlumniFund) {
+            fill = "#F0FDF4";
+            stroke = "#22C55E";
+            textCol = "#14532D";
+            subCol = "#16A34A";
+          } else {
+            fill = "var(--white)";
+            stroke = "var(--border)";
+            textCol = "var(--navy)";
+            subCol = "var(--slate-light)";
+          }
 
           return (
             <g
@@ -342,7 +374,7 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
                 {node.name.length > 22 ? node.name.substring(0, 20) + "…" : node.name}
               </text>
               <text x="10" y="35" style={{ fontFamily: "'Roboto Mono'", fontSize: "8.5px", fill: subCol }}>
-                {node.year || "—"} · {node.type.toUpperCase()}
+                {node.year || "—"} · {rel || node.type.toUpperCase()}
               </text>
               <text x="10" y="46" style={{ fontFamily: "'Inter',sans-serif", fontSize: "7.5px", fill: subCol, opacity: 0.7 }}>
                 {node.description ? (node.description.length > 30 ? node.description.substring(0, 28) + "…" : node.description) : ""}
@@ -360,7 +392,7 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
         position: "absolute", bottom: "0.6rem", right: "0.6rem",
         background: "rgba(255,255,255,0.95)", padding: "0.4rem 0.7rem",
         borderRadius: "5px", border: "1px solid var(--border)",
-        display: "flex", gap: "1rem", fontSize: "0.65rem",
+        display: "flex", gap: "0.8rem", fontSize: "0.6rem", flexWrap: "wrap",
         fontFamily: "'Roboto Mono'", boxShadow: "0 2px 8px rgba(0,0,0,0.04)", zIndex: 10
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
@@ -368,8 +400,20 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
           <span>Unicorn</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
+          <div style={{ width: "10px", height: "10px", background: "#FFF7ED", border: "1px solid #E67E22", borderRadius: "2px" }} />
+          <span>Alumni Startup</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
+          <div style={{ width: "10px", height: "10px", background: "#EEF2FF", border: "1px solid #6366F1", borderRadius: "2px" }} />
+          <span>Acquisition</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
+          <div style={{ width: "10px", height: "10px", background: "#F0FDF4", border: "1px solid #22C55E", borderRadius: "2px" }} />
+          <span>Alumni Fund</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
           <div style={{ width: "10px", height: "10px", background: "var(--white)", border: "1px solid var(--border)", borderRadius: "2px" }} />
-          <span>Entity</span>
+          <span>Investment / Partner</span>
         </div>
         <div className="hidden-mobile" style={{ color: "var(--slate-light)" }}>Drag to pan · Scroll to zoom</div>
         <div className="hidden-desktop" style={{ color: "var(--slate-light)" }}>Touch to pan · Pinch to zoom</div>
