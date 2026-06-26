@@ -318,8 +318,8 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
           const isUni = node.isUnicorn;
           const rel = node.relationship || '';
           const isAlumniStartup = rel === 'Alumni Startup';
-          const isAcquisition = rel === 'Acquisition';
-          const isAlumniFund = rel === 'Alumni Fund';
+          const isAlumniFund = rel === 'Alumni Fund' || rel === 'Shopify Initiative';
+          const isInvestment = rel.startsWith('Investment');
 
           let fill: string;
           let stroke: string;
@@ -336,16 +336,16 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
             stroke = "#E67E22";
             textCol = "#7C3A10";
             subCol = "#B45309";
-          } else if (isAcquisition) {
-            fill = "#EEF2FF";
-            stroke = "#6366F1";
-            textCol = "#312E81";
-            subCol = "#6366F1";
           } else if (isAlumniFund) {
             fill = "#F0FDF4";
             stroke = "#22C55E";
             textCol = "#14532D";
             subCol = "#16A34A";
+          } else if (isInvestment) {
+            fill = "#EFF6FF";
+            stroke = "#3B82F6";
+            textCol = "#1E3A5F";
+            subCol = "#3B82F6";
           } else {
             fill = "var(--white)";
             stroke = "var(--border)";
@@ -404,16 +404,12 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
           <span>Alumni Startup</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-          <div style={{ width: "10px", height: "10px", background: "#EEF2FF", border: "1px solid #6366F1", borderRadius: "2px" }} />
-          <span>Acquisition</span>
+          <div style={{ width: "10px", height: "10px", background: "#EFF6FF", border: "1px solid #3B82F6", borderRadius: "2px" }} />
+          <span>Investment</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
           <div style={{ width: "10px", height: "10px", background: "#F0FDF4", border: "1px solid #22C55E", borderRadius: "2px" }} />
           <span>Alumni Fund</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-          <div style={{ width: "10px", height: "10px", background: "var(--white)", border: "1px solid var(--border)", borderRadius: "2px" }} />
-          <span>Investment / Partner</span>
         </div>
         <div className="hidden-mobile" style={{ color: "var(--slate-light)" }}>Drag to pan · Scroll to zoom</div>
         <div className="hidden-desktop" style={{ color: "var(--slate-light)" }}>Touch to pan · Pinch to zoom</div>
