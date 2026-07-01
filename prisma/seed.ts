@@ -131,6 +131,7 @@ async function main() {
       ["Calian Group", 1982, 44, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Defence/Space", 'Larry O\'Brien', "2020s", 1.06, "Public", false, null],
       ["Ranovus", 2012, 14, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Semiconductors", "Hamid Arabzadeh, Saeid Aramideh", "2020s", 2.12, "Private", false, null],
       ["Eddyfi Technologies", 2009, 17, "Capped at 2026: Acquired", "Québec City", "NDT/Inspection", "Martin Thériault", "2020s", 2.00, "Acquired", false, "US"],
+      ["UniUni", 2018, 8, "Active: age uses current year (2026)", "Vancouver", "Logistics", "Leo Li", "2020s", 1.4, "Private", false, null],
     ];
 
     for (const u of unicorns) {
@@ -214,6 +215,7 @@ async function main() {
       ["Solink", "Ottawa-Gatineau", "Deep-Tech"],
       ["Solace", "Ottawa-Gatineau", "Deep-Tech"],
       ["Mindbridge.ai", "Ottawa-Gatineau", "Deep-Tech"],
+      ["Dominion Dynamics", "Ottawa-Gatineau", "Defence Technology"],
 
       ["Subterra", "Toronto", "CleanTech"],
       ["Salt XC", "Toronto", "MarTech"],
@@ -230,7 +232,6 @@ async function main() {
       ["Eavor Technologies", "Calgary", "Energy-Tech"],
       ["GHGSat", "Montréal", "Spacetech"],
       ["Blackline Safety", "Calgary", "IoT/Safety"],
-      ["UniUni", "Vancouver", "Logistics"],
     ];
 
     for (const c of onCusp) {
