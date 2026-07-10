@@ -132,6 +132,7 @@ async function main() {
       ["Ranovus", 2012, 14, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Semiconductors", "Hamid Arabzadeh, Saeid Aramideh", "2020s", 2.12, "Private", false, null],
       ["Eddyfi Technologies", 2009, 17, "Capped at 2026: Acquired", "Québec City", "NDT/Inspection", "Martin Thériault", "2020s", 2.00, "Acquired", false, "US"],
       ["UniUni", 2018, 8, "Active: age uses current year (2026)", "Vancouver", "Logistics", "Leo Li", "2020s", 1.4, "Private", false, null],
+      ["Super.com", 2016, 10, "Active: age uses current year (2026)", "Toronto", "Fintech", "Hussein Fazal, Henry Shi", "2020s", 1.70, "Private", false, null],
     ];
 
     for (const u of unicorns) {
@@ -169,7 +170,7 @@ async function main() {
       ["Toronto", "1990s", 2, 0.50],
       ["Toronto", "2000s", 2, 0.40],
       ["Toronto", "2010s", 3, 0.55],
-      ["Toronto", "2020s", 34, 5.48],
+      ["Toronto", "2020s", 35, 5.64],
 
       // Vancouver
       ["Vancouver", "1990s", 1, 0.63],

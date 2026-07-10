@@ -30,7 +30,7 @@ const NODES: SankeyNode[] = [
 
 const LINKS: SankeyLink[] = [
   // Canada to Provinces
-  { source: "canada", target: "ontario", value: 1782 },
+  { source: "canada", target: "ontario", value: 1784 },
   { source: "canada", target: "quebec", value: 107 },
   { source: "canada", target: "bc", value: 104 },
   { source: "canada", target: "atlantic", value: 4 },
@@ -38,7 +38,7 @@ const LINKS: SankeyLink[] = [
   
   // Provinces to CMAs
   { source: "ontario", target: "ottawa", value: 1491 },
-  { source: "ontario", target: "toronto", value: 291 },
+  { source: "ontario", target: "toronto", value: 293 },
   { source: "ontario", target: "kwc", value: 157 },
   { source: "quebec", target: "montreal", value: 107 },
   { source: "bc", target: "vancouver", value: 104 },
@@ -56,7 +56,7 @@ const LINKS: SankeyLink[] = [
   // Toronto Sectors
   { source: "toronto", target: "software", value: 112 },
   { source: "toronto", target: "ai", value: 21 },
-  { source: "toronto", target: "fintech", value: 11 },
+  { source: "toronto", target: "fintech", value: 13 },
   { source: "toronto", target: "health", value: 7 },
   { source: "toronto", target: "other_sector", value: 140 },
 
@@ -91,7 +91,7 @@ export default function NarwhalFlow() {
   const nodePositions: Record<string, {x:number;y:number;h:number}> = {};
   [0,1,2,3].forEach(l => {
     const nodesInLevel = NODES.filter(n => n.x === l);
-    const levelTotal = l === 0 ? 2169 : LINKS.filter(link => {
+    const levelTotal = l === 0 ? 2171 : LINKS.filter(link => {
       const targetNode = NODES.find(n => n.id === link.target);
       return targetNode && targetNode.x === l;
     }).reduce((sum, link) => sum + link.value, 0);
@@ -101,7 +101,7 @@ export default function NarwhalFlow() {
     
     let currentY = PAD;
     nodesInLevel.forEach((node) => {
-      const nodeValue = l === 0 ? 2169 : LINKS.filter(link => 
+      const nodeValue = l === 0 ? 2171 : LINKS.filter(link => 
         (l === 1 || l === 2 || l === 3) && link.target === node.id
       ).reduce((sum, link) => sum + link.value, 0);
       
@@ -128,7 +128,7 @@ export default function NarwhalFlow() {
     const srcX = src.x + NODE_W, srcY = src.y + src.h/2;
     const tgtX = tgt.x, tgtY = tgt.y + tgt.h/2;
     const midX = (srcX + tgtX) / 2;
-    const scale = (H - 2*PAD) / 2169;
+    const scale = (H - 2*PAD) / 2171;
     return {
       path: `M${srcX},${srcY} C${midX},${srcY} ${midX},${tgtY} ${tgtX},${tgtY}`,
       thickness: Math.max(link.value * scale, 1.5), index: i,

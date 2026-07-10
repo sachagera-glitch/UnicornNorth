@@ -11,7 +11,7 @@ interface CmaPosition {
 }
 
 const CMA_POSITIONS: CmaPosition[] = [
-  { name: "Toronto", x: 625, y: 655, rate: 1.15, count: 34 },
+  { name: "Toronto", x: 625, y: 655, rate: 1.29, count: 35 },
   { name: "Montréal", x: 710, y: 615, rate: 1.08, count: 11 },
   { name: "Vancouver", x: 135, y: 585, rate: 2.25, count: 21 },
   { name: "Ottawa-Gatineau", x: 678, y: 622, rate: 5.94, count: 25 },
