@@ -17,7 +17,7 @@ const CMA_POSITIONS: CmaPosition[] = [
   { name: "Ottawa-Gatineau", x: 678, y: 622, rate: 5.94, count: 25 },
   { name: "Waterloo-Kitchener-C", x: 605, y: 665, rate: 6.82, count: 6 },
   { name: "St. John's", x: 945, y: 535, rate: 4.88, count: 1 },
-  { name: "Calgary", x: 255, y: 565, rate: 1.55, count: 2 },
+  { name: "Calgary", x: 255, y: 565, rate: 2.02, count: 3 },
   { name: "Québec City", x: 735, y: 595, rate: 1.42, count: 2 },
   { name: "Halifax", x: 865, y: 655, rate: 1.88, count: 1 },
   { name: "Edmonton", x: 265, y: 515, rate: 1.12, count: 1 },

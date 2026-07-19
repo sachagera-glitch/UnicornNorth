@@ -18,7 +18,7 @@ const ERAS = [
   {
     years: "2020s",
     title: "The bloom",
-    desc: "65+ new unicorns across AI, fintech, web3, cleantech. Toronto leads volume, Vancouver diversity, Calgary emerges.",
+    desc: "66+ new unicorns across AI, fintech, web3, cleantech. Toronto leads volume, Vancouver diversity, Calgary emerges.",
     trait: "Multi-hub, multi-sector, but valuations largely unproven",
     color: "#059669", // Emerald-600
   },

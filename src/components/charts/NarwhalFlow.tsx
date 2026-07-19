@@ -6,7 +6,7 @@ interface SankeyNode { id: string; label: string; x: number; color: string; }
 interface SankeyLink { source: string; target: string; value: number; }
 
 const NODES: SankeyNode[] = [
-  { id: "canada", label: "Canada ($2.17T)", x: 0, color: "#00204E" },
+  { id: "canada", label: "Canada ($2.18T)", x: 0, color: "#00204E" },
   { id: "ontario", label: "Ontario", x: 1, color: "#003080" },
   { id: "quebec", label: "Québec", x: 1, color: "#003080" },
   { id: "bc", label: "British Columbia", x: 1, color: "#003080" },
@@ -34,7 +34,7 @@ const LINKS: SankeyLink[] = [
   { source: "canada", target: "quebec", value: 107 },
   { source: "canada", target: "bc", value: 104 },
   { source: "canada", target: "atlantic", value: 4 },
-  { source: "canada", target: "prairies", value: 5 },
+  { source: "canada", target: "prairies", value: 11.5 },
   
   // Provinces to CMAs
   { source: "ontario", target: "ottawa", value: 1491 },
@@ -42,7 +42,7 @@ const LINKS: SankeyLink[] = [
   { source: "ontario", target: "kwc", value: 157 },
   { source: "quebec", target: "montreal", value: 107 },
   { source: "bc", target: "vancouver", value: 104 },
-  { source: "prairies", target: "calgary", value: 5 },
+  { source: "prairies", target: "calgary", value: 11.5 },
   { source: "atlantic", target: "atlantic_cma", value: 4 },
 
   // Ottawa Sectors
@@ -79,7 +79,7 @@ const LINKS: SankeyLink[] = [
 
   // Calgary/Atlantic
   { source: "calgary", target: "fintech", value: 1.4 },
-  { source: "calgary", target: "other_sector", value: 3.6 },
+  { source: "calgary", target: "other_sector", value: 10.1 },
   { source: "atlantic_cma", target: "fintech", value: 4 },
 ];
 
@@ -91,7 +91,7 @@ export default function NarwhalFlow() {
   const nodePositions: Record<string, {x:number;y:number;h:number}> = {};
   [0,1,2,3].forEach(l => {
     const nodesInLevel = NODES.filter(n => n.x === l);
-    const levelTotal = l === 0 ? 2171 : LINKS.filter(link => {
+    const levelTotal = l === 0 ? 2177.5 : LINKS.filter(link => {
       const targetNode = NODES.find(n => n.id === link.target);
       return targetNode && targetNode.x === l;
     }).reduce((sum, link) => sum + link.value, 0);
@@ -101,7 +101,7 @@ export default function NarwhalFlow() {
     
     let currentY = PAD;
     nodesInLevel.forEach((node) => {
-      const nodeValue = l === 0 ? 2171 : LINKS.filter(link => 
+      const nodeValue = l === 0 ? 2177.5 : LINKS.filter(link => 
         (l === 1 || l === 2 || l === 3) && link.target === node.id
       ).reduce((sum, link) => sum + link.value, 0);
       
@@ -128,7 +128,7 @@ export default function NarwhalFlow() {
     const srcX = src.x + NODE_W, srcY = src.y + src.h/2;
     const tgtX = tgt.x, tgtY = tgt.y + tgt.h/2;
     const midX = (srcX + tgtX) / 2;
-    const scale = (H - 2*PAD) / 2171;
+    const scale = (H - 2*PAD) / 2177.5;
     return {
       path: `M${srcX},${srcY} C${midX},${srcY} ${midX},${tgtY} ${tgtX},${tgtY}`,
       thickness: Math.max(link.value * scale, 1.5), index: i,

@@ -133,6 +133,7 @@ async function main() {
       ["Eddyfi Technologies", 2009, 17, "Capped at 2026: Acquired", "Québec City", "NDT/Inspection", "Martin Thériault", "2020s", 2.00, "Acquired", false, "US"],
       ["UniUni", 2018, 8, "Active: age uses current year (2026)", "Vancouver", "Logistics", "Leo Li", "2020s", 1.4, "Private", false, null],
       ["Super.com", 2016, 10, "Active: age uses current year (2026)", "Toronto", "Fintech", "Hussein Fazal, Henry Shi", "2020s", 1.70, "Private", false, null],
+      ["CoolIT Systems", 2001, 25, "Capped at 2026: Acquired by Ecolab for US$4.75B; announced Mar 2026, closed Q3 2026", "Calgary", "Hardware", "Geoff Lyon (CEO/CTO from 2005); founded by Calgary gaming enthusiasts", "2020s", 6.50, "Acquired", false, "US"],
     ];
 
     for (const u of unicorns) {
@@ -194,7 +195,7 @@ async function main() {
       ["St. John's", "2020s", 1, 4.69],
 
       // Others (placeholders for 2020s)
-      ["Calgary", "2020s", 2, 1.35],
+      ["Calgary", "2020s", 3, 2.02],
       ["Québec City", "2020s", 3, 3.57],
       ["Edmonton", "2020s", 1, 0.71],
       ["Hamilton", "2020s", 1, 1.27],
