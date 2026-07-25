@@ -378,7 +378,9 @@ export default function LineageTab() {
                   <div style={{ fontSize: "0.78rem", opacity: 0.85, marginTop: "0.25rem" }}>
                     {selectedNode.unicornRegion === 'Canadian'
                       ? 'Confirmed Canadian Unicorn listed on the national leadership ledger.'
-                      : 'International portfolio unicorn backed by Shopify Ventures / partner integration.'}
+                      : (activeRootKey === 'shopify' 
+                          ? 'International portfolio unicorn backed by Shopify Ventures / partner integration.'
+                          : 'International portfolio unicorn originating from anchor ecosystem lineage.')}
                   </div>
                 </div>
               )}
@@ -395,10 +397,18 @@ export default function LineageTab() {
         <h4 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>How this map works</h4>
         <p>
           Each node represents a major institutional anchor or a significant commercial entity. 
-          Connections indicate direct spinoffs (founders leaving to start a new company), 
-          {activeRootKey === "shopify" 
-            ? " strategic equity investments by Shopify Ventures, or executive angel lead positions. This visualization tracks the Shopify Compounding Effect—how a single commerce hub seeds dozens of high-value ventures across global markets."
-            : ` executive angel investments, or institutional tech lineage. This visualization tracks the ${activeRoot.name} Compounding Effect—how a major innovation anchor seeds dozens of high-value ventures across Canadian and global tech ecosystems.`}
+          Connections indicate direct spinoffs (founders leaving to start a new company),{" "}
+          {activeRootKey === "shopify" ? (
+            <>
+              strategic equity investments by Shopify Ventures, or executive angel lead positions. 
+              This visualization tracks the <strong>Shopify Compounding Effect</strong>—how a single commerce hub seeds dozens of high-value ventures across global markets.
+            </>
+          ) : (
+            <>
+              executive angel investments, or institutional tech lineage. 
+              This visualization tracks the <strong>{activeRoot.name} Compounding Effect</strong>—how a major innovation anchor seeds dozens of high-value ventures across Canadian and global tech ecosystems.
+            </>
+          )}
         </p>
         <div style={{ 
           marginTop: "1.5rem", 
