@@ -77,7 +77,10 @@ export default function LineageTab() {
       <div className="section-header">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1.5rem" }}>
           <div>
-            <h2 style={{ margin: 0 }}>The Shopify Compounding Tree</h2>
+            <h2 style={{ margin: 0 }}>The Compounding Effect</h2>
+            <div style={{ fontFamily: "'Roboto Mono'", fontSize: "0.85rem", color: "var(--red)", fontWeight: 600, marginTop: "0.35rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+              {activeRoot.name} Lineage Tree
+            </div>
             <div className="divider" style={{ marginTop: "0.5rem" }} />
             <p style={{ marginBottom: "1rem" }}>
               {activeRootKey === "shopify"
@@ -343,7 +346,7 @@ export default function LineageTab() {
               {selectedNode.shopifyConnection && (
                 <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: "0.75rem", marginBottom: "0.75rem" }}>
                   <div className="data-label" style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.2rem" }}>
-                    Shopify Connection
+                    {activeRootKey === "shopify" ? "Shopify Connection" : "Anchor Connection"}
                   </div>
                   <div style={{ fontSize: "0.82rem", color: "#E2E8F0" }}>{selectedNode.shopifyConnection}</div>
                 </div>
@@ -392,10 +395,10 @@ export default function LineageTab() {
         <h4 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>How this map works</h4>
         <p>
           Each node represents a major institutional anchor or a significant commercial entity. 
-          Connections indicate direct spinoffs (founders leaving to start the new company), 
-          strategic equity investments by Shopify Ventures, or executive angel lead positions. 
-          This visualization tracks the <strong>Shopify Compounding Effect</strong>—how a single commerce hub 
-          seeds dozens of high-value ventures across global markets.
+          Connections indicate direct spinoffs (founders leaving to start a new company), 
+          {activeRootKey === "shopify" 
+            ? " strategic equity investments by Shopify Ventures, or executive angel lead positions. This visualization tracks the Shopify Compounding Effect—how a single commerce hub seeds dozens of high-value ventures across global markets."
+            : ` executive angel investments, or institutional tech lineage. This visualization tracks the ${activeRoot.name} Compounding Effect—how a major innovation anchor seeds dozens of high-value ventures across Canadian and global tech ecosystems.`}
         </p>
         <div style={{ 
           marginTop: "1.5rem", 
