@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://unicornnorth.ca/sitemap.xml',
+    sitemap: 'https://www.unicornnorth.com/sitemap.xml',
   };
 }

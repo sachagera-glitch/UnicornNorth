@@ -316,10 +316,8 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
         {/* Nodes */}
         {layout.nodes.map((node) => {
           const isUni = node.isUnicorn;
-          const rel = node.relationship || '';
-          const isAlumniStartup = rel === 'Alumni Startup';
-          const isAlumniFund = rel === 'Alumni Fund' || rel === 'Shopify Initiative';
-          const isInvestment = rel.startsWith('Investment');
+          const isAcquired = node.status === 'acquired';
+          const cat = node.category || (node.relationship === 'Alumni Startup' ? 'alumni' : (node.relationship?.includes('Investment') ? 'strategic_partner' : 'other'));
 
           let fill: string;
           let stroke: string;
@@ -327,25 +325,25 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
           let subCol: string;
 
           if (isUni) {
-            fill = "var(--navy)";
-            stroke = "var(--gold)";
-            textCol = "#fff";
-            subCol = "rgba(255,255,255,0.6)";
-          } else if (isAlumniStartup) {
+            fill = "#0F172A";
+            stroke = "#F59E0B";
+            textCol = "#FFFFFF";
+            subCol = "#FCD34D";
+          } else if (cat === 'lead_investment') {
+            fill = "#ECFDF5";
+            stroke = "#059669";
+            textCol = "#064E3B";
+            subCol = "#047857";
+          } else if (cat === 'alumni') {
             fill = "#FFF7ED";
-            stroke = "#E67E22";
-            textCol = "#7C3A10";
-            subCol = "#B45309";
-          } else if (isAlumniFund) {
-            fill = "#F0FDF4";
-            stroke = "#22C55E";
-            textCol = "#14532D";
-            subCol = "#16A34A";
-          } else if (isInvestment) {
+            stroke = "#EA580C";
+            textCol = "#9A3412";
+            subCol = "#C2410C";
+          } else if (cat === 'strategic_partner') {
             fill = "#EFF6FF";
-            stroke = "#3B82F6";
-            textCol = "#1E3A5F";
-            subCol = "#3B82F6";
+            stroke = "#2563EB";
+            textCol = "#1E3A8A";
+            subCol = "#1D4ED8";
           } else {
             fill = "var(--white)";
             stroke = "var(--border)";
@@ -363,24 +361,30 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
               <rect
                 width={NODE_W}
                 height={NODE_H}
-                rx="5"
-                ry="5"
+                rx="6"
+                ry="6"
                 fill={fill}
                 stroke={stroke}
-                strokeWidth={isUni ? "1.5" : "1"}
-                style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.06))" }}
+                strokeWidth={isUni ? "2" : "1.25"}
+                strokeDasharray={isAcquired ? "3 3" : "none"}
+                style={{ filter: isUni ? "drop-shadow(0 2px 8px rgba(245, 158, 11, 0.35))" : "drop-shadow(0 1px 3px rgba(0,0,0,0.06))" }}
               />
-              <text x="10" y="20" style={{ fontFamily: "'Inter',sans-serif", fontSize: "11px", fontWeight: 700, fill: textCol }}>
-                {node.name.length > 22 ? node.name.substring(0, 20) + "…" : node.name}
+              <text x="10" y="19" style={{ fontFamily: "'Inter',sans-serif", fontSize: "11px", fontWeight: 700, fill: textCol }}>
+                {node.name.length > 20 ? node.name.substring(0, 18) + "…" : node.name}
               </text>
-              <text x="10" y="35" style={{ fontFamily: "'Roboto Mono'", fontSize: "8.5px", fill: subCol }}>
-                {node.year || "—"} · {rel || node.type.toUpperCase()}
+              <text x="10" y="33" style={{ fontFamily: "'Roboto Mono'", fontSize: "8px", fill: subCol }}>
+                {node.year || "—"} · {node.category === 'lead_investment' ? 'LEAD INVESTOR' : (node.category === 'alumni' ? 'ALUMNI STARTUP' : (node.category === 'strategic_partner' ? 'VENTURES PARTNER' : (node.relationship || 'ENTITY')))}
               </text>
-              <text x="10" y="46" style={{ fontFamily: "'Inter',sans-serif", fontSize: "7.5px", fill: subCol, opacity: 0.7 }}>
-                {node.description ? (node.description.length > 30 ? node.description.substring(0, 28) + "…" : node.description) : ""}
+              <text x="10" y="44" style={{ fontFamily: "'Inter',sans-serif", fontSize: "7.5px", fill: subCol, opacity: 0.8 }}>
+                {node.description ? (node.description.length > 28 ? node.description.substring(0, 26) + "…" : node.description) : ""}
               </text>
               {isUni && (
-                <text x={NODE_W - 12} y="16" textAnchor="end" style={{ fontSize: "10px", fill: "var(--gold)" }}>★</text>
+                <text x={NODE_W - 6} y="15" textAnchor="end" style={{ fontSize: "9.5px", fill: "#F59E0B", fontWeight: "bold" }}>
+                  ★ {node.unicornRegion === 'Canadian' ? '🇨🇦' : '🇺🇸'}
+                </text>
+              )}
+              {isAcquired && (
+                <text x={NODE_W - 8} y={NODE_H - 8} textAnchor="end" style={{ fontSize: "7.5px", fill: "#7C3AED", fontWeight: 700 }}>[ACQ]</text>
               )}
             </g>
           );
@@ -390,29 +394,32 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
       {/* Legend */}
       <div style={{
         position: "absolute", bottom: "0.6rem", right: "0.6rem",
-        background: "rgba(255,255,255,0.95)", padding: "0.4rem 0.7rem",
-        borderRadius: "5px", border: "1px solid var(--border)",
-        display: "flex", gap: "0.8rem", fontSize: "0.6rem", flexWrap: "wrap",
-        fontFamily: "'Roboto Mono'", boxShadow: "0 2px 8px rgba(0,0,0,0.04)", zIndex: 10
+        background: "rgba(255,255,255,0.96)", padding: "0.5rem 0.8rem",
+        borderRadius: "6px", border: "1px solid var(--border)",
+        display: "flex", gap: "0.9rem", fontSize: "0.65rem", flexWrap: "wrap",
+        fontFamily: "'Roboto Mono'", boxShadow: "0 2px 10px rgba(0,0,0,0.08)", zIndex: 10
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-          <div style={{ width: "10px", height: "10px", background: "var(--navy)", border: "1px solid var(--gold)", borderRadius: "2px" }} />
-          <span>Unicorn</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <div style={{ width: "12px", height: "12px", background: "#0F172A", border: "1.5px solid #F59E0B", borderRadius: "3px" }} />
+          <span style={{ fontWeight: 700, color: "var(--navy)" }}>★ 🇨🇦 Canadian Unicorn</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-          <div style={{ width: "10px", height: "10px", background: "#FFF7ED", border: "1px solid #E67E22", borderRadius: "2px" }} />
-          <span>Alumni Startup</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <div style={{ width: "12px", height: "12px", background: "#0F172A", border: "1.5px solid #3B82F6", borderRadius: "3px" }} />
+          <span style={{ fontWeight: 600 }}>★ 🇺🇸 US/Global Unicorn</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-          <div style={{ width: "10px", height: "10px", background: "#EFF6FF", border: "1px solid #3B82F6", borderRadius: "2px" }} />
-          <span>Investment</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <div style={{ width: "12px", height: "12px", background: "#FFF7ED", border: "1.5px solid #EA580C", borderRadius: "3px" }} />
+          <span>Alumni Founded (2+ Yrs)</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-          <div style={{ width: "10px", height: "10px", background: "#F0FDF4", border: "1px solid #22C55E", borderRadius: "2px" }} />
-          <span>Alumni Fund</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <div style={{ width: "12px", height: "12px", background: "#EFF6FF", border: "1.5px solid #2563EB", borderRadius: "3px" }} />
+          <span>Ventures Partner</span>
         </div>
-        <div className="hidden-mobile" style={{ color: "var(--slate-light)" }}>Drag to pan · Scroll to zoom</div>
-        <div className="hidden-desktop" style={{ color: "var(--slate-light)" }}>Touch to pan · Pinch to zoom</div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          <div style={{ width: "12px", height: "12px", background: "#ECFDF5", border: "1.5px solid #059669", borderRadius: "3px" }} />
+          <span>Alumni/Exec Lead Investor</span>
+        </div>
+        <div className="hidden-mobile" style={{ color: "var(--slate-light)", borderLeft: "1px solid var(--border)", paddingLeft: "0.75rem" }}>Drag to pan · Scroll to zoom</div>
       </div>
     </div>
   );

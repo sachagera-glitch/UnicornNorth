@@ -3,7 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://unicornnorth.ca"),
+  metadataBase: new URL("https://www.unicornnorth.com"),
   title: "UnicornNorth — The Definitive Canadian Tech Ecosystem Ledger",
   description:
     "Explore the 110 companies that define the Canadian tech ecosystem. From Toronto's AI surge to Ottawa's telecom legacy and Vancouver's biotech hubs, track $2.17 Trillion in aggregate peak value creation.",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "UnicornNorth — The Canadian Tech Ecosystem Ledger",
     description:
       "110 companies. $2.17T CAD. The definitive chronicle of Canadian value creation across Toronto, Ottawa, Vancouver, and Montreal.",
-    url: "https://unicornnorth.ca",
+    url: "https://www.unicornnorth.com",
     siteName: "UnicornNorth",
     locale: "en_CA",
     type: "website",
@@ -114,14 +114,14 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 "name": "UnicornNorth",
-                "url": "https://unicornnorth.ca",
+                "url": "https://www.unicornnorth.com/",
                 "description": "The Definitive Canadian Tech Ecosystem Ledger",
                 "publisher": {
                   "@type": "Organization",
                   "name": "UnicornNorth",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://unicornnorth.ca/icon-512.png"
+                    "url": "https://www.unicornnorth.com/icon-512.png"
                   }
                 }
               },
@@ -130,7 +130,8 @@ export default function RootLayout({
                 "@type": "Dataset",
                 "name": "UnicornNorth Canadian Tech Ecosystem Ledger",
                 "description": "A comprehensive dataset of 110 Canadian unicorn companies representing $2.17T in aggregate peak valuation.",
-                "url": "https://unicornnorth.ca",
+                "url": "https://www.unicornnorth.com/",
+                "license": "https://creativecommons.org/licenses/by/4.0/",
                 "keywords": "Canadian tech, Unicorns, Venture Capital, Toronto, Ottawa, Vancouver, Montreal",
                 "creator": {
                   "@type": "Organization",
