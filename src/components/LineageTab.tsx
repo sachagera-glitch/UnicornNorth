@@ -4,8 +4,12 @@ import React, { useState, useMemo } from "react";
 import LineageTree from "./charts/LineageTree";
 import { LINEAGE_ROOTS, type LineageNode } from "@/data/lineageData";
 
-export default function LineageTab() {
-  const [activeRootKey, setActiveRootKey] = useState<keyof typeof LINEAGE_ROOTS>("shopify");
+interface Props {
+  initialRootKey?: keyof typeof LINEAGE_ROOTS;
+}
+
+export default function LineageTab({ initialRootKey = "shopify" }: Props) {
+  const [activeRootKey, setActiveRootKey] = useState<keyof typeof LINEAGE_ROOTS>(initialRootKey);
   const [selectedNode, setSelectedNode] = useState<LineageNode | null>(null);
   const [shopifyCategoryFilter, setShopifyCategoryFilter] = useState<'all' | 'alumni' | 'strategic_partner' | 'lead_investment' | 'canadian_unicorns' | 'us_global_unicorns' | 'acquired'>('all');
 

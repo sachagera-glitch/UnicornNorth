@@ -23,6 +23,7 @@ import LineageTab from "@/components/LineageTab";
 import ValueConcentration from "@/components/charts/ValueConcentration";
 import AboutUs from "@/components/AboutUs";
 import SubscribeBanner from "@/components/SubscribeBanner";
+import { LINEAGE_ROOTS } from "@/data/lineageData";
 
 import { 
   type UnicornRow, 
@@ -36,10 +37,12 @@ interface Props {
   cmaStats: CmaStatRow[];
   onCusp: CuspRow[];
   cmaMetadata: CmaMetadataRow[];
+  initialTab?: TabKey;
+  initialRootKey?: keyof typeof LINEAGE_ROOTS;
 }
 
-export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: Props) {
-  const [activeTab, setActiveTab] = useState<TabKey>("overview");
+export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata, initialTab = "overview", initialRootKey }: Props) {
+  const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
 
   // ── Calculation Logic for Lifetime Summary ───────────────────────────
   
@@ -164,7 +167,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata }: 
         )}
 
         {activeTab === "lineage" && (
-          <LineageTab />
+          <LineageTab initialRootKey={initialRootKey} />
         )}
 
         {activeTab === "founders" && (
