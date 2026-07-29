@@ -326,9 +326,9 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
 
           if (isUni) {
             fill = "#0F172A";
-            stroke = "#F59E0B";
+            stroke = node.unicornRegion === 'Canadian' ? "#F59E0B" : "#3B82F6";
             textCol = "#FFFFFF";
-            subCol = "#FCD34D";
+            subCol = node.unicornRegion === 'Canadian' ? "#FCD34D" : "#93C5FD";
           } else if (cat === 'lead_investment') {
             fill = "#ECFDF5";
             stroke = "#059669";
@@ -367,7 +367,7 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
                 stroke={stroke}
                 strokeWidth={isUni ? "2" : "1.25"}
                 strokeDasharray={isAcquired ? "3 3" : "none"}
-                style={{ filter: isUni ? "drop-shadow(0 2px 8px rgba(245, 158, 11, 0.35))" : "drop-shadow(0 1px 3px rgba(0,0,0,0.06))" }}
+                style={{ filter: isUni ? (node.unicornRegion === 'Canadian' ? "drop-shadow(0 2px 8px rgba(245, 158, 11, 0.35))" : "drop-shadow(0 2px 8px rgba(59, 130, 246, 0.35))") : "drop-shadow(0 1px 3px rgba(0,0,0,0.06))" }}
               />
               <text x="10" y="19" style={{ fontFamily: "'Inter',sans-serif", fontSize: "11px", fontWeight: 700, fill: textCol }}>
                 {node.name.length > 20 ? node.name.substring(0, 18) + "…" : node.name}
@@ -379,7 +379,7 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
                 {node.description ? (node.description.length > 28 ? node.description.substring(0, 26) + "…" : node.description) : ""}
               </text>
               {isUni && (
-                <text x={NODE_W - 6} y="15" textAnchor="end" style={{ fontSize: "9.5px", fill: "#F59E0B", fontWeight: "bold" }}>
+                <text x={NODE_W - 6} y="15" textAnchor="end" style={{ fontSize: "9.5px", fill: node.unicornRegion === 'Canadian' ? "#F59E0B" : "#3B82F6", fontWeight: "bold" }}>
                   ★ {node.unicornRegion === 'Canadian' ? '🇨🇦' : '🇺🇸'}
                 </text>
               )}
