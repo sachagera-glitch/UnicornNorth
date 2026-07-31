@@ -307,6 +307,7 @@ export default function LineageTab({ initialRootKey = "shopify" }: Props) {
           <LineageTree 
             data={currentTreeData} 
             onNodeClick={(node) => setSelectedNode(node)} 
+            activeRootKey={activeRootKey}
           />
         </div>
 
@@ -315,7 +316,7 @@ export default function LineageTab({ initialRootKey = "shopify" }: Props) {
             <div className="card" style={{ 
               background: selectedNode.isUnicorn ? "#0F172A" : "var(--navy)", 
               color: "white", 
-              border: selectedNode.isUnicorn ? (selectedNode.unicornRegion === 'Canadian' ? "2px solid #F59E0B" : "2px solid #3B82F6") : "1px solid var(--border)",
+              border: selectedNode.isUnicorn ? (activeRootKey === 'shopify' ? (selectedNode.unicornRegion === 'Canadian' ? "2px solid #F59E0B" : "2px solid #3B82F6") : "2px solid #F59E0B") : "1px solid var(--border)",
               boxShadow: selectedNode.isUnicorn ? "0 4px 20px rgba(0, 0, 0, 0.4)" : "none"
             }}>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.75rem", alignItems: "center" }}>
@@ -375,16 +376,22 @@ export default function LineageTab({ initialRootKey = "shopify" }: Props) {
               )}
 
               {selectedNode.isUnicorn && (
-                <div style={{ marginTop: "1rem", padding: "0.75rem", background: selectedNode.unicornRegion === 'Canadian' ? "rgba(245, 158, 11, 0.12)" : "rgba(59, 130, 246, 0.12)", borderRadius: "6px", border: selectedNode.unicornRegion === 'Canadian' ? "1px solid #F59E0B" : "1px solid #3B82F6" }}>
-                  <div style={{ fontSize: "0.75rem", color: selectedNode.unicornRegion === 'Canadian' ? "#F59E0B" : "#60A5FA", fontWeight: 700, display: "flex", alignItems: "center", gap: "0.3rem" }}>
-                    <span>★</span> {selectedNode.unicornRegion === 'Canadian' ? '🇨🇦 CANADIAN UNICORN' : '🇺🇸 US / GLOBAL STRATEGIC UNICORN'} ($1B+ Valuation)
+                <div style={{ 
+                  marginTop: "1rem", 
+                  padding: "0.75rem", 
+                  background: activeRootKey === 'shopify' && selectedNode.unicornRegion !== 'Canadian' ? "rgba(59, 130, 246, 0.12)" : "rgba(245, 158, 11, 0.12)", 
+                  borderRadius: "6px", 
+                  border: activeRootKey === 'shopify' && selectedNode.unicornRegion !== 'Canadian' ? "1px solid #3B82F6" : "1px solid #F59E0B" 
+                }}>
+                  <div style={{ fontSize: "0.75rem", color: activeRootKey === 'shopify' && selectedNode.unicornRegion !== 'Canadian' ? "#60A5FA" : "#F59E0B", fontWeight: 700, display: "flex", alignItems: "center", gap: "0.3rem" }}>
+                    <span>★</span> {activeRootKey === 'shopify' ? (selectedNode.unicornRegion === 'Canadian' ? '🇨🇦 CANADIAN UNICORN' : '🇺🇸 US / GLOBAL STRATEGIC UNICORN') : 'UNICORN-CLASS'} ($1B+ Valuation)
                   </div>
                   <div style={{ fontSize: "0.78rem", opacity: 0.85, marginTop: "0.25rem" }}>
-                    {selectedNode.unicornRegion === 'Canadian'
-                      ? 'Confirmed Canadian Unicorn listed on the national leadership ledger.'
-                      : (activeRootKey === 'shopify' 
-                          ? 'International portfolio unicorn backed by Shopify Ventures / partner integration.'
-                          : 'International portfolio unicorn originating from anchor ecosystem lineage.')}
+                    {activeRootKey === 'shopify' 
+                      ? (selectedNode.unicornRegion === 'Canadian' 
+                          ? 'Confirmed Canadian Unicorn listed on the national leadership ledger.' 
+                          : 'International portfolio unicorn backed by Shopify Ventures / partner integration.')
+                      : 'Unicorn-class company originating from anchor ecosystem lineage.'}
                   </div>
                 </div>
               )}

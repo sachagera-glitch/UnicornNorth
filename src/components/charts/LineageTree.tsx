@@ -6,6 +6,7 @@ import { type LineageNode } from "@/data/lineageData";
 interface LineageTreeProps {
   data: LineageNode[];
   onNodeClick: (node: LineageNode) => void;
+  activeRootKey?: string;
 }
 
 interface TreeLayoutNode extends LineageNode {
@@ -20,7 +21,7 @@ const NODE_H = 52;
 const H_GAP = 60;
 const V_GAP = 14;
 
-export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
+export default function LineageTree({ data, onNodeClick, activeRootKey = "shopify" }: LineageTreeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [viewBox, setViewBox] = useState({ x: 0, y: 0, w: 1200, h: 650 });
   const [zoom, setZoom] = useState(1);
@@ -326,9 +327,10 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
 
           if (isUni) {
             fill = "#0F172A";
-            stroke = node.unicornRegion === 'Canadian' ? "#F59E0B" : "#3B82F6";
+            const isShopify = activeRootKey === 'shopify';
+            stroke = isShopify ? (node.unicornRegion === 'Canadian' ? "#F59E0B" : "#3B82F6") : "#F59E0B";
             textCol = "#FFFFFF";
-            subCol = node.unicornRegion === 'Canadian' ? "#FCD34D" : "#93C5FD";
+            subCol = isShopify ? (node.unicornRegion === 'Canadian' ? "#FCD34D" : "#93C5FD") : "#FCD34D";
           } else if (cat === 'lead_investment') {
             fill = "#ECFDF5";
             stroke = "#059669";
@@ -367,7 +369,7 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
                 stroke={stroke}
                 strokeWidth={isUni ? "2" : "1.25"}
                 strokeDasharray={isAcquired ? "3 3" : "none"}
-                style={{ filter: isUni ? (node.unicornRegion === 'Canadian' ? "drop-shadow(0 2px 8px rgba(245, 158, 11, 0.35))" : "drop-shadow(0 2px 8px rgba(59, 130, 246, 0.35))") : "drop-shadow(0 1px 3px rgba(0,0,0,0.06))" }}
+                style={{ filter: isUni ? (activeRootKey === 'shopify' ? (node.unicornRegion === 'Canadian' ? "drop-shadow(0 2px 8px rgba(245, 158, 11, 0.35))" : "drop-shadow(0 2px 8px rgba(59, 130, 246, 0.35))") : "drop-shadow(0 2px 8px rgba(245, 158, 11, 0.35))") : "drop-shadow(0 1px 3px rgba(0,0,0,0.06))" }}
               />
               <text x="10" y="19" style={{ fontFamily: "'Inter',sans-serif", fontSize: "11px", fontWeight: 700, fill: textCol }}>
                 {node.name.length > 20 ? node.name.substring(0, 18) + "…" : node.name}
@@ -379,8 +381,8 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
                 {node.description ? (node.description.length > 28 ? node.description.substring(0, 26) + "…" : node.description) : ""}
               </text>
               {isUni && (
-                <text x={NODE_W - 6} y="15" textAnchor="end" style={{ fontSize: "9.5px", fill: node.unicornRegion === 'Canadian' ? "#F59E0B" : "#3B82F6", fontWeight: "bold" }}>
-                  ★ {node.unicornRegion === 'Canadian' ? '🇨🇦' : '🇺🇸'}
+                <text x={NODE_W - 6} y="15" textAnchor="end" style={{ fontSize: "9.5px", fill: activeRootKey === 'shopify' && node.unicornRegion !== 'Canadian' ? "#3B82F6" : "#F59E0B", fontWeight: "bold" }}>
+                  {activeRootKey === 'shopify' ? (node.unicornRegion === 'Canadian' ? '★ 🇨🇦' : '★ 🇺🇸') : '★'}
                 </text>
               )}
               {isAcquired && (
@@ -399,14 +401,23 @@ export default function LineageTree({ data, onNodeClick }: LineageTreeProps) {
         display: "flex", gap: "0.9rem", fontSize: "0.65rem", flexWrap: "wrap",
         fontFamily: "'Roboto Mono'", boxShadow: "0 2px 10px rgba(0,0,0,0.08)", zIndex: 10
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-          <div style={{ width: "12px", height: "12px", background: "#0F172A", border: "1.5px solid #F59E0B", borderRadius: "3px" }} />
-          <span style={{ fontWeight: 700, color: "var(--navy)" }}>★ 🇨🇦 Canadian Unicorn</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-          <div style={{ width: "12px", height: "12px", background: "#0F172A", border: "1.5px solid #3B82F6", borderRadius: "3px" }} />
-          <span style={{ fontWeight: 600 }}>★ 🇺🇸 US/Global Unicorn</span>
-        </div>
+        {activeRootKey === 'shopify' ? (
+          <>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+              <div style={{ width: "12px", height: "12px", background: "#0F172A", border: "1.5px solid #F59E0B", borderRadius: "3px" }} />
+              <span style={{ fontWeight: 700, color: "var(--navy)" }}>★ 🇨🇦 Canadian Unicorn</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+              <div style={{ width: "12px", height: "12px", background: "#0F172A", border: "1.5px solid #3B82F6", borderRadius: "3px" }} />
+              <span style={{ fontWeight: 600 }}>★ 🇺🇸 US/Global Unicorn</span>
+            </div>
+          </>
+        ) : (
+          <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+            <div style={{ width: "12px", height: "12px", background: "#0F172A", border: "1.5px solid #F59E0B", borderRadius: "3px" }} />
+            <span style={{ fontWeight: 700, color: "var(--navy)" }}>★ Unicorn-Class</span>
+          </div>
+        )}
         <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
           <div style={{ width: "12px", height: "12px", background: "#FFF7ED", border: "1.5px solid #EA580C", borderRadius: "3px" }} />
           <span>Alumni Founded (2+ Yrs)</span>
