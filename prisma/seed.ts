@@ -234,6 +234,8 @@ async function main() {
       ["Eavor Technologies", "Calgary", "Energy-Tech"],
       ["GHGSat", "Montréal", "Spacetech"],
       ["Blackline Safety", "Calgary", "IoT/Safety"],
+      ["Colab Software", "St. John's", "Engineering Software"],
+      ["Spellbook", "St. John's", "Legal AI"],
     ];
 
     for (const c of onCusp) {

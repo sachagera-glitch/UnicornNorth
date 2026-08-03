@@ -22,6 +22,8 @@ const cuspData = [
   { name: "Eavor Technologies", cma: "Calgary", val: 650, growth: 90, sector: "Energy-Tech" },
   { name: "GHGSat", cma: "Montréal", val: 600, growth: 65, sector: "Spacetech" },
   { name: "Blackline Safety", cma: "Calgary", val: 510, growth: 60, sector: "IoT/Safety" },
+  { name: "Colab Software", cma: "St. John's", val: 700, growth: 80, sector: "Engineering Software" },
+  { name: "Spellbook", cma: "St. John's", val: 490, growth: 85, sector: "Legal AI" },
 ];
 
 export default function SuccessorRadar() {
