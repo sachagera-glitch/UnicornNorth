@@ -5,10 +5,10 @@ import { Unicorn, CmaDecadeStat } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "Shopify Compounding Effect | UnicornNorth",
-  description: "Explore the Shopify Compounding Effect: a definitive mapping of the 80+ high-value spin-offs, strategic investments, and alumni-founded ventures seeding the global tech ecosystem.",
+  description: "Explore the Shopify Compounding Effect: a definitive mapping of the 81 high-value spin-offs, strategic investments, and alumni-founded ventures seeding the global tech ecosystem.",
   openGraph: {
     title: "Shopify Compounding Effect | UnicornNorth",
-    description: "Explore the Shopify Compounding Effect: a definitive mapping of the 80+ high-value spin-offs, strategic investments, and alumni-founded ventures seeding the global tech ecosystem.",
+    description: "Explore the Shopify Compounding Effect: a definitive mapping of the 81 high-value spin-offs, strategic investments, and alumni-founded ventures seeding the global tech ecosystem.",
     url: "https://www.unicornnorth.com/shopify-compounding",
     siteName: "UnicornNorth",
     images: [
@@ -54,6 +54,7 @@ export default async function ShopifyCompoundingPage() {
       onCusp={onCusp}
       cmaMetadata={cmaMetadata}
       initialTab="lineage"
+      initialRootKey="shopify"
     />
   );
 }

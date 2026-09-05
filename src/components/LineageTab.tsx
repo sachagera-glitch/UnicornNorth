@@ -446,6 +446,15 @@ export default function LineageTab({ initialRootKey = "shopify" }: Props) {
                 style={{ color: "var(--red)", textDecoration: "underline" }}
               >
                 The Shopify Story
+              </a>{" "}
+              and his blog,{" "}
+              <a
+                href="https://shopify1000.substack.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--red)", textDecoration: "underline" }}
+              >
+                Shopify’s Journey
               </a>
               .
             </span>
