@@ -7,6 +7,7 @@ const cuspData = [
   { name: "Solace", cma: "Ottawa-Gatineau", val: 600, growth: 70, sector: "Deep-Tech" },
   { name: "Mindbridge.ai", cma: "Ottawa-Gatineau", val: 550, growth: 60, sector: "Deep-Tech" },
   { name: "Dominion Dynamics", cma: "Ottawa-Gatineau", val: 550, growth: 90, sector: "Defence Technology" },
+  { name: "Field Effect Software", cma: "Ottawa-Gatineau", val: 500, growth: 100, sector: "Cybersecurity" },
   { name: "Subterra", cma: "Toronto", val: 650, growth: 75, sector: "CleanTech" },
   { name: "Salt XC", cma: "Toronto", val: 500, growth: 65, sector: "MarTech" },
   { name: "Ecopia AI", cma: "Toronto", val: 600, growth: 80, sector: "AI" },
@@ -61,7 +62,7 @@ export default function SuccessorRadar() {
                     borderRadius: 2, padding: "0.5rem 0.75rem", fontFamily: "'Roboto Mono'", fontSize: 11 }}>
                     <div style={{ fontWeight: 700, color: "var(--navy)" }}>{d.name}</div>
                     <div style={{ color: "var(--slate)" }}>{d.cma} · {d.sector}</div>
-                    <div style={{ color: "var(--burgundy)" }}>~${d.val}M CAD</div>
+                    <div style={{ color: "var(--burgundy)" }}>~${d.val}M CAD · {d.growth}% YoY Growth</div>
                   </div>
                 );
               }}

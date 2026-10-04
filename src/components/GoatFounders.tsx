@@ -90,7 +90,7 @@ const FOUNDERS: Founder[] = [
     name: "Aidan Gomez",
     company: "Cohere",
     location: "Toronto, ON",
-    peak: "$9.5B valuation",
+    peak: "$20.0B valuation",
     description: "At just 20 years old, Aidan Gomez was an intern at Google Brain and one of eight co-authors of the landmark 2017 research paper \"Attention Is All You Need,\" which introduced the transformer architecture, arguably the most consequential AI paper ever published with over 120,000 citations. Growing up in rural Brighton, Ontario on a 150-acre property without a TV, Gomez studied computer science and mathematics at the University of Toronto before pursuing a PhD at Oxford (completed in 2024). In 2019, he co-founded Cohere with Nick Frosst and Ivan Zhang to bring enterprise-grade AI to businesses worldwide. Cohere has raised nearly $1 billion across four funding rounds, with a valuation exceeding $6.8 billion and backing from Nvidia and Geoffrey Hinton’s Radical Ventures. Gomez was named to the TIME 100/AI list in 2023 and ranked first on Maclean’s AI Trailblazers Power List. In 2025, he was elected to the board of Rivian. At 28, he has already reshaped the global AI industry while keeping Cohere headquartered in Toronto, strengthening Canada’s position as an AI superpower.",
     wikipediaUrl: "https://en.wikipedia.org/wiki/Aidan_Gomez"
   },

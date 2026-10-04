@@ -85,7 +85,7 @@ const unicorns = [
   ["Telesat", 1969, 57, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Satellite Tech", 'Govt. of Canada (privatized)', "2000s", 4.7, "Public", false, null],
   ["1Password", 2005, 21, "Active: age uses current year (2026)", "Toronto", "Cybersecurity", 'Dave Teare, Roustem Karimov', "2020s", 10.3, "Private", false, null],
   ["Telus International (TIXT)", 2005, 21, "Active: age uses current year (2026)", "Vancouver", "Tech Services", 'Darren Entwistle (Telus)', "2020s", 10.0, "Public", false, null],
-  ["Cohere", 2019, 7, "Active: age uses current year (2026)", "Toronto", "AI", 'Aidan Gomez, Ivan Zhang, Nick Frosst', "2020s", 9.5, "Private", false, null],
+  ["Cohere", 2019, 7, "Active: age uses current year (2026)", "Toronto", "AI", 'Aidan Gomez, Ivan Zhang, Nick Frosst', "2020s", 20.0, "Private", false, null],
   ["Hopper", 2007, 19, "Active: age uses current year (2026)", "Montréal", "Travel Tech", 'Frederic Lalonde', "2020s", 7.4, "Private", false, null],
   ["MDS Nordion", 1946, 64, "Acquired by Sterigenics (now Sotera Health) 2014", "Ottawa-Gatineau", "Health", "n/a", "2000s", 8.0, "Acquired", false, "US"],
   ["Kinaxis", 1984, 42, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Supply Chain", 'Duncan Klett, Bob Ashe', "2010s", 6.8, "Public", false, null],
