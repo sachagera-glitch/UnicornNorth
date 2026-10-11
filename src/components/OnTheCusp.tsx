@@ -10,6 +10,7 @@ const CUSP_LENSES: Record<string, { title: string; lens: string }> = {
   "Edmonton": { title: "Edmonton", lens: "New Node Hub" },
   "Saskatoon": { title: "Saskatoon", lens: "Prairie SaaS" },
   "Waterloo-Kitchener-C": { title: "Waterloo-Kitchener-C", lens: "Engagement Tech" },
+  "Kitchener-Cambridge-Waterloo": { title: "Waterloo-Kitchener-C", lens: "Engagement Tech" },
   "Calgary": { title: "Calgary", lens: "Energy-Tech" },
   "Victoria": { title: "Victoria", lens: "Island SaaS" },
   "St. John's": { title: "St. John's", lens: "Fintech Outpost" },
@@ -17,7 +18,8 @@ const CUSP_LENSES: Record<string, { title: string; lens: string }> = {
 
 export default function OnTheCusp({ data }: { data: CuspRow[] }) {
   const grouped = data.reduce((acc, c) => {
-    const cma = c.hqCma || "Other";
+    let cma = c.hqCma || "Other";
+    if (cma === "Kitchener-Cambridge-Waterloo") cma = "Waterloo-Kitchener-C";
     if (!acc[cma]) acc[cma] = [];
     acc[cma].push(c);
     return acc;

@@ -6,7 +6,7 @@ interface SankeyNode { id: string; label: string; x: number; color: string; }
 interface SankeyLink { source: string; target: string; value: number; }
 
 const NODES: SankeyNode[] = [
-  { id: "canada", label: "Canada ($2.18T)", x: 0, color: "#00204E" },
+  { id: "canada", label: "Canada ($2.19T)", x: 0, color: "#00204E" },
   { id: "ontario", label: "Ontario", x: 1, color: "#003080" },
   { id: "quebec", label: "Québec", x: 1, color: "#003080" },
   { id: "bc", label: "British Columbia", x: 1, color: "#003080" },
@@ -30,7 +30,7 @@ const NODES: SankeyNode[] = [
 
 const LINKS: SankeyLink[] = [
   // Canada to Provinces
-  { source: "canada", target: "ontario", value: 1784 },
+  { source: "canada", target: "ontario", value: 1785 },
   { source: "canada", target: "quebec", value: 107 },
   { source: "canada", target: "bc", value: 104 },
   { source: "canada", target: "atlantic", value: 4 },
@@ -39,7 +39,7 @@ const LINKS: SankeyLink[] = [
   // Provinces to CMAs
   { source: "ontario", target: "ottawa", value: 1491 },
   { source: "ontario", target: "toronto", value: 293 },
-  { source: "ontario", target: "kwc", value: 157 },
+  { source: "ontario", target: "kwc", value: 158 },
   { source: "quebec", target: "montreal", value: 107 },
   { source: "bc", target: "vancouver", value: 104 },
   { source: "prairies", target: "calgary", value: 11.5 },
@@ -63,7 +63,7 @@ const LINKS: SankeyLink[] = [
   // Kitchener Sectors
   { source: "kwc", target: "telecom", value: 130 },
   { source: "kwc", target: "software", value: 18 },
-  { source: "kwc", target: "other_sector", value: 9 },
+  { source: "kwc", target: "other_sector", value: 10 },
 
   // Montreal Sectors
   { source: "montreal", target: "fintech", value: 43 },
@@ -91,7 +91,7 @@ export default function NarwhalFlow() {
   const nodePositions: Record<string, {x:number;y:number;h:number}> = {};
   [0,1,2,3].forEach(l => {
     const nodesInLevel = NODES.filter(n => n.x === l);
-    const levelTotal = l === 0 ? 2177.5 : LINKS.filter(link => {
+    const levelTotal = l === 0 ? 2178.5 : LINKS.filter(link => {
       const targetNode = NODES.find(n => n.id === link.target);
       return targetNode && targetNode.x === l;
     }).reduce((sum, link) => sum + link.value, 0);
@@ -101,7 +101,7 @@ export default function NarwhalFlow() {
     
     let currentY = PAD;
     nodesInLevel.forEach((node) => {
-      const nodeValue = l === 0 ? 2177.5 : LINKS.filter(link => 
+      const nodeValue = l === 0 ? 2178.5 : LINKS.filter(link => 
         (l === 1 || l === 2 || l === 3) && link.target === node.id
       ).reduce((sum, link) => sum + link.value, 0);
       

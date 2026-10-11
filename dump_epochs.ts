@@ -50,6 +50,7 @@ const SECTOR_MAPPING: Record<string, string> = {
   "Semiconductors": "Hardware",
   "Broadcast": "Hardware",
   "Auto Tech": "Hardware",
+  "Transportation Technology": "Hardware",
   "Telematics": "Hardware",
   "Space Tech": "Hardware",
   "Quantum": "Quantum",

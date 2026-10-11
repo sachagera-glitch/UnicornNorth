@@ -19,7 +19,7 @@ async function main() {
     await client.query("DELETE FROM cma_decade_stats");
     await client.query("DELETE FROM unicorns");
 
-    // ── Unicorns (108 companies) ──────────────
+    // ── Unicorns (114 companies) ──────────────
     const unicorns = [
       ["Nortel / BNR", 1895, 114, "Capped at 2009: Filed Ch. 11 / CCAA bankruptcy in 2009", "Ottawa-Gatineau", "Telecom", 'N/A', "1990s", 768.6, "Defunct", false, null],
       ["JDS Uniphase (JDSU)", 1981, 34, "Capped at 2015: Split into Lumentum & Viavi 2015; JDSU name retired", "Ottawa-Gatineau", "Telecom", 'Jozef Straus; Kevin Kalkhoven', "1990s", 295.0, "Acquired", false, 'US'],
@@ -134,6 +134,7 @@ async function main() {
       ["UniUni", 2018, 8, "Active: age uses current year (2026)", "Vancouver", "Logistics", "Leo Li", "2020s", 1.4, "Private", false, null],
       ["Super.com", 2016, 10, "Active: age uses current year (2026)", "Toronto", "Fintech", "Hussein Fazal, Henry Shi", "2020s", 1.70, "Private", false, null],
       ["CoolIT Systems", 2001, 25, "Capped at 2026: Acquired by Ecolab for US$4.75B; announced Mar 2026, closed Q3 2026", "Calgary", "Hardware", "Geoff Lyon (CEO/CTO from 2005); founded by Calgary gaming enthusiasts", "2020s", 6.50, "Acquired", false, "US"],
+      ["Miovision", 2005, 21, "Active: age uses current year (2026)", "Waterloo-Kitchener-C", "Transportation Technology", "Kurtis McBride, Tony Brijpaul, Kevin Madill", "2020s", 1.06, "Private", false, null],
     ];
 
     for (const u of unicorns) {
@@ -183,7 +184,7 @@ async function main() {
       ["Waterloo-Kitchener-C", "1990s", 1, 2.85],
       ["Waterloo-Kitchener-C", "2000s", 2, 4.76],
       ["Waterloo-Kitchener-C", "2010s", 4, 8.33],
-      ["Waterloo-Kitchener-C", "2020s", 6, 10.42],
+      ["Waterloo-Kitchener-C", "2020s", 7, 12.15],
 
       // Montréal
       ["Montréal", "1990s", 1, 0.31],
@@ -224,10 +225,12 @@ async function main() {
       ["Salt XC", "Toronto", "MarTech"],
 
       ["Ecopia AI", "Toronto", "AI"],
+      ["Float Financial", "Toronto", "Fintech (business banking / spend management)"],
       ["Klue", "Vancouver", "SaaS"],
       ["AlayaCare", "Montréal", "HealthTech"],
       ["Vendasta", "Saskatoon", "SaaS"],
       ["Vidyard", "Waterloo-Kitchener-C", "MarTech"],
+      ["Miovision", "Waterloo-Kitchener-C", "Intelligent transportation / smart mobility"],
       ["Propel Holdings", "Toronto", "Fintech"],
       ["Certn", "Victoria", "Trust & ID"],
       ["Kardium", "Vancouver", "Medtech"],
