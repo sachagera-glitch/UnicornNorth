@@ -17,7 +17,6 @@ const cuspData = [
   { name: "AlayaCare", cma: "Montréal", val: 800, growth: 70, sector: "HealthTech" },
   { name: "Vendasta", cma: "Saskatoon", val: 700, growth: 65, sector: "SaaS" },
   { name: "Vidyard", cma: "Waterloo-Kitchener-C", val: 600, growth: 60, sector: "MarTech" },
-  { name: "Miovision", cma: "Waterloo-Kitchener-C", val: 1055, growth: 59.7, sector: "Intelligent Transportation" },
   { name: "Propel Holdings", cma: "Toronto", val: 855, growth: 80, sector: "Fintech" },
   { name: "Certn", cma: "Victoria", val: 600, growth: 75, sector: "Trust & ID" },
   { name: "Kardium", cma: "Vancouver", val: 600, growth: 70, sector: "Medtech" },

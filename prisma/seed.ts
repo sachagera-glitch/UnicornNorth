@@ -230,7 +230,6 @@ async function main() {
       ["AlayaCare", "Montréal", "HealthTech"],
       ["Vendasta", "Saskatoon", "SaaS"],
       ["Vidyard", "Waterloo-Kitchener-C", "MarTech"],
-      ["Miovision", "Waterloo-Kitchener-C", "Intelligent transportation / smart mobility"],
       ["Propel Holdings", "Toronto", "Fintech"],
       ["Certn", "Victoria", "Trust & ID"],
       ["Kardium", "Vancouver", "Medtech"],
