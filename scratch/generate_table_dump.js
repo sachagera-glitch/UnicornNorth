@@ -165,7 +165,7 @@ const unicorns = [
   ["Banyon Software", 2016, 10, "Active: age uses current year (2026)", "Toronto", "Vertical SaaS", 'David Fajardo', "2020s", 1.0, "HoldCo", false, null],
   ["Farmers Edge", 2005, 21, "Active: age uses current year (2026)", "Winnipeg", "AgTech", 'Wade Barnes', "2020s", 1.0, "Delisted", false, null],
   ["Copperleaf Technologies", 2000, 24, "Capped at 2024: Acquired by IFS Aug 2024; de-listed and absorbed", "Vancouver", "Enterprise SW", 'Judi Hess', "2020s", 1.0, "Acquired (IFS)", false, 'European'],
-  ["Solink", 2009, 17, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Mike Matheson", "2020s", 1.0, "Private", false, null],
+  ["Solink", 2009, 17, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Mike Matta", "2020s", 1.0, "Private", false, null],
 ];
 
 const results = unicorns.map(u => {

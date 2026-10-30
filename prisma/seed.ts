@@ -135,7 +135,7 @@ async function main() {
       ["Super.com", 2016, 10, "Active: age uses current year (2026)", "Toronto", "Fintech", "Hussein Fazal, Henry Shi", "2020s", 1.70, "Private", false, null],
       ["CoolIT Systems", 2001, 25, "Capped at 2026: Acquired by Ecolab for US$4.75B; announced Mar 2026, closed Q3 2026", "Calgary", "Hardware", "Geoff Lyon (CEO/CTO from 2005); founded by Calgary gaming enthusiasts", "2020s", 6.50, "Acquired", false, "US"],
       ["Miovision", 2005, 21, "Active: age uses current year (2026)", "Waterloo-Kitchener-C", "Transportation Technology", "Kurtis McBride, Tony Brijpaul, Kevin Madill", "2020s", 1.06, "Private", false, null],
-      ["Solink", 2009, 17, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Mike Matheson", "2020s", 1.0, "Private", false, null],
+      ["Solink", 2009, 17, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Mike Matta", "2020s", 1.0, "Private", false, null],
     ];
 
     for (const u of unicorns) {
