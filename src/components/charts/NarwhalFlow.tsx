@@ -6,7 +6,7 @@ interface SankeyNode { id: string; label: string; x: number; color: string; }
 interface SankeyLink { source: string; target: string; value: number; }
 
 const NODES: SankeyNode[] = [
-  { id: "canada", label: "Canada ($2.19T)", x: 0, color: "#00204E" },
+  { id: "canada", label: "Canada ($2.22T)", x: 0, color: "#00204E" },
   { id: "ontario", label: "Ontario", x: 1, color: "#003080" },
   { id: "quebec", label: "Québec", x: 1, color: "#003080" },
   { id: "bc", label: "British Columbia", x: 1, color: "#003080" },
@@ -30,15 +30,15 @@ const NODES: SankeyNode[] = [
 
 const LINKS: SankeyLink[] = [
   // Canada to Provinces
-  { source: "canada", target: "ontario", value: 1785 },
+  { source: "canada", target: "ontario", value: 1815 },
   { source: "canada", target: "quebec", value: 107 },
   { source: "canada", target: "bc", value: 104 },
   { source: "canada", target: "atlantic", value: 4 },
   { source: "canada", target: "prairies", value: 11.5 },
   
   // Provinces to CMAs
-  { source: "ontario", target: "ottawa", value: 1491 },
-  { source: "ontario", target: "toronto", value: 293 },
+  { source: "ontario", target: "ottawa", value: 1494 },
+  { source: "ontario", target: "toronto", value: 330 },
   { source: "ontario", target: "kwc", value: 158 },
   { source: "quebec", target: "montreal", value: 107 },
   { source: "bc", target: "vancouver", value: 104 },
@@ -49,14 +49,14 @@ const LINKS: SankeyLink[] = [
   { source: "ottawa", target: "telecom", value: 1097 },
   { source: "ottawa", target: "ecommerce", value: 300 },
   { source: "ottawa", target: "software", value: 30 },
-  { source: "ottawa", target: "health", value: 12 },
-  { source: "ottawa", target: "ai", value: 2 },
+  { source: "ottawa", target: "health", value: 14 },
+  { source: "ottawa", target: "ai", value: 3 },
   { source: "ottawa", target: "other_sector", value: 50 },
 
   // Toronto Sectors
   { source: "toronto", target: "software", value: 112 },
-  { source: "toronto", target: "ai", value: 21 },
-  { source: "toronto", target: "fintech", value: 13 },
+  { source: "toronto", target: "ai", value: 49 },
+  { source: "toronto", target: "fintech", value: 22 },
   { source: "toronto", target: "health", value: 7 },
   { source: "toronto", target: "other_sector", value: 140 },
 
@@ -91,7 +91,7 @@ export default function NarwhalFlow() {
   const nodePositions: Record<string, {x:number;y:number;h:number}> = {};
   [0,1,2,3].forEach(l => {
     const nodesInLevel = NODES.filter(n => n.x === l);
-    const levelTotal = l === 0 ? 2178.5 : LINKS.filter(link => {
+    const levelTotal = l === 0 ? 2222.4 : LINKS.filter(link => {
       const targetNode = NODES.find(n => n.id === link.target);
       return targetNode && targetNode.x === l;
     }).reduce((sum, link) => sum + link.value, 0);
@@ -101,7 +101,7 @@ export default function NarwhalFlow() {
     
     let currentY = PAD;
     nodesInLevel.forEach((node) => {
-      const nodeValue = l === 0 ? 2178.5 : LINKS.filter(link => 
+      const nodeValue = l === 0 ? 2222.4 : LINKS.filter(link => 
         (l === 1 || l === 2 || l === 3) && link.target === node.id
       ).reduce((sum, link) => sum + link.value, 0);
       
@@ -128,7 +128,7 @@ export default function NarwhalFlow() {
     const srcX = src.x + NODE_W, srcY = src.y + src.h/2;
     const tgtX = tgt.x, tgtY = tgt.y + tgt.h/2;
     const midX = (srcX + tgtX) / 2;
-    const scale = (H - 2*PAD) / 2177.5;
+    const scale = (H - 2*PAD) / 2222.4;
     return {
       path: `M${srcX},${srcY} C${midX},${srcY} ${midX},${tgtY} ${tgtX},${tgtY}`,
       thickness: Math.max(link.value * scale, 1.5), index: i,

@@ -19,7 +19,7 @@ async function main() {
     await client.query("DELETE FROM cma_decade_stats");
     await client.query("DELETE FROM unicorns");
 
-    // ── Unicorns (114 companies) ──────────────
+    // ── Unicorns (115 companies) ──────────────
     const unicorns = [
       ["Nortel / BNR", 1895, 114, "Capped at 2009: Filed Ch. 11 / CCAA bankruptcy in 2009", "Ottawa-Gatineau", "Telecom", 'N/A', "1990s", 768.6, "Defunct", false, null],
       ["JDS Uniphase (JDSU)", 1981, 34, "Capped at 2015: Split into Lumentum & Viavi 2015; JDSU name retired", "Ottawa-Gatineau", "Telecom", 'Jozef Straus; Kevin Kalkhoven', "1990s", 295.0, "Acquired", false, 'US'],
@@ -43,14 +43,14 @@ async function main() {
       ["Telesat", 1969, 57, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Telecom", 'Govt. of Canada (privatized)', "2000s", 4.7, "Public", false, null],
       ["1Password", 2005, 21, "Active: age uses current year (2026)", "Toronto", "Cybersecurity", 'Dave Teare, Roustem Karimov', "2020s", 10.3, "Private", false, null],
       ["Telus International (TIXT)", 2005, 21, "Active: age uses current year (2026)", "Vancouver", "Telecom", 'Darren Entwistle (Telus)', "2020s", 10.0, "Public", false, null],
-      ["Cohere", 2019, 7, "Active: age uses current year (2026)", "Toronto", "AI", 'Aidan Gomez, Ivan Zhang, Nick Frosst', "2020s", 20.0, "Private", false, null],
+      ["Cohere", 2019, 7, "Active: age uses current year (2026)", "Toronto", "AI", 'Aidan Gomez, Ivan Zhang, Nick Frosst', "2020s", 35.7, "Private", false, null],
       ["Hopper", 2007, 19, "Active: age uses current year (2026)", "Montréal", "Travel Tech", 'Frederic Lalonde', "2020s", 7.4, "Private", false, null],
       ["MDS Nordion", 1946, 64, "Acquired by Sterigenics (now Sotera Health) 2014", "Ottawa-Gatineau", "Health", "n/a", "2000s", 8.0, "Acquired", false, "US"],
       ["Kinaxis", 1984, 42, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Supply Chain", 'Duncan Klett, Bob Ashe', "2010s", 6.8, "Public", false, null],
       ["Corel (Alludo)", 1985, 41, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Software", 'Michael Cowpland', "1990s", 6.6, "Private", false, null],
       ["PointClickCare", 2000, 26, "Active: age uses current year (2026)", "Toronto", "Healthtech", 'Mike Oldfield, Dave Friesen', "2020s", 5.9, "Private", false, null],
       ["Lumonics", 1970, 36, "Merged with General Scanning 1999; original operations wound down 2002-2006", "Ottawa-Gatineau", "Telecom", "Alan Buchanan, Gordon Mauchel, Allan Crawford", "2000s", 5.0, "Acquired", false, "US"],
-      ["Wealthsimple", 2014, 12, "Active: age uses current year (2026)", "Toronto", "Fintech", 'Michael Katchen', "2020s", 5.0, "Private", false, null],
+      ["Wealthsimple", 2014, 12, "Active: age uses current year (2026)", "Toronto", "Fintech", 'Michael Katchen', "2020s", 13.8, "Private", false, null],
       ["SSENSE", 2003, 23, "Active: age uses current year (2026)", "Montréal", "E-commerce", 'Rami, Bassel, Firas Atallah', "2020s", 5.0, "Creditor Protection", false, null],
       ["Geotab", 2000, 26, "Active: age uses current year (2026)", "Toronto", "Telematics", 'Neil Cawse', "2020s", 5.0, "Self-Funded", false, null],
       ["EXFO", 1985, 41, "Active: age uses current year (2026)", "Québec City", "Telecom", 'Germain Lamonde', "2020s", 4.8, "Private (Lamonde)", false, null],
@@ -61,10 +61,10 @@ async function main() {
       ["Verafin", 2003, 18, "Capped at 2021: Acquired by Nasdaq Feb 2021; rebranded Nasdaq Verafin", "St. John's", "Cyber/Fintech", 'Jamie King, Raymond Pretty', "2020s", 4.1, "Acquired", false, 'US'],
       ["ApplyBoard", 2015, 11, "Active: age uses current year (2026)", "Waterloo-Kitchener-C", "Edtech", 'Martin, Meti & Massi Basiri', "2020s", 4.0, "Private", false, null],
       ["MDA Space", 1969, 57, "Active: age uses current year (2026)", "Toronto", "Hardware", 'John S. MacDonald', "2020s", 4.0, "Public", false, null],
-      ["Tenstorrent", 2016, 10, "Active: age uses current year (2026)", "Toronto", "AI", 'Ljubisa Bajic', "2020s", 3.8, "Private", false, null],
+      ["Tenstorrent", 2016, 10, "Active: age uses current year (2026)", "Toronto", "AI", 'Ljubisa Bajic', "2020s", 6.0, "Private", false, null],
       ["Mitel", 1973, 53, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Telecom", 'Terry Matthews, Michael Cowpland', "1980s", 5.5, "Private (post-Ch. 11)", false, null],
       ["Entrust", 1996, 30, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Cybersecurity", 'Nortel spin-off', "2000s", 3.7, "Acquired", false, 'US'],
-      ["Fullscript", 2011, 15, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Digital Health", 'Kyle Braatz, Brad Dyment, Chris Wise', "2020s", 3.7, "Private", false, null],
+      ["Fullscript", 2011, 15, "Active: age uses current year (2026)", "Ottawa-Gatineau", "Digital Health", 'Kyle Braatz, Brad Dyment, Chris Wise', "2020s", 6.0, "Private", false, null],
       ["StackAdapt", 2013, 13, "Active: age uses current year (2026)", "Toronto", "E-commerce", 'Vitaly Pecherskiy et al.', "2020s", 3.7, "Private", false, null],
       ["N-able", 2000, 26, "Active: age uses current year (2026)", "Ottawa-Gatineau", "IT Software", 'SolarWinds spin-off', "2020s", 3.1, "Public", false, null],
       ["Docebo", 2005, 21, "Active: age uses current year (2026)", "Toronto", "Edtech/LMS", 'Claudio Erba', "2020s", 3.0, "Public", false, null],
@@ -135,6 +135,7 @@ async function main() {
       ["Super.com", 2016, 10, "Active: age uses current year (2026)", "Toronto", "Fintech", "Hussein Fazal, Henry Shi", "2020s", 1.70, "Private", false, null],
       ["CoolIT Systems", 2001, 25, "Capped at 2026: Acquired by Ecolab for US$4.75B; announced Mar 2026, closed Q3 2026", "Calgary", "Hardware", "Geoff Lyon (CEO/CTO from 2005); founded by Calgary gaming enthusiasts", "2020s", 6.50, "Acquired", false, "US"],
       ["Miovision", 2005, 21, "Active: age uses current year (2026)", "Waterloo-Kitchener-C", "Transportation Technology", "Kurtis McBride, Tony Brijpaul, Kevin Madill", "2020s", 1.06, "Private", false, null],
+      ["Solink", 2009, 17, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Mike Matheson", "2020s", 1.0, "Private", false, null],
     ];
 
     for (const u of unicorns) {
@@ -166,7 +167,7 @@ async function main() {
       ["Ottawa-Gatineau", "1990s", 10, 12.50],
       ["Ottawa-Gatineau", "2000s", 14, 14.00],
       ["Ottawa-Gatineau", "2010s", 15, 12.50],
-      ["Ottawa-Gatineau", "2020s", 24, 16.14],
+      ["Ottawa-Gatineau", "2020s", 25, 16.80],
 
       // Toronto
       ["Toronto", "1990s", 2, 0.50],
@@ -215,7 +216,6 @@ async function main() {
 
     // ── Companies On The Cusp (Preserving or placeholder) ──────────────
     const onCusp = [
-      ["Solink", "Ottawa-Gatineau", "Deep-Tech"],
       ["Solace", "Ottawa-Gatineau", "Deep-Tech"],
       ["Mindbridge.ai", "Ottawa-Gatineau", "Deep-Tech"],
       ["Dominion Dynamics", "Ottawa-Gatineau", "Defence Technology"],
