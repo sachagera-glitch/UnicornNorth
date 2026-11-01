@@ -19,7 +19,7 @@ async function main() {
     await client.query("DELETE FROM cma_decade_stats");
     await client.query("DELETE FROM unicorns");
 
-    // ── Unicorns (115 companies) ──────────────
+    // ── Unicorns (118 companies) ──────────────
     const unicorns = [
       ["Nortel / BNR", 1895, 114, "Capped at 2009: Filed Ch. 11 / CCAA bankruptcy in 2009", "Ottawa-Gatineau", "Telecom", 'N/A', "1990s", 768.6, "Defunct", false, null],
       ["JDS Uniphase (JDSU)", 1981, 34, "Capped at 2015: Split into Lumentum & Viavi 2015; JDSU name retired", "Ottawa-Gatineau", "Telecom", 'Jozef Straus; Kevin Kalkhoven', "1990s", 295.0, "Acquired", false, 'US'],
@@ -136,6 +136,9 @@ async function main() {
       ["CoolIT Systems", 2001, 25, "Capped at 2026: Acquired by Ecolab for US$4.75B; announced Mar 2026, closed Q3 2026", "Calgary", "Hardware", "Geoff Lyon (CEO/CTO from 2005); founded by Calgary gaming enthusiasts", "2020s", 6.50, "Acquired", false, "US"],
       ["Miovision", 2005, 21, "Active: age uses current year (2026)", "Waterloo-Kitchener-C", "Transportation Technology", "Kurtis McBride, Tony Brijpaul, Kevin Madill", "2020s", 1.06, "Private", false, null],
       ["Solink", 2009, 17, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Mike Matta", "2020s", 1.0, "Private", false, null],
+      ["Clarity (formerly Hiive)", 2021, 5, "Active: age uses current year (2026)", "Vancouver", "Fintech", "Sim Desai", "2020s", 1.17, "Private", false, null],
+      ["Propel Holdings", 2011, 15, "Active: age uses current year (2026)", "Toronto", "Fintech", "Clive Kinross", "2020s", 1.50, "Public", false, null],
+      ["Hostaway", 2015, 11, "Active: age uses current year (2026)", "Toronto", "Travel Tech", "Marcus Räder", "2020s", 1.30, "Private", false, null],
     ];
 
     for (const u of unicorns) {
@@ -173,13 +176,13 @@ async function main() {
       ["Toronto", "1990s", 2, 0.50],
       ["Toronto", "2000s", 2, 0.40],
       ["Toronto", "2010s", 3, 0.55],
-      ["Toronto", "2020s", 35, 5.64],
+      ["Toronto", "2020s", 37, 5.97],
 
       // Vancouver
       ["Vancouver", "1990s", 1, 0.63],
       ["Vancouver", "2000s", 1, 0.50],
       ["Vancouver", "2010s", 2, 0.87],
-      ["Vancouver", "2020s", 22, 8.33],
+      ["Vancouver", "2020s", 23, 8.70],
 
       // Waterloo-Kitchener-C
       ["Waterloo-Kitchener-C", "1990s", 1, 2.85],
@@ -230,16 +233,18 @@ async function main() {
       ["AlayaCare", "Montréal", "HealthTech"],
       ["Vendasta", "Saskatoon", "SaaS"],
       ["Vidyard", "Waterloo-Kitchener-C", "MarTech"],
-      ["Propel Holdings", "Toronto", "Fintech"],
       ["Certn", "Victoria", "Trust & ID"],
       ["Kardium", "Vancouver", "Medtech"],
       ["Cyclic Materials", "Toronto", "Cleantech"],
       ["Eavor Technologies", "Calgary", "Energy-Tech"],
       ["GHGSat", "Montréal", "Spacetech"],
       ["Blackline Safety", "Calgary", "IoT/Safety"],
-      ["Helcim Inc.", "Calgary", "FinTech — SMB payments / merchant acquiring"],
       ["Colab Software", "St. John's", "Engineering Software"],
       ["Spellbook", "St. John's", "Legal AI"],
+      ["Clutch", "Toronto", "E-Commerce / Auto Retail"],
+      ["Electrovaya", "Toronto", "Energy Storage / Batteries"],
+      ["Blue J", "Toronto", "AI / Tax & Legal Research"],
+      ["Relay", "Toronto", "Fintech (SMB banking)"],
     ];
 
     for (const c of onCusp) {

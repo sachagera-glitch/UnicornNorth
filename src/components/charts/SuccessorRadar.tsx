@@ -16,16 +16,18 @@ const cuspData = [
   { name: "AlayaCare", cma: "Montréal", val: 800, growth: 70, sector: "HealthTech" },
   { name: "Vendasta", cma: "Saskatoon", val: 700, growth: 65, sector: "SaaS" },
   { name: "Vidyard", cma: "Waterloo-Kitchener-C", val: 600, growth: 60, sector: "MarTech" },
-  { name: "Propel Holdings", cma: "Toronto", val: 855, growth: 80, sector: "Fintech" },
   { name: "Certn", cma: "Victoria", val: 600, growth: 75, sector: "Trust & ID" },
   { name: "Kardium", cma: "Vancouver", val: 600, growth: 70, sector: "Medtech" },
   { name: "Cyclic Materials", cma: "Toronto", val: 700, growth: 85, sector: "Cleantech" },
   { name: "Eavor Technologies", cma: "Calgary", val: 650, growth: 90, sector: "Energy-Tech" },
   { name: "GHGSat", cma: "Montréal", val: 600, growth: 65, sector: "Spacetech" },
   { name: "Blackline Safety", cma: "Calgary", val: 510, growth: 60, sector: "IoT/Safety" },
-  { name: "Helcim Inc.", cma: "Calgary", val: 250, growth: 61, sector: "FinTech — SMB Payments" },
   { name: "Colab Software", cma: "St. John's", val: 700, growth: 80, sector: "Engineering Software" },
   { name: "Spellbook", cma: "St. John's", val: 490, growth: 85, sector: "Legal AI" },
+  { name: "Clutch", cma: "Toronto", val: 575, growth: 80, sector: "E-Commerce / Auto Retail" },
+  { name: "Electrovaya", cma: "Toronto", val: 700, growth: 70, sector: "Energy Storage / Batteries" },
+  { name: "Blue J", cma: "Toronto", val: 415, growth: 85, sector: "AI / Tax & Legal Research" },
+  { name: "Relay", cma: "Toronto", val: 400, growth: 85, sector: "Fintech (SMB banking)" },
 ];
 
 export default function SuccessorRadar() {
@@ -34,7 +36,7 @@ export default function SuccessorRadar() {
       <div className="section-header">
         <h2>The Successor Radar</h2>
         <div className="divider" />
-        <p>Companies on the cusp ($500M–$1B CAD) plotted by estimated valuation vs. growth trajectory. Bubble size = valuation.</p>
+        <p>Companies on the cusp ($400M–$1B CAD) plotted by estimated valuation vs. growth trajectory. Bubble size = valuation.</p>
       </div>
       <div className="chart-container">
         <ResponsiveContainer width="100%" height={420}>

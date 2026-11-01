@@ -166,6 +166,9 @@ const unicorns = [
   ["Farmers Edge", 2005, 21, "Active: age uses current year (2026)", "Winnipeg", "AgTech", 'Wade Barnes', "2020s", 1.0, "Delisted", false, null],
   ["Copperleaf Technologies", 2000, 24, "Capped at 2024: Acquired by IFS Aug 2024; de-listed and absorbed", "Vancouver", "Enterprise SW", 'Judi Hess', "2020s", 1.0, "Acquired (IFS)", false, 'European'],
   ["Solink", 2009, 17, "Active: age uses current year (2026)", "Ottawa-Gatineau", "AI", "Mike Matta", "2020s", 1.0, "Private", false, null],
+  ["Clarity (formerly Hiive)", 2021, 5, "Active: age uses current year (2026)", "Vancouver", "Fintech", "Sim Desai", "2020s", 1.17, "Private", false, null],
+  ["Propel Holdings", 2011, 15, "Active: age uses current year (2026)", "Toronto", "Fintech", "Clive Kinross", "2020s", 1.50, "Public", false, null],
+  ["Hostaway", 2015, 11, "Active: age uses current year (2026)", "Toronto", "Travel Tech", "Marcus Räder", "2020s", 1.30, "Private", false, null],
 ];
 
 const results = unicorns.map(u => {

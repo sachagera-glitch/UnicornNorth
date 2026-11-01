@@ -30,7 +30,7 @@ export default function OnTheCusp({ data }: { data: CuspRow[] }) {
       <div className="section-header">
         <h2>Poised for Tomorrow</h2>
         <div className="divider" />
-        <p>Companies on the cusp ($500M–$1B CAD). The predictive radar for future Narwhals.</p>
+        <p>Companies on the cusp ($400M–$1B CAD). The predictive radar for future Narwhals.</p>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1rem" }}>

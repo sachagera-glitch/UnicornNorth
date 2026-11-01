@@ -5,10 +5,10 @@ import { Unicorn, CmaDecadeStat } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "GOAT Canadian Tech Founders | UnicornNorth",
-  description: "Discover the top 20 Greatest Of All Time (GOAT) Canadian tech founders who built the $2.22 Trillion Canadian tech ecosystem.",
+  description: "Discover the top 20 Greatest Of All Time (GOAT) Canadian tech founders who built the $2.23 Trillion Canadian tech ecosystem.",
   openGraph: {
     title: "GOAT Canadian Tech Founders | UnicornNorth",
-    description: "Discover the top 20 Greatest Of All Time (GOAT) Canadian tech founders who built the $2.22 Trillion Canadian tech ecosystem.",
+    description: "Discover the top 20 Greatest Of All Time (GOAT) Canadian tech founders who built the $2.23 Trillion Canadian tech ecosystem.",
     url: "https://www.unicornnorth.com/goat-founders",
     siteName: "UnicornNorth",
     images: [

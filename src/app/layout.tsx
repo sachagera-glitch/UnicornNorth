@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.unicornnorth.com"),
   title: "UnicornNorth — The Definitive Canadian Tech Ecosystem Ledger",
   description:
-    "Explore the 115 companies that define the Canadian tech ecosystem. From Toronto's AI surge to Ottawa's telecom legacy and Vancouver's biotech hubs, track $2.22 Trillion in aggregate peak value creation.",
+    "Explore the 118 companies that define the Canadian tech ecosystem. From Toronto's AI surge to Ottawa's telecom legacy and Vancouver's biotech hubs, track $2.23 Trillion in aggregate peak value creation.",
   keywords: [
     "Canadian unicorns",
     "Toronto tech ecosystem",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "UnicornNorth — The Canadian Tech Ecosystem Ledger",
     description:
-      "115 companies. $2.22T CAD. The definitive chronicle of Canadian value creation across Toronto, Ottawa, Vancouver, and Montreal.",
+      "118 companies. $2.23T CAD. The definitive chronicle of Canadian value creation across Toronto, Ottawa, Vancouver, and Montreal.",
     url: "https://www.unicornnorth.com",
     siteName: "UnicornNorth",
     locale: "en_CA",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "UnicornNorth — Canadian Tech Ledger",
-    description: "Tracking the $2.22T evolution of the Canadian tech ecosystem.",
+    description: "Tracking the $2.23T evolution of the Canadian tech ecosystem.",
     images: ["/og-image.png"],
   },
   other: {
@@ -129,7 +129,7 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Dataset",
                 "name": "UnicornNorth Canadian Tech Ecosystem Ledger",
-                "description": "A comprehensive dataset of 115 Canadian unicorn companies representing $2.22T in aggregate peak valuation.",
+                "description": "A comprehensive dataset of 118 Canadian unicorn companies representing $2.23T in aggregate peak valuation.",
                 "url": "https://www.unicornnorth.com/",
                 "license": "https://creativecommons.org/licenses/by/4.0/",
                 "keywords": "Canadian tech, Unicorns, Venture Capital, Toronto, Ottawa, Vancouver, Montreal",

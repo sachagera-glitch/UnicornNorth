@@ -1,8 +1,27 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import LineageTree from "./charts/LineageTree";
 import { LINEAGE_ROOTS, type LineageNode } from "@/data/lineageData";
+
+export const LINEAGE_ROOT_ROUTES: Record<keyof typeof LINEAGE_ROOTS, { href: string; title: string }> = {
+  nortel: {
+    href: "/nortel-compounding",
+    title: "Nortel Compounding Effect | UnicornNorth",
+  },
+  nrc_gov: {
+    href: "/nrc-compounding",
+    title: "NRC Compounding Effect | UnicornNorth",
+  },
+  cognos: {
+    href: "/cognos-compounding",
+    title: "Cognos Compounding Effect | UnicornNorth",
+  },
+  shopify: {
+    href: "/shopify-compounding",
+    title: "Shopify Compounding Effect | UnicornNorth",
+  },
+};
 
 interface Props {
   initialRootKey?: keyof typeof LINEAGE_ROOTS;
@@ -12,6 +31,10 @@ export default function LineageTab({ initialRootKey = "shopify" }: Props) {
   const [activeRootKey, setActiveRootKey] = useState<keyof typeof LINEAGE_ROOTS>(initialRootKey);
   const [selectedNode, setSelectedNode] = useState<LineageNode | null>(null);
   const [shopifyCategoryFilter, setShopifyCategoryFilter] = useState<'all' | 'alumni' | 'strategic_partner' | 'lead_investment' | 'canadian_unicorns' | 'us_global_unicorns' | 'acquired'>('all');
+
+  useEffect(() => {
+    setActiveRootKey(initialRootKey);
+  }, [initialRootKey]);
 
   const activeRoot = LINEAGE_ROOTS[activeRootKey];
 
@@ -94,31 +117,43 @@ export default function LineageTab({ initialRootKey = "shopify" }: Props) {
           </div>
           
           <div style={{ display: "flex", gap: "0.5rem", background: "var(--border-light)", padding: "0.25rem", borderRadius: "6px" }}>
-            {(Object.keys(LINEAGE_ROOTS) as Array<keyof typeof LINEAGE_ROOTS>).map((key) => (
-              <button
-                key={key}
-                onClick={() => {
-                  setActiveRootKey(key);
-                  setSelectedNode(null);
-                  setShopifyCategoryFilter('all');
-                }}
-                style={{
-                  padding: "0.5rem 1rem",
-                  borderRadius: "4px",
-                  border: "none",
-                  background: activeRootKey === key ? "var(--white)" : "transparent",
-                  color: activeRootKey === key ? "var(--navy)" : "var(--slate)",
-                  fontFamily: "'Roboto Mono'",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  boxShadow: activeRootKey === key ? "0 2px 4px rgba(0,0,0,0.05)" : "none",
-                  transition: "all 0.2s"
-                }}
-              >
-                {LINEAGE_ROOTS[key].name}
-              </button>
-            ))}
+            {(Object.keys(LINEAGE_ROOTS) as Array<keyof typeof LINEAGE_ROOTS>).map((key) => {
+              const route = LINEAGE_ROOT_ROUTES[key];
+              return (
+                <a
+                  key={key}
+                  href={route.href}
+                  onClick={(e) => {
+                    if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                      e.preventDefault();
+                      setActiveRootKey(key);
+                      setSelectedNode(null);
+                      setShopifyCategoryFilter('all');
+                      if (typeof window !== "undefined") {
+                        window.history.pushState(null, "", route.href);
+                        document.title = route.title;
+                      }
+                    }
+                  }}
+                  style={{
+                    padding: "0.5rem 1rem",
+                    borderRadius: "4px",
+                    border: "none",
+                    textDecoration: "none",
+                    background: activeRootKey === key ? "var(--white)" : "transparent",
+                    color: activeRootKey === key ? "var(--navy)" : "var(--slate)",
+                    fontFamily: "'Roboto Mono'",
+                    fontSize: "0.75rem",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    boxShadow: activeRootKey === key ? "0 2px 4px rgba(0,0,0,0.05)" : "none",
+                    transition: "all 0.2s"
+                  }}
+                >
+                  {LINEAGE_ROOTS[key].name}
+                </a>
+              );
+            })}
           </div>
         </div>
 

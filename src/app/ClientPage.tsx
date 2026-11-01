@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { CurrencyProvider } from "@/components/CurrencyContext";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import TabNavigation, { type TabKey } from "@/components/TabNavigation";
+import TabNavigation, { type TabKey, TAB_ROUTES } from "@/components/TabNavigation";
 import LifetimeSummary from "@/components/LifetimeSummary";
 import MasterLedger from "@/components/MasterLedger";
 import ValueEpochs from "@/components/charts/ValueEpochs";
@@ -41,8 +41,51 @@ interface Props {
   initialRootKey?: keyof typeof LINEAGE_ROOTS;
 }
 
+const PATH_TO_TAB: Record<string, { tab: TabKey; rootKey?: keyof typeof LINEAGE_ROOTS }> = {
+  "/": { tab: "overview" },
+  "/overview": { tab: "overview" },
+  "/leadership-board": { tab: "ledger" },
+  "/tech-hubs": { tab: "regions" },
+  "/compounding-effect": { tab: "lineage", rootKey: "shopify" },
+  "/shopify-compounding": { tab: "lineage", rootKey: "shopify" },
+  "/nortel-compounding": { tab: "lineage", rootKey: "nortel" },
+  "/cognos-compounding": { tab: "lineage", rootKey: "cognos" },
+  "/nrc-compounding": { tab: "lineage", rootKey: "nrc_gov" },
+  "/radar": { tab: "radar" },
+  "/vitality": { tab: "vitality" },
+  "/goat-founders": { tab: "founders" },
+  "/about": { tab: "about" },
+};
+
 export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata, initialTab = "overview", initialRootKey }: Props) {
   const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
+  const [activeRootKey, setActiveRootKey] = useState<keyof typeof LINEAGE_ROOTS | undefined>(initialRootKey);
+
+  const handleTabChange = useCallback((tab: TabKey) => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      const route = TAB_ROUTES[tab];
+      if (route) {
+        window.history.pushState(null, "", route.href);
+        document.title = route.title;
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const onPopState = () => {
+      const path = window.location.pathname.replace(/\/+$/, "") || "/";
+      const match = PATH_TO_TAB[path];
+      if (match) {
+        setActiveTab(match.tab);
+        if (match.rootKey) {
+          setActiveRootKey(match.rootKey);
+        }
+      }
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   // ── Calculation Logic for Lifetime Summary ───────────────────────────
   
@@ -119,7 +162,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata, in
         hubCount={hubCount}
       />
       <SubscribeBanner />
-      <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} />
 
       <main style={{ minHeight: "60vh" }}>
         {/* ── Overview Tab ─────────────────────────────────────────── */}
@@ -167,7 +210,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata, in
         )}
 
         {activeTab === "lineage" && (
-          <LineageTab initialRootKey={initialRootKey} />
+          <LineageTab initialRootKey={activeRootKey} />
         )}
 
         {activeTab === "founders" && (
@@ -221,10 +264,14 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata, in
           }}
         >
           <span>The Canadian Technology Ecosystem Ledger · 1990–2026</span>
-          <button 
-            onClick={() => {
-              setActiveTab("about");
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+          <a 
+            href="/about"
+            onClick={(e) => {
+              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                e.preventDefault();
+                handleTabChange("about");
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
             }}
             style={{ 
               background: "none", 
@@ -238,7 +285,7 @@ export default function ClientPage({ unicorns, cmaStats, onCusp, cmaMetadata, in
             }}
           >
             About Us
-          </button>
+          </a>
           <a 
             href="mailto:admin@unicornnorth.com"
             style={{ 

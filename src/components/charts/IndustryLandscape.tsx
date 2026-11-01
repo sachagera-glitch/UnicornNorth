@@ -149,7 +149,7 @@ export default function IndustryLandscape({ data }: IndustryLandscapeProps) {
           style={{ 
             display: "grid", 
             gridTemplateColumns: "repeat(12, 1fr)",
-            gridTemplateRows: "repeat(6, 80px)",
+            gridTemplateRows: "repeat(5, 80px) minmax(80px, auto)",
             gap: "8px",
             borderRadius: "8px",
             overflow: "hidden"

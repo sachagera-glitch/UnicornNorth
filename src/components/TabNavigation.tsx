@@ -4,20 +4,63 @@ import { useState, useEffect, useCallback } from "react";
 
 export type TabKey = "overview" | "ledger" | "regions" | "lineage" | "radar" | "vitality" | "founders" | "about";
 
+export const TAB_ROUTES: Record<TabKey, { label: string; href: string; title: string }> = {
+  overview: {
+    label: "Overview",
+    href: "/overview",
+    title: "Canadian Tech Ecosystem Overview | UnicornNorth",
+  },
+  ledger: {
+    label: "Leadership Board",
+    href: "/leadership-board",
+    title: "Canadian Unicorn Leadership Board & Master Ledger | UnicornNorth",
+  },
+  regions: {
+    label: "Tech Hubs",
+    href: "/tech-hubs",
+    title: "Canadian Tech Hubs & Ecosystems | UnicornNorth",
+  },
+  lineage: {
+    label: "Compounding Effect",
+    href: "/compounding-effect",
+    title: "The Compounding Effect — Canadian Tech Lineage Trees | UnicornNorth",
+  },
+  radar: {
+    label: "Radar",
+    href: "/radar",
+    title: "The Successor Radar — Canadian Tech Companies On The Cusp | UnicornNorth",
+  },
+  vitality: {
+    label: "Vitality",
+    href: "/vitality",
+    title: "Canadian Tech Ecosystem Vitality & Survival Analysis | UnicornNorth",
+  },
+  founders: {
+    label: "GOAT Founders",
+    href: "/goat-founders",
+    title: "GOAT Canadian Tech Founders | UnicornNorth",
+  },
+  about: {
+    label: "About",
+    href: "/about",
+    title: "About UnicornNorth — Honoring Canada's Tech Builders | UnicornNorth",
+  },
+};
+
 interface TabNavigationProps {
   activeTab: TabKey;
   onTabChange: (tab: TabKey) => void;
 }
 
-const TABS: { key: TabKey; label: string }[] = [
-  { key: "overview", label: "Overview" },
-  { key: "ledger", label: "Leadership Board" },
-  { key: "regions", label: "Tech Hubs" },
-  { key: "lineage", label: "Compounding Effect" },
-  { key: "radar", label: "Radar" },
-  { key: "vitality", label: "Vitality" },
-  { key: "founders", label: "GOAT Founders" },
-  { key: "about", label: "About" },
+const TABS: { key: TabKey; label: string; href: string }[] = [
+  { key: "overview", label: "Overview", href: "/overview" },
+  { key: "ledger", label: "Leadership Board", href: "/leadership-board" },
+  { key: "regions", label: "Tech Hubs", href: "/tech-hubs" },
+  { key: "lineage", label: "Compounding Effect", href: "/compounding-effect" },
+  { key: "radar", label: "Radar", href: "/radar" },
+  { key: "vitality", label: "Vitality", href: "/vitality" },
+  { key: "founders", label: "GOAT Founders", href: "/goat-founders" },
+  { key: "about", label: "About", href: "/about" },
 ];
 
 export default function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
@@ -45,13 +88,20 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
         {/* Desktop Navigation — hidden on mobile via existing CSS class */}
         <nav className="tab-bar hidden-mobile">
           {TABS.map((tab) => (
-            <button
+            <a
               key={tab.key}
+              href={tab.href}
               className={`tab-item ${activeTab === tab.key ? "active" : ""}`}
-              onClick={() => onTabChange(tab.key)}
+              style={{ textDecoration: "none" }}
+              onClick={(e) => {
+                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                  e.preventDefault();
+                  onTabChange(tab.key);
+                }
+              }}
             >
               {tab.label}
-            </button>
+            </a>
           ))}
         </nav>
 
@@ -185,13 +235,20 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
               {TABS.map((tab) => {
                 const isActive = activeTab === tab.key;
                 return (
-                  <button
+                  <a
                     key={tab.key}
-                    onClick={() => handleSelect(tab.key)}
+                    href={tab.href}
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault();
+                        handleSelect(tab.key);
+                      }
+                    }}
                     style={{
                       display: "block",
                       width: "100%",
                       textAlign: "left",
+                      textDecoration: "none",
                       padding: "0.9rem 1.25rem",
                       paddingLeft: isActive ? "calc(1.25rem - 4px)" : "1.25rem",
                       fontFamily: "'Roboto Mono', monospace",
@@ -220,7 +277,7 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
                     }}
                   >
                     {tab.label}
-                  </button>
+                  </a>
                 );
               })}
             </nav>
